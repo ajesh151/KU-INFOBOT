@@ -1,6 +1,3 @@
-models/FAQ.h
-
-
 #ifndef FAQ_H
 #define FAQ_H
 
