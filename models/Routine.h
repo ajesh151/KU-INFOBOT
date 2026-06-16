@@ -1,13 +1,10 @@
-#ifndef ROUTINE_H
-#define ROUTINE_H
-
-#include <QString>
-
 class Routine
 {
 private:
     QString program;
-    QString semester;
+    int year;
+    int semester;
+    QString section;
     QString day;
     QString time;
     QString courseCode;
@@ -17,25 +14,29 @@ public:
     Routine();
 
     Routine(const QString& program,
-            const QString& semester,
+            int year,
+            int semester,
+            const QString& section,
             const QString& day,
             const QString& time,
             const QString& courseCode,
             const QString& venue);
 
     QString getProgram() const;
-    QString getSemester() const;
+    int getYear() const;
+    int getSemester() const;
+    QString getSection() const;
     QString getDay() const;
     QString getTime() const;
     QString getCourseCode() const;
     QString getVenue() const;
 
     void setProgram(const QString& program);
-    void setSemester(const QString& semester);
+    void setYear(int year);
+    void setSemester(int semester);
+    void setSection(const QString& section);
     void setDay(const QString& day);
     void setTime(const QString& time);
     void setCourseCode(const QString& courseCode);
     void setVenue(const QString& venue);
 };
-
-#endif
