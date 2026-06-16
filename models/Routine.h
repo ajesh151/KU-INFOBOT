@@ -10,27 +10,32 @@ private:
     QString semester;
     QString day;
     QString time;
-    QString subject;
+    QString courseCode;
+    QString venue;
 
 public:
     Routine();
-    Routine(QString program,
-            QString semester,
-            QString day,
-            QString time,
-            QString subject);
+
+    Routine(const QString& program,
+            const QString& semester,
+            const QString& day,
+            const QString& time,
+            const QString& courseCode,
+            const QString& venue);
 
     QString getProgram() const;
     QString getSemester() const;
     QString getDay() const;
     QString getTime() const;
-    QString getSubject() const;
+    QString getCourseCode() const;
+    QString getVenue() const;
 
-    void setProgram(QString program);
-    void setSemester(QString semester);
-    void setDay(QString day);
-    void setTime(QString time);
-    void setSubject(QString subject);
+    void setProgram(const QString& program);
+    void setSemester(const QString& semester);
+    void setDay(const QString& day);
+    void setTime(const QString& time);
+    void setCourseCode(const QString& courseCode);
+    void setVenue(const QString& venue);
 };
 
 #endif
