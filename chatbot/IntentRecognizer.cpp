@@ -3,12 +3,9 @@
 #include <QStringList>
 
 IntentRecognizer::IntentRecognizer()
-{
-}
+{}
 
-bool IntentRecognizer::containsAny(
-    const QString& text,
-    const QStringList& keywords) const
+bool IntentRecognizer::containsAny(const QString& text, const QStringList& keywords) const
 {
     for(const QString& keyword : keywords)
     {
