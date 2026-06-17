@@ -1,31 +1,15 @@
 #include "Routine.h"
-
-// Default Constructor
 Routine::Routine()
 {
+
 }
 
-// Parameterized Constructor
-Routine::Routine(const QString& program,
-                 int year,
-                 int semester,
-                 const QString& section,
-                 const QString& day,
-                 const QString& time,
-                 const QString& courseCode,
-                 const QString& venue)
-    : program(program),
-    year(year),
-    semester(semester),
-    section(section),
-    day(day),
-    time(time),
-    courseCode(courseCode),
-    venue(venue)
+Routine::Routine(const QString& program,int year,int semester,const QString& section,const QString& day,
+                 const QString& time,const QString& courseCode,const QString& venue)
+    : program(program),year(year),semester(semester),section(section),day(day),time(time),courseCode(courseCode),venue(venue)
 {
-}
 
-// Getters
+}
 
 QString Routine::getProgram() const
 {
@@ -67,7 +51,6 @@ QString Routine::getVenue() const
     return venue;
 }
 
-// Setters
 
 void Routine::setProgram(const QString& program)
 {
