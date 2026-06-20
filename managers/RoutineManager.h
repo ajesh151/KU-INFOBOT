@@ -3,41 +3,85 @@
 
 #include <QList>
 #include <QString>
-#include "routine.h"
+
+#include "../models/Routine.h"
 
 class RoutineManager
 {
 private:
+
     QList<Routine> routines;
 
+
 public:
+
+    // Constructor
     RoutineManager();
+
 
     // Add routine
     void addRoutine(const Routine& routine);
 
-    // Remove routine by course code
+
+    // Remove routine using course code
     bool removeRoutine(const QString& courseCode);
 
-    // Update existing routine
-    bool updateRoutine(const QString& courseCode, const Routine& updatedRoutine);
 
-    // Get all routines
+    // Update routine
+    bool updateRoutine(const QString& courseCode,
+                       const Routine& updatedRoutine);
+
+
+    // Return all routines
     QList<Routine> getAllRoutines() const;
 
+
+
     // Search functions
-    QList<Routine> getRoutineByProgram(const QString& program) const;
-    QList<Routine> getRoutineByYear(int year) const;
-    QList<Routine> getRoutineBySemester(int semester) const;
-    QList<Routine> getRoutineBySection(const QString& section) const;
-    QList<Routine> getRoutineByDay(const QString& day) const;
-    QList<Routine> getRoutineByCourseCode(const QString& courseCode) const;
 
-    // Clear all routines
-    void clearRoutines();
+    QList<Routine> findByProgram(
+        const QString& program) const;
 
-    // Count routines
-    int getRoutineCount() const;
+
+    QList<Routine> findByYear(
+        int year) const;
+
+
+    QList<Routine> findBySemester(
+        int semester) const;
+
+
+    QList<Routine> findBySection(
+        const QString& section) const;
+
+
+    QList<Routine> findByDay(
+        const QString& day) const;
+
+
+    QList<Routine> findByCourseCode(
+        const QString& courseCode) const;
+
+
+
+    // File operations
+
+    bool loadFromFile(
+        const QString& filename);
+
+
+    bool saveToFile(
+        const QString& filename) const;
+
+
+
+    // Utility
+
+    void clear();
+
+    int count() const;
+
 };
+
 
 #endif // ROUTINEMANAGER_H
