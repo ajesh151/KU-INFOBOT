@@ -17,6 +17,20 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
 
+            managers/CourseManager.cpp
+            managers/RoutineManager.cpp
+            managers/FaqManager.cpp
+            managers/AdmissionManager.cpp
+
+            models/Course.cpp
+            models/Routine.cpp
+            models/Faq.cpp
+            models/Admission.cpp
+
+            chatbot/ChatBot.cpp
+            chatbot/IntentRecognizer.cpp
+            chatbot/ResponseGenerator.cpp
+
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

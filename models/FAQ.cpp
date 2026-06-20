@@ -4,8 +4,8 @@ Faq::Faq()
 {
 }
 
-Faq::Faq(const QString& question,
-         const QString& answer)
+Faq::Faq(const QString question,
+         const QString answer)
     : question(question),
     answer(answer)
 {
@@ -21,12 +21,12 @@ QString Faq::getAnswer() const
     return answer;
 }
 
-void Faq::setQuestion(const QString& question)
+void Faq::setQuestion( QString& question)
 {
     this->question = question;
 }
 
-void Faq::setAnswer(const QString& answer)
+void Faq::setAnswer( QString& answer)
 {
     this->answer = answer;
 }

@@ -1,5 +1,5 @@
 #include "IntentRecognizer.h"
-
+#include <QRegularExpression>
 #include <QStringList>
 
 IntentRecognizer::IntentRecognizer()
@@ -23,107 +23,47 @@ Intent IntentRecognizer::recognizeIntent(
 {
     QString text = input.toLower();
 
-    // Greetings
-
-    if(containsAny(text,
-                    {
-                        "hello",
-                        "hi",
-                        "hey",
-                        "namaste",
-                        "good morning",
-                        "good afternoon",
-                        "good evening"
-                    }))
+    // Greeting
+    if(text.contains("hello") ||
+        text.contains("hi") ||
+        text.contains("hey"))
     {
         return Intent::GREETING;
     }
 
     // Goodbye
-
-    if(containsAny(text,
-                    {
-                        "bye",
-                        "goodbye",
-                        "see you",
-                        "exit",
-                        "quit"
-                    }))
+    if(text.contains("bye") ||
+        text.contains("goodbye"))
     {
         return Intent::GOODBYE;
     }
 
-    // Routine Queries
+    // Course code detection
+    QRegularExpression coursePattern(
+        "[A-Z]{4,5}\\d{3}",
+        QRegularExpression::CaseInsensitiveOption);
 
-    if(containsAny(text,
-                    {
-                        "routine",
-                        "schedule",
-                        "class timing",
-                        "class",
-                        "section",
-                        "semester",
-                        "year",
-                        "venue",
-                        "room"
-                    }))
-    {
-        return Intent::ROUTINE_QUERY;
-    }
-
-    // Course Queries
-
-    if(containsAny(text,
-                    {
-                        "course",
-                        "subject",
-                        "credit",
-                        "credits",
-                        "comp",
-                        "eeeg",
-                        "math",
-                        "what is",
-                        "course code"
-                    }))
+    if(coursePattern.match(input).hasMatch())
     {
         return Intent::COURSE_INFO;
     }
 
-    // Admission Queries
+    // Routine
+    if(text.contains("routine") ||
+        text.contains("schedule") ||
+        text.contains("class"))
+    {
+        return Intent::ROUTINE_QUERY;
+    }
 
-    if(containsAny(text,
-                    {
-                        "admission",
-                        "eligibility",
-                        "fee",
-                        "fees",
-                        "kucat",
-                        "entrance",
-                        "apply",
-                        "application",
-                        "scholarship",
-                        "merit"
-                    }))
+    // Admission
+    if(text.contains("admission") ||
+        text.contains("apply") ||
+        text.contains("entrance"))
     {
         return Intent::ADMISSION_QUERY;
     }
 
-    // FAQ Queries
-
-    if(containsAny(text,
-                    {
-                        "library",
-                        "hostel",
-                        "office",
-                        "location",
-                        "university",
-                        "ku",
-                        "campus",
-                        "contact"
-                    }))
-    {
-        return Intent::FAQ_QUERY;
-    }
-
-    return Intent::UNKNOWN;
+    // FAQ
+    return Intent::FAQ_QUERY;
 }

@@ -1,3 +1,5 @@
+#include <QString>
+
 class Routine
 {
 private:

@@ -12,14 +12,14 @@ private:
 
 public:
     Course();
-    Course(QString code, QString name, int credits);
+    Course(const QString& code, const QString& name, int credits);
 
     QString getCode() const;
     QString getName() const;
     int getCredits() const;
 
-    void setCode(QString code);
-    void setName(QString name);
+    void setCode(const QString& code);
+    void setName(const QString& name);
     void setCredits(int credits);
 };
 

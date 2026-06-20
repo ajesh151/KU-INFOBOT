@@ -16,8 +16,8 @@ public:
     QString getQuestion() const;
     QString getAnswer() const;
 
-    void setQuestion(QString question);
-    void setAnswer(QString answer);
+    void setQuestion(QString& question);
+    void setAnswer(QString& answer);
 };
 
 #endif

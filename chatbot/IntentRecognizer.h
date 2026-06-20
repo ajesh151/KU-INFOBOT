@@ -18,7 +18,6 @@ class IntentRecognizer
 {
 public:
     IntentRecognizer();
-
     Intent recognizeIntent(const QString& input) const;
 
 private:
