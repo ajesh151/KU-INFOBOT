@@ -15,14 +15,7 @@ private:
 public:
     Routine();
 
-    Routine(const QString& program,
-            int year,
-            int semester,
-            const QString& section,
-            const QString& day,
-            const QString& time,
-            const QString& courseCode,
-            const QString& venue);
+    Routine(const QString& program,int year,int semester,const QString& section,const QString& day,const QString& time,const QString& courseCode,const QString& venue);
 
     QString getProgram() const;
     int getYear() const;
