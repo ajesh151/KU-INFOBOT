@@ -1,278 +1,140 @@
 #include "RoutineManager.h"
+
 #include <QFile>
 #include <QTextStream>
+#include <QStringList>
 
 RoutineManager::RoutineManager()
 {
-
-}
-// Add routine
-
-void RoutineManager::addRoutine(const Routine& routine)
-{
-    routines.append(routine);
 }
 
-// Remove routine
-
-bool RoutineManager::removeRoutine(const QString& courseCode)
+bool RoutineManager::loadRoutines(const QString& filename)
 {
+    QFile file(filename);
 
-    for(int i=0;i<routines.size();i++)
+    if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        if(routines[i].getCourseCode()==courseCode)
-        {
-            routines.removeAt(i);
-            return true;
-        }
+        return false;
     }
 
-    return false;
-}
-// Update routine
+    QTextStream in(&file);
 
-bool RoutineManager::updateRoutine(
-        const QString& courseCode,
-        const Routine& updatedRoutine)
-{
+    routines.clear();
 
-    for(int i=0;i<routines.size();i++)
+    while(!in.atEnd())
     {
-        if(routines[i].getCourseCode()==courseCode)
+        QString line = in.readLine().trimmed();
+
+        if(line.isEmpty())
         {
-            routines[i]=updatedRoutine;
-            return true;
+            continue;
         }
+
+        QStringList data = line.split("|");
+
+        if(data.size() != 8)
+        {
+            continue;
+        }
+
+        Routine routine(
+            data[0],                 // Program
+            data[1].toInt(),         // Year
+            data[2].toInt(),         // Semester
+            data[3],                 // Section
+            data[4],                 // Day
+            data[5],                 // Time
+            data[6],                 // Course Code
+            data[7]                  // Venue
+        );
+
+        routines.append(routine);
     }
 
-    return false;
+    file.close();
+
+    return true;
 }
-// Get all
 
 QList<Routine> RoutineManager::getAllRoutines() const
 {
     return routines;
 }
-// Find by program
 
-QList<Routine> RoutineManager::findByProgram(
+QList<Routine> RoutineManager::getByProgram(
         const QString& program) const
 {
-
     QList<Routine> result;
 
-
-    for(const Routine& r : routines)
+    for(const Routine& routine : routines)
     {
-        if(r.getProgram()==program)
+        if(routine.getProgram().compare(
+                program,
+                Qt::CaseInsensitive) == 0)
         {
-            result.append(r);
+            result.append(routine);
         }
     }
-
 
     return result;
 }
 
-// Find by year
-
-QList<Routine> RoutineManager::findByYear(
-        int year) const
-{
-
-    QList<Routine> result;
-
-
-    for(const Routine& r : routines)
-    {
-        if(r.getYear()==year)
-        {
-            result.append(r);
-        }
-    }
-
-
-    return result;
-}
-// Find by semester
-
-QList<Routine> RoutineManager::findBySemester(
+QList<Routine> RoutineManager::getBySemester(
         int semester) const
 {
-
     QList<Routine> result;
 
-
-    for(const Routine& r : routines)
+    for(const Routine& routine : routines)
     {
-        if(r.getSemester()==semester)
+        if(routine.getSemester() == semester)
         {
-            result.append(r);
+            result.append(routine);
         }
     }
 
-
     return result;
 }
-// Find by section
 
-QList<Routine> RoutineManager::findBySection(
-        const QString& section) const
+QList<Routine> RoutineManager::getByProgramAndSemester(
+        const QString& program,
+        int semester) const
 {
-
     QList<Routine> result;
 
-
-    for(const Routine& r : routines)
+    for(const Routine& routine : routines)
     {
-        if(r.getSection()==section)
+        if(routine.getProgram().compare(
+                program,
+                Qt::CaseInsensitive) == 0
+           &&
+           routine.getSemester() == semester)
         {
-            result.append(r);
+            result.append(routine);
         }
     }
 
-
     return result;
 }
-// Find by day
 
-QList<Routine> RoutineManager::findByDay(
-        const QString& day) const
-{
-
-    QList<Routine> result;
-
-
-    for(const Routine& r : routines)
-    {
-        if(r.getDay()==day)
-        {
-            result.append(r);
-        }
-    }
-
-
-    return result;
-}
-// Find by course code
-
-QList<Routine> RoutineManager::findByCourseCode(
+QList<Routine> RoutineManager::getByCourseCode(
         const QString& courseCode) const
 {
-
     QList<Routine> result;
 
-
-    for(const Routine& r : routines)
+    for(const Routine& routine : routines)
     {
-        if(r.getCourseCode()==courseCode)
+        if(routine.getCourseCode().compare(
+                courseCode,
+                Qt::CaseInsensitive) == 0)
         {
-            result.append(r);
+            result.append(routine);
         }
     }
 
-
     return result;
 }
-// Load routines from txt file
 
-bool RoutineManager::loadFromFile(
-        const QString& filename)
-{
-
-    QFile file(filename);
-
-
-    if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
-        return false;
-
-
-
-    QTextStream in(&file);
-
-
-
-    routines.clear();
-
-
-
-    while(!in.atEnd())
-    {
-
-        QString line=in.readLine();
-
-
-        QStringList data=line.split(",");
-
-
-
-        if(data.size()!=8)
-            continue;
-
-
-
-        Routine r(
-            data[0],
-            data[1].toInt(),
-            data[2].toInt(),
-            data[3],
-            data[4],
-            data[5],
-            data[6],
-            data[7]
-        );
-
-
-        routines.append(r);
-
-    }
-
-
-
-    file.close();
-
-
-    return true;
-}
-// Save routines
-
-bool RoutineManager::saveToFile(
-        const QString& filename) const
-{
-
-    QFile file(filename);
-
-
-    if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
-        return false;
-
-
-    QTextStream out(&file);
-    for(const Routine& r : routines)
-    {
-
-        out
-        << r.getProgram() << ","
-        << r.getYear() << ","
-        << r.getSemester() << ","
-        << r.getSection() << ","
-        << r.getDay() << ","
-        << r.getTime() << ","
-        << r.getCourseCode() << ","
-        << r.getVenue()
-        << "\n";
-
-    }
-    file.close();
-    return true;
-}
-
-void RoutineManager::clear()
-{
-    routines.clear();
-}
-
-int RoutineManager::count() const
+int RoutineManager::size() const
 {
     return routines.size();
 }
