@@ -5,7 +5,7 @@
 
 #include "../managers/CourseManager.h"
 #include "../managers/RoutineManager.h"
-#include "../managers/FaqManager.h"
+#include "../managers/FAQManager.h"
 #include "../managers/AdmissionManager.h"
 #include "IntentRecognizer.h"
 
