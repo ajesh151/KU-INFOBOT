@@ -1,3 +1,5 @@
+#ifndef ROUTINE_H
+#define ROUTINE_H
 #include <QString>
 
 class Routine
