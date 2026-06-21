@@ -13,13 +13,13 @@ class ResponseGenerator
 {
 private:
     CourseManager* courseManager;
-    //RoutineManager* routineManager;
+    RoutineManager* routineManager;
    // FaqManager* faqManager;
     //AdmissionManager* admissionManager;
 
 public:
-    ResponseGenerator(CourseManager* courseManager);
-       // RoutineManager* routineManager,
+    ResponseGenerator(CourseManager* courseManager,RoutineManager* routineManager);
+       ,
        // FaqManager* faqManager,
         // AdmissionManager* admissionManager
 

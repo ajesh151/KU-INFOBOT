@@ -1,12 +1,12 @@
 #include "ResponseGenerator.h"
 #include <QRegularExpression>
 ResponseGenerator::ResponseGenerator(
-    CourseManager* courseManager/*,
-    RoutineManager* routineManager,
+    CourseManager* courseManager,
+    RoutineManager* routineManager/*,
     FaqManager* faqManager,
     AdmissionManager* admissionManager*/)
-    : courseManager(courseManager)/*,
-    routineManager(routineManager),
+    : courseManager(courseManager),
+    routineManager(routineManager)/*,
     faqManager(faqManager),
     admissionManager(admissionManager)*/
 {
