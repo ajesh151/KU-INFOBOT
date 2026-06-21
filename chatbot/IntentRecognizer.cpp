@@ -1,7 +1,7 @@
 #include "IntentRecognizer.h"
 #include <QRegularExpression>
 #include <QStringList>
-#include<QString>
+#include <QString>
 IntentRecognizer::IntentRecognizer()
 {}
 
@@ -23,24 +23,30 @@ Intent IntentRecognizer::recognizeIntent(
 {
     QString text = input.toLower();
 
+    static const QStringList greetingKeywords = {"hello", "hi", "hey","namaste","namaskar"};
+    static const QStringList goodbyeKeywords = {"bye", "goodbye"};
+    static const QStringList routineKeywords = {"routine", "schedule", "class"};
+    static const QStringList admissionKeywords = {"admission", "apply", "entrance"};
+
     // Greeting
-    if(text.contains("hello") ||
-        text.contains("hi") ||
-        text.contains("hey"))
+    if(containsAny(text, greetingKeywords))
     {
         return Intent::GREETING;
     }
 
     // Goodbye
-    if(text.contains("bye") ||
-        text.contains("goodbye"))
+    if(containsAny(text, goodbyeKeywords))
     {
         return Intent::GOODBYE;
     }
 
-    // Course code detection
-    QRegularExpression coursePattern(
-        "[A-Z]{4,5}\\d{3}",
+    if(containsAny(text, routineKeywords))
+    {
+        return Intent::ROUTINE_QUERY;
+    }
+
+    static const QRegularExpression coursePattern(
+        "[A-Z]{3,5}\\d{3}",
         QRegularExpression::CaseInsensitiveOption);
 
     if(coursePattern.match(input).hasMatch())
@@ -48,18 +54,8 @@ Intent IntentRecognizer::recognizeIntent(
         return Intent::COURSE_INFO;
     }
 
-    // Routine
-    if(text.contains("routine") ||
-        text.contains("schedule") ||
-        text.contains("class"))
-    {
-        return Intent::ROUTINE_QUERY;
-    }
-
     // Admission
-    if(text.contains("admission") ||
-        text.contains("apply") ||
-        text.contains("entrance"))
+    if(containsAny(text, admissionKeywords))
     {
         return Intent::ADMISSION_QUERY;
     }
@@ -67,5 +63,3 @@ Intent IntentRecognizer::recognizeIntent(
     // FAQ
     return Intent::FAQ_QUERY;
 }
-
-
