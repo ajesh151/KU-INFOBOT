@@ -3,6 +3,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QStringList>
+#include <QDebug>
 
 RoutineManager::RoutineManager()
 {
@@ -14,6 +15,7 @@ bool RoutineManager::loadRoutines(const QString& filename)
 
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
+        qWarning() << "RoutineManager: could not open file:" << filename;
         return false;
     }
 
@@ -21,9 +23,12 @@ bool RoutineManager::loadRoutines(const QString& filename)
 
     routines.clear();
 
+    int lineNumber = 0;
+
     while(!in.atEnd())
     {
         QString line = in.readLine().trimmed();
+        ++lineNumber;
 
         if(line.isEmpty())
         {
@@ -34,6 +39,9 @@ bool RoutineManager::loadRoutines(const QString& filename)
 
         if(data.size() != 8)
         {
+            qWarning() << "RoutineManager: skipping malformed line"
+                       << lineNumber << "-" << data.size()
+                       << "fields instead of 8:" << line;
             continue;
         }
 
@@ -129,6 +137,58 @@ QList<Routine> RoutineManager::getByCourseCode(
         {
             result.append(routine);
         }
+    }
+
+    return result;
+}
+
+QList<Routine> RoutineManager::search(
+        const QString& program,
+        int year,
+        int semester,
+        const QString& section,
+        const QString& day,
+        const QString& courseCode) const
+{
+    QList<Routine> result;
+
+    for(const Routine& routine : routines)
+    {
+        if(!program.isEmpty() &&
+           routine.getProgram().compare(program, Qt::CaseInsensitive) != 0)
+        {
+            continue;
+        }
+
+        if(year != -1 && routine.getYear() != year)
+        {
+            continue;
+        }
+
+        if(semester != -1 && routine.getSemester() != semester)
+        {
+            continue;
+        }
+
+        if(!section.isEmpty() &&
+           routine.getSection().compare(section, Qt::CaseInsensitive) != 0)
+        {
+            continue;
+        }
+
+        if(!day.isEmpty() &&
+           routine.getDay().compare(day, Qt::CaseInsensitive) != 0)
+        {
+            continue;
+        }
+
+        if(!courseCode.isEmpty() &&
+           routine.getCourseCode().compare(courseCode, Qt::CaseInsensitive) != 0)
+        {
+            continue;
+        }
+
+        result.append(routine);
     }
 
     return result;
