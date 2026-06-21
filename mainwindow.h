@@ -32,7 +32,7 @@ private:
     ChatBot* chatbot;
 
     CourseManager courseManager;
-    // RoutineManager routineManager;
+    RoutineManager routineManager;
     // FaqManager faqManager;
     // AdmissionManager admissionManager;
 

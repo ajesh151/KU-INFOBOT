@@ -18,8 +18,8 @@ private:
 
 public:
     ChatBot(
-        CourseManager* courseManager
-        /*RoutineManager* routineManager,
+        CourseManager* courseManager,
+        RoutineManager* routineManager/*,
         FaqManager* faqManager,
         AdmissionManager* admissionManager*/);
 
