@@ -19,7 +19,7 @@ private:
 
 public:
     ResponseGenerator(CourseManager* courseManager,RoutineManager* routineManager);
-       ,
+       
        // FaqManager* faqManager,
         // AdmissionManager* admissionManager
 
