@@ -91,3 +91,25 @@ void Routine::setVenue(const QString& venue)
 {
     this->venue = venue;
 }
+
+QString Routine::toString() const
+{
+    QString result = QString("%1 %2 — %3 @ %4")
+        .arg(day, time, courseCode, venue);
+
+    result += QString(" [%1, Year %2").arg(program).arg(year);
+
+    if(semester > 0)
+    {
+        result += QString(", Sem %1").arg(semester);
+    }
+
+    if(!section.isEmpty())
+    {
+        result += QString(", Section %1").arg(section);
+    }
+
+    result += "]";
+
+    return result;
+}

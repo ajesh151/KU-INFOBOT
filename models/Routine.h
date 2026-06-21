@@ -36,4 +36,10 @@ public:
     void setTime(const QString& time);
     void setCourseCode(const QString& courseCode);
     void setVenue(const QString& venue);
+
+    // Human-readable single-line representation of this entry, e.g.
+    // "Monday 9:00-11:00 — MATH104 @ 9-301(Graduate Room) [CE, Year 1, Sem 2, Section A]"
+    QString toString() const;
 };
+
+#endif // ROUTINE_H
