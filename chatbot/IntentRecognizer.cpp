@@ -1,7 +1,7 @@
 #include "IntentRecognizer.h"
 #include <QRegularExpression>
 #include <QStringList>
-
+#include<QString>
 IntentRecognizer::IntentRecognizer()
 {}
 
@@ -67,3 +67,5 @@ Intent IntentRecognizer::recognizeIntent(
     // FAQ
     return Intent::FAQ_QUERY;
 }
+
+
