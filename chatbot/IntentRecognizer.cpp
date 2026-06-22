@@ -24,8 +24,9 @@ Intent IntentRecognizer::recognizeIntent(
     QString text = input.toLower();
 
     static const QStringList greetingKeywords = {"hello", "hi", "hey","namaste","namaskar"};
-    static const QStringList goodbyeKeywords = {"bye", "goodbye"};
-    static const QStringList routineKeywords = {"routine", "schedule", "class"};
+    static const QStringList goodbyeKeywords = {"bye", "goodbye","see you"};
+    static const QStringList routineKeywords = {"routine", "schedule", "class","timetable","semester","year", "section",
+                                                 "sunday","monday","tuesday","wednesday","thursday","friday","saturday"};
     static const QStringList admissionKeywords = {"admission", "apply", "entrance"};
 
     // Greeting

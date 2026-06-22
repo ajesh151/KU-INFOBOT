@@ -4,7 +4,20 @@
 
 namespace
 {
-    const QStringList knownPrograms = {"CE", "CS", "BIT", "ME"};
+    const QStringList knownPrograms =
+    {
+        "BIT",
+        "BCA",
+        "BIM",
+        "BBA",
+        "CS",
+        "CE",
+        "EEE",
+        "BE",
+        "BPH",
+        "BSC",
+        "ME"
+    };
 
     QString extractProgram(const QString& upperInput)
     {
@@ -22,31 +35,50 @@ namespace
         return QString();
     }
 
-    int extractNumberNear(const QString& lowerText, const QString& keyword)
+    int extractNumberNear(
+        const QString& lowerText,
+        const QString& keyword)
     {
-        // Prefer "<digit><suffix?> <keyword>" e.g. "1st year", "2nd semester"
-        // so that "1st year 2nd semester" doesn't mix up the two numbers.
-        QRegularExpression beforePattern(
+        QRegularExpression digitBefore(
             "(\\d)(?:st|nd|rd|th)?\\s*" + keyword,
             QRegularExpression::CaseInsensitiveOption);
 
-        QRegularExpressionMatch beforeMatch = beforePattern.match(lowerText);
+        auto beforeMatch = digitBefore.match(lowerText);
 
         if(beforeMatch.hasMatch())
         {
             return beforeMatch.captured(1).toInt();
         }
 
-        // Fall back to "<keyword> <digit>" e.g. "semester 2"
-        QRegularExpression afterPattern(
+        QRegularExpression digitAfter(
             keyword + "\\s*(\\d)",
             QRegularExpression::CaseInsensitiveOption);
 
-        QRegularExpressionMatch afterMatch = afterPattern.match(lowerText);
+        auto afterMatch = digitAfter.match(lowerText);
 
         if(afterMatch.hasMatch())
         {
             return afterMatch.captured(1).toInt();
+        }
+
+        if(keyword == "semester")
+        {
+            if(lowerText.contains("first semester")) return 1;
+            if(lowerText.contains("second semester")) return 2;
+            if(lowerText.contains("third semester")) return 3;
+            if(lowerText.contains("fourth semester")) return 4;
+            if(lowerText.contains("fifth semester")) return 5;
+            if(lowerText.contains("sixth semester")) return 6;
+            if(lowerText.contains("seventh semester")) return 7;
+            if(lowerText.contains("eighth semester")) return 8;
+        }
+
+        if(keyword == "year")
+        {
+            if(lowerText.contains("first year")) return 1;
+            if(lowerText.contains("second year")) return 2;
+            if(lowerText.contains("third year")) return 3;
+            if(lowerText.contains("fourth year")) return 4;
         }
 
         return -1;
@@ -58,11 +90,11 @@ namespace
             "section\\s*([A-Za-z0-9]{1,3})\\b",
             QRegularExpression::CaseInsensitiveOption);
 
-        QRegularExpressionMatch match = pattern.match(input);
+        auto match = pattern.match(input);
 
         if(match.hasMatch())
         {
-            return match.captured(1);
+            return match.captured(1).toUpper();
         }
 
         return QString();
@@ -70,9 +102,16 @@ namespace
 
     QString extractDay(const QString& input)
     {
-        static const QStringList days = {
-            "monday", "tuesday", "wednesday", "thursday",
-            "friday", "saturday", "sunday"};
+        static const QStringList days =
+        {
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday",
+            "sunday"
+        };
 
         for(const QString& day : days)
         {
@@ -88,7 +127,8 @@ namespace
     QString extractCourseCode(const QString& upperInput)
     {
         QRegularExpression pattern("[A-Z]{3,5}\\d{3}[A-Z]*");
-        QRegularExpressionMatch match = pattern.match(upperInput);
+
+        auto match = pattern.match(upperInput);
 
         if(match.hasMatch())
         {
@@ -101,19 +141,15 @@ namespace
 
 ResponseGenerator::ResponseGenerator(
     CourseManager* courseManager,
-    RoutineManager* routineManager/*,
-    FaqManager* faqManager,
-    AdmissionManager* admissionManager*/)
+    RoutineManager* routineManager)
     : courseManager(courseManager),
-    routineManager(routineManager)/*,
-    faqManager(faqManager),
-    admissionManager(admissionManager)*/
+      routineManager(routineManager)
 {
 }
 
 QString ResponseGenerator::generateResponse(
-    Intent intent,
-    const QString& userInput) const
+        Intent intent,
+        const QString& userInput) const
 {
     switch(intent)
     {
@@ -139,23 +175,23 @@ QString ResponseGenerator::generateResponse(
             word.remove(';');
             word.remove(':');
 
-            Course course =
-                courseManager->findByCode(word);
+            Course course = courseManager->findByCode(word);
 
             if(!course.getCode().isEmpty())
             {
                 return QString(
-                           "Course Code: %1\n"
-                           "Course Name: %2\n"
-                           "Credits: %3")
-                    .arg(course.getCode())
-                    .arg(course.getName())
-                    .arg(course.getCredits());
+                    "Course Code : %1\n"
+                    "Course Name : %2\n"
+                    "Credits     : %3")
+                        .arg(course.getCode())
+                        .arg(course.getName())
+                        .arg(course.getCredits());
             }
         }
 
         return "Course not found.";
     }
+
     case Intent::ROUTINE_QUERY:
     {
         QString upperInput = userInput.toUpper();
@@ -165,41 +201,75 @@ QString ResponseGenerator::generateResponse(
         int year = extractNumberNear(lowerInput, "year");
         int semester = extractNumberNear(lowerInput, "semester");
         QString section = extractSection(userInput);
-        QString day = extractDay(userInput);
+        QString day = extractDay(lowerInput);
         QString courseCode = extractCourseCode(upperInput);
 
+        if(!courseCode.isEmpty() &&
+           (program.isEmpty() || year == -1 || semester == -1))
+        {
+            return "Please specify Program, Year and Semester along with the Course Code.";
+        }
+
         QList<Routine> matches = routineManager->search(
-            program, year, semester, section, day, courseCode);
+                    program,
+                    year,
+                    semester,
+                    section,
+                    day,
+                    courseCode);
 
         if(matches.isEmpty())
         {
-            return "I couldn't find any routine matching that. "
-                   "Try specifying program, year, "
-                   "semester, section, day, or course code.";
+            return "No matching routine found.\n\n"
+                   "Please provide:\n"
+                   "- Program\n"
+                   "- Year\n"
+                   "- Semester\n"
+                   "- Section (optional)\n"
+                   "- Day (optional)\n"
+                   "- Course Code (optional)";
         }
 
-        QString response = QString(
-            "Found %1 class(es):\n").arg(matches.size());
+        QString response =
+                QString("Found %1 class(es):\n\n")
+                .arg(matches.size());
 
         for(const Routine& routine : matches)
         {
-            response += routine.toString() + "\n";
+            response += QString(
+                "Program   : %1\n"
+                "Year      : %2\n"
+                "Semester  : %3\n"
+                "Section   : %4\n"
+                "Day       : %5\n"
+                "Time      : %6\n"
+                "Course    : %7\n"
+                "Venue     : %8\n"
+                "-----------------------------\n")
+                    .arg(routine.getProgram())
+                    .arg(routine.getYear())
+                    .arg(routine.getSemester())
+                    .arg(routine.getSection())
+                    .arg(routine.getDay())
+                    .arg(routine.getTime())
+                    .arg(routine.getCourseCode())
+                    .arg(routine.getVenue());
         }
 
         return response.trimmed();
     }
 
-    // case Intent::FAQ_QUERY:
-    // {
-    //     QString answer = faqManager.findAnswer(userInput);
+    /*
+    case Intent::FAQ_QUERY:
+    {
+        return faqManager->findAnswer(userInput);
+    }
 
-    //     return answer;
-    // }
-
-    // case Intent::ADMISSION_QUERY:
-    // {
-    //     return admissionManager->findInfo(userInput);
-    // }
+    case Intent::ADMISSION_QUERY:
+    {
+        return admissionManager->findInfo(userInput);
+    }
+    */
 
     case Intent::UNKNOWN:
     default:
