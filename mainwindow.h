@@ -6,7 +6,7 @@
 #include "chatbot/ChatBot.h"
 #include "managers/CourseManager.h"
 #include "managers/RoutineManager.h"
-#include "managers/FaqManager.h"
+#include "managers/FAQManager.h"
 #include "managers/AdmissionManager.h"
 
 QT_BEGIN_NAMESPACE
