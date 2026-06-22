@@ -141,9 +141,11 @@ namespace
 
 ResponseGenerator::ResponseGenerator(
     CourseManager* courseManager,
-    RoutineManager* routineManager)
+    RoutineManager* routineManager,
+    FaqManager* faqManager)
     : courseManager(courseManager),
-      routineManager(routineManager)
+      routineManager(routineManager),
+    faqManager(faqManager)
 {
 }
 

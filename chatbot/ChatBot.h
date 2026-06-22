@@ -19,8 +19,8 @@ private:
 public:
     ChatBot(
         CourseManager* courseManager,
-        RoutineManager* routineManager/*,
-        FaqManager* faqManager,
+        RoutineManager* routineManager,
+        FaqManager* faqManager/*,
         AdmissionManager* admissionManager*/);
 
     QString getResponse(const QString& userInput);

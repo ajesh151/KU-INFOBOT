@@ -33,7 +33,7 @@ private:
 
     CourseManager courseManager;
     RoutineManager routineManager;
-    // FaqManager faqManager;
+    FaqManager faqManager;
     // AdmissionManager admissionManager;
 
     void addMessage(const QString& text, bool isUser);

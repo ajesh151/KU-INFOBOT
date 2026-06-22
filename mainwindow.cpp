@@ -14,15 +14,15 @@ MainWindow::MainWindow(QWidget *parent)
 
     courseManager.loadCourses("data/courses.txt");
     routineManager.loadRoutines("data/routines.txt");
-    // faqManager.loadFaqs("data/faq.txt");
+    faqManager.loadFaqs("data/faq.txt");
     // admissionManager.loadAdmissions("data/file.txt");
 
     // Create chatbot
 
     chatbot = new ChatBot(
         &courseManager,
-        &routineManager
-        // &faqManager,
+        &routineManager,
+        &faqManager
         // &admissionManager
         );
 

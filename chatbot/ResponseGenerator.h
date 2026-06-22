@@ -14,13 +14,11 @@ class ResponseGenerator
 private:
     CourseManager* courseManager;
     RoutineManager* routineManager;
-   // FaqManager* faqManager;
+   FaqManager* faqManager;
     //AdmissionManager* admissionManager;
 
 public:
-    ResponseGenerator(CourseManager* courseManager,RoutineManager* routineManager);
-       
-       // FaqManager* faqManager,
+   ResponseGenerator(CourseManager* courseManager,RoutineManager* routineManager, FaqManager* faqManager);
         // AdmissionManager* admissionManager
 
     QString generateResponse(

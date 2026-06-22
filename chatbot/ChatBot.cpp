@@ -2,13 +2,13 @@
 #include <QDebug>
 ChatBot::ChatBot(
     CourseManager* courseManager,
-    RoutineManager* routineManager/*
-    FaqManager* faqManager,
+    RoutineManager* routineManager,
+    FaqManager* faqManager/*,
     AdmissionManager* admissionManager*/)
     : responseGenerator(
           courseManager,
-          routineManager/*,
-          faqManager,
+          routineManager,
+          faqManager/*,
           admissionManager*/)
 {
 }
