@@ -1,8 +1,8 @@
 #include "FaqManager.h"
-
 #include <QFile>
 #include <QTextStream>
 #include <QStringList>
+#include <QRegularExpression>
 
 FaqManager::FaqManager()
 {
@@ -56,17 +56,48 @@ std::vector<Faq> FaqManager::getAllFaqs() const
 
 QString FaqManager::findAnswer(const QString& question) const
 {
-    for (const Faq& faq : faqs)
+    QString input = question.toLower();
+
+    int bestScore = 0;
+    QString bestAnswer;
+
+    for(const Faq& faq : faqs)
     {
-        if (faq.getQuestion().compare(
-                question,
-                Qt::CaseInsensitive) == 0)
+        QString storedQuestion = faq.getQuestion().toLower();
+
+        QStringList words =
+            storedQuestion.split(
+                QRegularExpression("\\W+"),
+                Qt::SkipEmptyParts);
+
+        int score = 0;
+
+        for(const QString& word : words)
         {
-            return faq.getAnswer();
+            if(word.length() < 3)
+            {
+                continue;
+            }
+
+            if(input.contains(word))
+            {
+                score++;
+            }
+        }
+
+        if(score > bestScore)
+        {
+            bestScore = score;
+            bestAnswer = faq.getAnswer();
         }
     }
 
-    return "Sorry, I could not find an answer to that question.";
+    if(bestScore >= 2)
+    {
+        return bestAnswer;
+    }
+
+    return "Sorry, I couldn't find an answer for that question.";
 }
 
 std::vector<Faq> FaqManager::searchFaqs(
