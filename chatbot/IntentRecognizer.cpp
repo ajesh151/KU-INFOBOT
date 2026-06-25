@@ -30,61 +30,27 @@ Intent IntentRecognizer::recognizeIntent(
 
     static const QStringList greetingKeywords =
     {
-        "hello",
-        "hi",
-        "hey",
-        "namaste",
-        "namaskar"
+        "hello","hi","hey","namaste","namaskar"
     };
 
     static const QStringList goodbyeKeywords =
     {
-        "bye",
-        "goodbye",
-        "see you"
+        "bye","goodbye","see you"
     };
 
     static const QStringList routineKeywords =
     {
-        "routine",
-        "schedule",
-        "timetable",
-        "semester",
-        "year",
-        "section",
-        "sunday",
-        "monday",
-        "tuesday",
-        "wednesday",
-        "thursday",
-        "friday",
-        "saturday"
+        "routine","schedule","timetable","semester","year","section","sunday","monday","tuesday","wednesday","thursday","friday","saturday"
     };
 
     static const QStringList admissionKeywords =
     {
-        "admission",
-        "apply",
-        "entrance"
+        "admission","apply","entrance"
     };
 
     static const QStringList faqKeywords =
     {
-        "what",
-        "how",
-        "why",
-        "when",
-        "where",
-        "facility",
-        "hostel",
-        "library",
-        "wifi",
-        "transport",
-        "club",
-        "event",
-        "fee",
-        "fees",
-        "scholarship"
+        "what","how","why","when","where","facility","hostel","library","wifi","transport","club","event","fee","fees","scholarship"
     };
 
     // Greeting
