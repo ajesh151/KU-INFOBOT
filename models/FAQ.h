@@ -11,13 +11,13 @@ private:
 
 public:
     Faq();
-    Faq(const QString question,const QString answer);
+    Faq(const QString& question,const QString& answer);
 
     QString getQuestion() const;
     QString getAnswer() const;
 
     void setQuestion(const QString& question);
-    void setAnswer(constQString& answer);
+    void setAnswer(const QString& answer);
 };
 
 #endif
