@@ -235,6 +235,12 @@ border-radius:10px;
        </property>
        <item>
         <widget class="QLabel" name="lblReady">
+        <property name="styleSheet">
+         <string>
+font-size:16px;
+font-weight: bold;
+         </string>
+        </property>
          <property name="text">
           <string>KU InfoBot is ready to help you.</string>
          </property>
@@ -272,6 +278,7 @@ font-size:18px;
           <string>
 color:green;
 font-weight:bold;
+font-size:14px;
           </string>
          </property>
          <property name="text">
