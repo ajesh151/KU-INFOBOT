@@ -90,7 +90,7 @@ color:white;
             </size>
            </property>
            <property name="pixmap">
-            <pixmap>:/images/bot.png</pixmap>
+            <pixmap>resources/icons/bot.png</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
