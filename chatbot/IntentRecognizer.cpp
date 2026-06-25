@@ -30,12 +30,12 @@ Intent IntentRecognizer::recognizeIntent(
 
     static const QStringList greetingKeywords =
     {
-        "hello","hi","hey","namaste","namaskar"
+        "hello","hi","hey","namaste","namaskar", "whats up","heyy"
     };
 
     static const QStringList goodbyeKeywords =
     {
-        "bye","goodbye","see you"
+        "bye","goodbye","see you", "later", "take care", "catch you later","bye bye", "byebye"
     };
 
     static const QStringList routineKeywords =
@@ -78,10 +78,6 @@ Intent IntentRecognizer::recognizeIntent(
 
     if(coursePattern.match(input).hasMatch())
     {
-        // Questions like:
-        // "When is COMP116?"
-        // "Schedule of COMP116"
-        // should go to routine search
         if(text.contains("when") ||
            text.contains("routine") ||
            text.contains("schedule"))
