@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     courseManager.loadCourses("data/courses.txt");
     routineManager.loadRoutines("data/routines.txt");
     faqManager.loadFaqs("data/faq.txt");
+
     // admissionManager.loadAdmissions("data/file.txt");
     // Create chatbot
 

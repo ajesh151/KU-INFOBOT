@@ -6,17 +6,7 @@ namespace
 {
     const QStringList knownPrograms =
     {
-        "BIT",
-        "BCA",
-        "BIM",
-        "BBA",
-        "CS",
-        "CE",
-        "EEE",
-        "BE",
-        "BPH",
-        "BSC",
-        "ME"
+        "BIT","BCA","BIM","BBA","CS","CE","EEE","BE","BPH","BSC","ME"
     };
 
     QString extractProgram(const QString& upperInput)
@@ -261,12 +251,12 @@ QString ResponseGenerator::generateResponse(
         return response.trimmed();
     }
 
-    /*
+    
     case Intent::FAQ_QUERY:
     {
         return faqManager->findAnswer(userInput);
     }
-
+/*
     case Intent::ADMISSION_QUERY:
     {
         return admissionManager->findInfo(userInput);

@@ -92,7 +92,7 @@ QString FaqManager::findAnswer(const QString& question) const
         }
     }
 
-    if(bestScore >= 2)
+    if(bestScore > 0)
     {
         return bestAnswer;
     }
