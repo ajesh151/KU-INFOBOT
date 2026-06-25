@@ -6,17 +6,7 @@ namespace
 {
     const QStringList knownPrograms =
     {
-        "BIT",
-        "BCA",
-        "BIM",
-        "BBA",
-        "CS",
-        "CE",
-        "EEE",
-        "BE",
-        "BPH",
-        "BSC",
-        "ME"
+        "BIT","BCA","BIM","BBA","CS","CE","EEE","BE","BPH","BSC","ME"
     };
 
     QString extractProgram(const QString& upperInput)
