@@ -28,7 +28,8 @@ Intent IntentRecognizer::recognizeIntent(
     static const QStringList routineKeywords = {"routine", "schedule", "class","timetable","semester","year", "section",
                                                  "sunday","monday","tuesday","wednesday","thursday","friday","saturday"};
     static const QStringList admissionKeywords = {"admission", "apply", "entrance"};
-
+    static const QStringList faqKeywords ={"what","how","why","when","where","facility","hostel","library"
+                                            ,"wifi","transport","club","event","fee","fees","scholarship"};
     // Greeting
     if(containsAny(text, greetingKeywords))
     {
@@ -59,6 +60,10 @@ Intent IntentRecognizer::recognizeIntent(
     if(containsAny(text, admissionKeywords))
     {
         return Intent::ADMISSION_QUERY;
+    }
+    if(containsAny(text, faqKeywords))
+    {
+        return Intent::FAQ_QUERY;
     }
 
     // FAQ
