@@ -184,7 +184,7 @@ QString ResponseGenerator::generateResponse(
                 return QString(
                     "Course Code : %1\n"
                     "Course Name : %2\n"
-                    "Credits     : %3")
+                    "Credits : %3")
                         .arg(course.getCode())
                         .arg(course.getName())
                         .arg(course.getCredits());
