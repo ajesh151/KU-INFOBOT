@@ -261,12 +261,12 @@ QString ResponseGenerator::generateResponse(
         return response.trimmed();
     }
 
-    /*
+    
     case Intent::FAQ_QUERY:
     {
         return faqManager->findAnswer(userInput);
     }
-
+/*
     case Intent::ADMISSION_QUERY:
     {
         return admissionManager->findInfo(userInput);
