@@ -1,0 +1,79 @@
+engineering fee|Most four-year engineering programs including Computer Engineering, Civil Engineering, Mechanical Engineering, Electrical Engineering, BIT, Artificial Intelligence, Chemical Engineering, Mining Engineering and Health Informatics cost Rs. 960,000.
+
+bit fee|The total fee for Bachelor of Information Technology (BIT) is Rs. 960,000.
+
+computer engineering fee|The total fee for Computer Engineering is Rs. 960,000.
+
+civil engineering fee|The total fee for Civil Engineering is Rs. 960,000.
+
+mechanical engineering fee|The total fee for Mechanical Engineering is Rs. 960,000.
+
+electrical engineering fee|The total fee for Electrical and Electronics Engineering is Rs. 960,000.
+
+chemical engineering fee|The total fee for Chemical Engineering is Rs. 960,000.
+
+artificial intelligence fee|The total fee for B.Tech Artificial Intelligence is Rs. 960,000.
+
+ai fee|The total fee for B.Tech Artificial Intelligence is Rs. 960,000.
+
+mining engineering fee|The total fee for Mining Engineering is Rs. 960,000.
+
+health informatics fee|The total fee for Health Informatics is Rs. 960,000.
+
+heritage conservation fee|The total fee for Heritage Conservation is Rs. 960,000.
+
+architecture fee|The total fee for Bachelor of Architecture is Rs. 1,097,000.
+
+biotechnology fee|The total fee for B.Tech Biotechnology is Rs. 987,000.
+
+agriculture fee|The total fee for B.Sc. Agriculture is Rs. 987,000.
+
+environmental engineering fee|The total fee for Environmental Engineering is Rs. 960,000.
+
+data science fee|The total fee for Data Science is Rs. 924,000.
+
+computational mathematics fee|The total fee for Computational Mathematics is Rs. 924,000.
+
+pharmacy fee|The total fee for Bachelor of Pharmacy is Rs. 777,000.
+
+engineering masters fee|Most two-year engineering master's programs cost Rs. 475,000.
+
+science masters fee|Most M.Sc. programs cost Rs. 475,000 while M.Tech Biotechnology costs Rs. 830,000.
+
+bba fee|The total fee for Bachelor of Business Administration (BBA) is Rs. 960,000.
+
+bbis fee|The total fee for Bachelor of Business Information Systems (BBIS) is Rs. 960,000.
+
+law fee|The total fee for BBM-LL.B and BEcon-LL.B is Rs. 1,037,000.
+
+bbm llb fee|The total fee for BBM-LL.B is Rs. 1,037,000.
+
+becon llb fee|The total fee for BEcon-LL.B is Rs. 1,037,000.
+
+mba fee|The total fee for MBA is Rs. 658,000.
+
+mbe fee|The total fee for MBE is Rs. 658,000.
+
+mppm fee|The total fee for MPPM is Rs. 658,000.
+
+executive mba fee|The total fee for Executive MBA is Rs. 677,000.
+
+music fee|The total fee for Bachelor of Music is Rs. 530,000.
+
+fine arts fee|The total fee for Bachelor of Fine Arts is Rs. 530,000.
+
+media studies fee|The total fee for Bachelor of Media Studies is Rs. 546,000.
+
+economics fee|The total fee for Bachelor of Economics is Rs. 546,000.
+
+education fee|All undergraduate education programs cost Rs. 546,000.
+
+education masters fee|Two-year Master's programs cost Rs. 305,000 while one-year Master's programs cost Rs. 149,000.
+
+phd fee|Most Ph.D. programs cost Rs. 672,000 while Ph.D. Biotechnology costs Rs. 882,000.
+
+phd biotechnology fee|The total fee for Ph.D. Biotechnology is Rs. 882,000.
+
+saarc fee|SAARC and Corporate-sponsored students pay 1.5 times the regular tuition fee.
+
+international fee|International students outside SAARC pay twice the regular tuition fee.
