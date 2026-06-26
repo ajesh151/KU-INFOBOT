@@ -77,10 +77,10 @@ color:white;
           <widget class="QLabel" name="lblBotAvatar">
            <property name="geometry">
             <rect>
-             <x>1278</x>
-             <y>6</y>
-             <width>70</width>
-             <height>70</height>
+             <x>1125</x>
+             <y>2</y>
+             <width>100</width>
+             <height>100</height>
             </rect>
            </property>
            <property name="minimumSize">
