@@ -8,8 +8,8 @@ ChatBot::ChatBot(
     : responseGenerator(
           courseManager,
           routineManager,
-          faqManager/*,
-          admissionManager*/)
+          faqManager,
+          admissionManager)
 {
 }
 

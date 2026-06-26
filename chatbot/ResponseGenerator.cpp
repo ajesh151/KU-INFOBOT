@@ -132,10 +132,13 @@ namespace
 ResponseGenerator::ResponseGenerator(
     CourseManager* courseManager,
     RoutineManager* routineManager,
-    FaqManager* faqManager)
-    : courseManager(courseManager),
+    FaqManager* faqManager,
+    AdmissionManager* admissionManager)
+    :
+      courseManager(courseManager),
       routineManager(routineManager),
-    faqManager(faqManager)
+      faqManager(faqManager),
+      admissionManager(admissionManager)
 {
 }
 
@@ -256,12 +259,12 @@ QString ResponseGenerator::generateResponse(
     {
         return faqManager->findAnswer(userInput);
     }
-/*
+
     case Intent::ADMISSION_QUERY:
     {
         return admissionManager->findInfo(userInput);
     }
-    */
+    
 
     case Intent::UNKNOWN:
     default:

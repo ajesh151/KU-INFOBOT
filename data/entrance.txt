@@ -1,0 +1,49 @@
+kucat|Kathmandu University Common Admission Test (KUCAT) is a Computer-Based Test conducted for engineering admissions.
+
+entrance exam|Admission to the School of Engineering requires qualifying the Kathmandu University Common Admission Test (KUCAT-CBT).
+
+computer based test|The entrance examination is conducted in Computer-Based Test (CBT) mode.
+
+test format|The examination consists of 120 multiple-choice questions.
+
+duration|The examination duration is 120 minutes (2 hours).
+
+subjects|The entrance examination contains 40 questions each from Physics, Chemistry and Mathematics.
+
+syllabus|Questions are prepared according to the official Kathmandu University entrance syllabus.
+
+adaptive scoring|The examination uses adaptive scoring where the difficulty of the next question depends on the previous answer.
+
+difficulty level|Questions are divided into five difficulty levels.
+
+level 1|Level 1 questions carry 11 points.
+
+level 2|Level 2 questions carry 13 points.
+
+level 3|Level 3 questions carry 15 points.
+
+level 4|Level 4 questions carry 17 points.
+
+level 5|Level 5 questions carry 19 points.
+
+negative marking|There is no traditional negative marking. Incorrect answers lower the difficulty level of subsequent questions.
+
+score range|The total obtainable score ranges from 0 to 2220.
+
+pass mark|The minimum qualifying score is 528.
+
+minimum score|The minimum score required to qualify the entrance examination is 528.
+
+qualifying score|Applicants must obtain at least 528 marks to qualify.
+
+computer engineering cutoff|The estimated merit score for Computer Engineering ranges from 900 to 1300 or above.
+
+computer engineering merit|The estimated admission score for Computer Engineering ranges from 900 to 1300 or above.
+
+ai cutoff|The estimated merit score for B.Tech Artificial Intelligence ranges from 800 to 1100 or above.
+
+civil engineering cutoff|The estimated merit score for Civil Engineering (Hydropower) ranges from 700 to 1100 or above.
+
+mechanical engineering cutoff|The estimated merit score for Mechanical Engineering ranges from 600 to 1000 or above.
+
+mining engineering cutoff|The estimated merit score for Mining Engineering ranges from 528 to 700 or above.
