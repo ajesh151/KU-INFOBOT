@@ -262,7 +262,7 @@ QString ResponseGenerator::generateResponse(
 
     case Intent::ADMISSION_QUERY:
     {
-        return admissionManager->findInfo(userInput);
+        return admissionManager->findAnswer(userInput);
     }
     
 

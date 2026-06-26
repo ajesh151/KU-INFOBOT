@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-managers/admisiionmanager.h
-
->>>>>>> 104504e4c3d085213ad9ed9760de1c6ada4b55e2
 #ifndef ADMISSIONMANAGER_H
 #define ADMISSIONMANAGER_H
 

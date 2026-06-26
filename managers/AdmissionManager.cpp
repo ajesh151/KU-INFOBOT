@@ -1,5 +1,4 @@
 #include "AdmissionManager.h"
-
 #include <QFile>
 #include <QTextStream>
 #include <QStringList>
