@@ -3,6 +3,7 @@
 #include <QLabel>
 #include <QHBoxLayout>
 #include <QScrollBar>
+#include <QPixmap>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -83,68 +84,87 @@ void MainWindow::sendMessage()
     ui->txtMessage->clear();
 }
 
-void MainWindow::addMessage(
-    const QString& text,
-    bool isUser)
+void MainWindow::addMessage(const QString& text, bool isUser)
 {
-    QLabel* messageLabel =
-        new QLabel(text);
-
+    // Chat bubble
+    QLabel *messageLabel = new QLabel(text);
     messageLabel->setWordWrap(true);
-
-    messageLabel->setMaximumWidth(600);
+    messageLabel->setMaximumWidth(700);
 
     if(isUser)
     {
         messageLabel->setStyleSheet(
+            "QLabel{"
             "background:#0057D8;"
             "color:white;"
-            "border-radius:10px;"
-            "padding:10px;"
+            "border-radius:15px;"
+            "padding:12px;"
+            "font-size:14px;"
+            "}"
             );
     }
     else
     {
         messageLabel->setStyleSheet(
-            "background:#F0F0F0;"
+            "QLabel{"
+            "background:#F2F2F2;"
             "color:black;"
-            "border-radius:10px;"
-            "padding:10px;"
+            "border-radius:15px;"
+            "padding:12px;"
+            "font-size:14px;"
+            "}"
             );
     }
 
-    QWidget* container = new QWidget;
+    // Avatar
+    QLabel *avatar = new QLabel;
+    avatar->setFixedSize(45,45);
 
-    QHBoxLayout* layout =
-        new QHBoxLayout(container);
+    if(isUser)
+    {
+        avatar->setPixmap(
+            QPixmap("resources/icons/user.png")
+                .scaled(45,45,
+                        Qt::KeepAspectRatio,
+                        Qt::SmoothTransformation)
+            );
+    }
+    else
+    {
+        avatar->setPixmap(
+            QPixmap("resources/icons/bot.png")
+                .scaled(45,45,
+                        Qt::KeepAspectRatio,
+                        Qt::SmoothTransformation)
+            );
+    }
 
-    layout->setContentsMargins(
-        10, 5, 10, 5);
+    QWidget *container = new QWidget;
+
+    QHBoxLayout *layout = new QHBoxLayout(container);
+    layout->setContentsMargins(15,8,15,8);
+    layout->setSpacing(10);
 
     if(isUser)
     {
         layout->addStretch();
         layout->addWidget(messageLabel);
+        layout->addWidget(avatar);
     }
     else
     {
+        layout->addWidget(avatar);
         layout->addWidget(messageLabel);
         layout->addStretch();
     }
-
-    // Insert before spacer
-
+    layout->setAlignment(avatar, Qt::AlignTop);
+    layout->setAlignment(messageLabel, Qt::AlignTop);
     ui->verticalLayout_Chat->insertWidget(
-        ui->verticalLayout_Chat->count() - 1,
-        container
-        );
+        ui->verticalLayout_Chat->count()-1,
+        container);
 
-    // Auto-scroll
-
-    QScrollBar* scrollBar =
+    QScrollBar *scrollBar =
         ui->scrollAreaChat->verticalScrollBar();
 
-    scrollBar->setValue(
-        scrollBar->maximum()
-        );
+    scrollBar->setValue(scrollBar->maximum());
 }

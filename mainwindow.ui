@@ -30,8 +30,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>1352</width>
-         <height>672</height>
+         <width>1344</width>
+         <height>660</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_Chat">
@@ -47,7 +47,7 @@
            <bool>false</bool>
           </property>
           <property name="styleSheet">
-           <string notr="true">background:#003C96;
+           <string notr="true">background:#474BC3;
 border-radius:10px;
 color:white;
        </string>
@@ -78,15 +78,15 @@ color:white;
            <property name="geometry">
             <rect>
              <x>1125</x>
-             <y>2</y>
-             <width>100</width>
-             <height>100</height>
+             <y>5</y>
+             <width>90</width>
+             <height>90</height>
             </rect>
            </property>
            <property name="minimumSize">
             <size>
-             <width>70</width>
-             <height>70</height>
+             <width>30</width>
+             <height>30</height>
             </size>
            </property>
            <property name="pixmap">
@@ -96,44 +96,44 @@ color:white;
             <bool>true</bool>
            </property>
           </widget>
-          <widget class="QWidget" name="">
+          <widget class="QLabel" name="lblTitle">
            <property name="geometry">
             <rect>
-             <x>82</x>
-             <y>6</y>
-             <width>273</width>
-             <height>57</height>
+             <x>83</x>
+             <y>18</y>
+             <width>125</width>
+             <height>31</height>
             </rect>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_Title">
-            <item>
-             <widget class="QLabel" name="lblTitle">
-              <property name="styleSheet">
-               <string>
+           <property name="styleSheet">
+            <string>
 font-size:24px;
 font-weight:bold;
 color:white;
             </string>
-              </property>
-              <property name="text">
-               <string>KU InfoBot</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="lblSubtitle">
-              <property name="styleSheet">
-               <string>
+           </property>
+           <property name="text">
+            <string>KU InfoBot</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="lblSubtitle">
+           <property name="geometry">
+            <rect>
+             <x>83</x>
+             <y>45</y>
+             <width>281</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string>
 font-size:14px;
 color:white;
             </string>
-              </property>
-              <property name="text">
-               <string>Kathmandu University Information Assistant</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
+           </property>
+           <property name="text">
+            <string>Kathmandu University Information Assistant</string>
+           </property>
           </widget>
          </widget>
         </item>
@@ -183,6 +183,8 @@ border:1px solid #D0D0D0;
 border-radius:10px;
 padding-left:10px;
 font-size:14px;
+background: white;
+color: black;
           </string>
          </property>
          <property name="placeholderText">
@@ -235,12 +237,12 @@ border-radius:10px;
        </property>
        <item>
         <widget class="QLabel" name="lblReady">
-        <property name="styleSheet">
-         <string>
+         <property name="styleSheet">
+          <string>
 font-size:16px;
 font-weight: bold;
          </string>
-        </property>
+         </property>
          <property name="text">
           <string>KU InfoBot is ready to help you.</string>
          </property>
