@@ -95,7 +95,7 @@ void MainWindow::addMessage(const QString& text, bool isUser)
     {
         messageLabel->setStyleSheet(
             "QLabel{"
-            "background:#0057D8;"
+            "background:#474BC3;"
             "color:white;"
             "border-radius:15px;"
             "padding:12px;"

@@ -40,14 +40,15 @@
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>100</height>
+            <height>85</height>
            </size>
           </property>
           <property name="autoFillBackground">
            <bool>false</bool>
           </property>
           <property name="styleSheet">
-           <string notr="true">background:#474BC3;
+           <string notr="true">
+           background:#474BC3;
 border-radius:10px;
 color:white;
        </string>
@@ -55,10 +56,10 @@ color:white;
           <widget class="QLabel" name="lblKULogo">
            <property name="geometry">
             <rect>
-             <x>-10</x>
-             <y>9</y>
-             <width>101</width>
-             <height>81</height>
+             <x>10</x>
+             <y>2</y>
+             <width>80</width>
+             <height>80</height>
             </rect>
            </property>
            <property name="minimumSize">
@@ -77,10 +78,10 @@ color:white;
           <widget class="QLabel" name="lblBotAvatar">
            <property name="geometry">
             <rect>
-             <x>1125</x>
-             <y>5</y>
-             <width>90</width>
-             <height>90</height>
+             <x>1140</x>
+             <y>0</y>
+             <width>81</width>
+             <height>81</height>
             </rect>
            </property>
            <property name="minimumSize">
@@ -99,10 +100,10 @@ color:white;
           <widget class="QLabel" name="lblTitle">
            <property name="geometry">
             <rect>
-             <x>83</x>
-             <y>18</y>
+             <x>100</x>
+             <y>10</y>
              <width>125</width>
-             <height>31</height>
+             <height>41</height>
             </rect>
            </property>
            <property name="styleSheet">
@@ -119,15 +120,15 @@ color:white;
           <widget class="QLabel" name="lblSubtitle">
            <property name="geometry">
             <rect>
-             <x>83</x>
-             <y>45</y>
-             <width>281</width>
-             <height>31</height>
+             <x>100</x>
+             <y>50</y>
+             <width>311</width>
+             <height>20</height>
             </rect>
            </property>
            <property name="styleSheet">
             <string>
-font-size:14px;
+font-size:15px;
 color:white;
             </string>
            </property>
@@ -202,7 +203,7 @@ color: black;
          </property>
          <property name="styleSheet">
           <string>
-background:#0057D8;
+background:#474BC3;
 color:white;
 font-size:14px;
 font-weight:bold;
