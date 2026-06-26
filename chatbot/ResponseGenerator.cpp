@@ -1,6 +1,7 @@
 #include "ResponseGenerator.h"
 #include <QRegularExpression>
 #include <QStringList>
+#include <algorithm>
 
 namespace
 {
@@ -94,13 +95,13 @@ namespace
     {
         static const QStringList days =
         {
+            "sunday",
             "monday",
             "tuesday",
             "wednesday",
             "thursday",
             "friday",
-            "saturday",
-            "sunday"
+            "saturday"
         };
 
         for(const QString& day : days)
@@ -200,18 +201,18 @@ QString ResponseGenerator::generateResponse(
         QString courseCode = extractCourseCode(upperInput);
 
         if(!courseCode.isEmpty() &&
-           (program.isEmpty() || year == -1 || semester == -1))
+            (program.isEmpty() || year == -1 || semester == -1))
         {
             return "Please specify Program, Year and Semester along with the Course Code.";
         }
 
         QList<Routine> matches = routineManager->search(
-                    program,
-                    year,
-                    semester,
-                    section,
-                    day,
-                    courseCode);
+            program,
+            year,
+            semester,
+            section,
+            day,
+            courseCode);
 
         if(matches.isEmpty())
         {
@@ -225,35 +226,63 @@ QString ResponseGenerator::generateResponse(
                    "- Course Code (optional)";
         }
 
-        QString response =
-                QString("Found %1 class(es):\n\n")
-                .arg(matches.size());
+        // Order of days
+        QStringList dayOrder =
+            {
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+            };
 
-        for(const Routine& routine : matches)
+        // Sort routines by day and then by time
+        std::sort(matches.begin(), matches.end(),
+                  [&dayOrder](const Routine &a, const Routine &b)
+                  {
+                      int dayA = dayOrder.indexOf(a.getDay());
+                      int dayB = dayOrder.indexOf(b.getDay());
+
+                      if(dayA != dayB)
+                          return dayA < dayB;
+
+                      return a.getTime() < b.getTime();
+                  });
+
+        const Routine &first = matches.first();
+
+        QString response = QString(
+                               "Routine for %1-%2 (%3/%4) is:\n\n")
+                               .arg(first.getProgram())
+                               .arg(first.getSection())
+                               .arg(first.getYear())
+                               .arg(first.getSemester());
+
+        QString currentDay;
+
+        for(const Routine &routine : matches)
         {
-            response += QString(
-                "Program   : %1\n"
-                "Year      : %2\n"
-                "Semester  : %3\n"
-                "Section   : %4\n"
-                "Day       : %5\n"
-                "Time      : %6\n"
-                "Course    : %7\n"
-                "Venue     : %8\n"
-                "-----------------------------\n")
-                    .arg(routine.getProgram())
-                    .arg(routine.getYear())
-                    .arg(routine.getSemester())
-                    .arg(routine.getSection())
-                    .arg(routine.getDay())
-                    .arg(routine.getTime())
-                    .arg(routine.getCourseCode())
-                    .arg(routine.getVenue());
+            // Print day heading only once
+            if(currentDay != routine.getDay())
+            {
+                if(!currentDay.isEmpty())
+                    response += "\n";
+
+                currentDay = routine.getDay();
+
+                response += currentDay + "\n";
+            }
+
+            response += QString("%1\t%2\t%3\n")
+                            .arg(routine.getTime(), -15)
+                            .arg(routine.getCourseCode(), -10)
+                            .arg(routine.getVenue());
         }
 
         return response.trimmed();
     }
-
     
     case Intent::FAQ_QUERY:
     {
