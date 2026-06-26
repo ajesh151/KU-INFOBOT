@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
         &courseManager,
         &routineManager,
         &faqManager
-        // &admissionManager
+        &admissionManager
         );
 
     // Send button

@@ -1,8 +1,8 @@
 #include "IntentRecognizer.h"
 
 #include <QRegularExpression>
-#include <QStringList>
 #include <QString>
+#include <QStringList>
 
 IntentRecognizer::IntentRecognizer()
 {
@@ -28,59 +28,57 @@ Intent IntentRecognizer::recognizeIntent(
 {
     QString text = input.toLower();
 
+
     static const QStringList greetingKeywords =
     {
-        "hello","hi","hey","namaste","namaskar", "whats up","heyy"
+        "hello","hi","hey","heyy","namaste","namaskar",
+        "good morning","good afternoon","good evening"
     };
 
-    static const QStringList goodbyeKeywords =
-    {
-        "bye","goodbye","see you", "later", "take care", "catch you later","bye bye", "byebye"
-    };
-
-    static const QStringList routineKeywords =
-    {
-        "routine","schedule","timetable","semester","year","section","sunday","monday","tuesday","wednesday","thursday","friday","saturday"
-    };
-
-    static const QStringList admissionKeywords =
-    {
-        "admission","apply","entrance"
-    };
-
-    static const QStringList faqKeywords =
-    {
-        "what","how","why","when","where","facility","hostel","library","wifi","transport","club","event","fee","fees","scholarship"
-    };
-
-    // Greeting
     if(containsAny(text, greetingKeywords))
     {
         return Intent::GREETING;
     }
 
-    // Goodbye
+
+    static const QStringList goodbyeKeywords =
+    {
+        "bye","goodbye","see you","take care","later","bye bye"
+    };
+
     if(containsAny(text, goodbyeKeywords))
     {
         return Intent::GOODBYE;
     }
 
-    // Routine keywords
-    if(containsAny(text, routineKeywords))
-    {
-        return Intent::ROUTINE_QUERY;
-    }
-
-    // Course code detection
+    
     static const QRegularExpression coursePattern(
         "[A-Z]{3,5}\\d{3}",
         QRegularExpression::CaseInsensitiveOption);
 
-    if(coursePattern.match(input).hasMatch())
+    bool hasCourseCode =
+            coursePattern.match(input).hasMatch();
+
+
+    static const QStringList routineKeywords =
+    {
+        "routine","schedule","timetable","semester","year","section",
+        "sunday","monday","tuesday","wednesday","thursday","friday","saturday",
+       "today","tomorrow","class timing","class time","next class","which class","when is"
+    };
+
+    if(containsAny(text,routineKeywords))
+    {
+        return Intent::ROUTINE_QUERY;
+    }
+
+    
+    if(hasCourseCode)
     {
         if(text.contains("when") ||
            text.contains("routine") ||
-           text.contains("schedule"))
+           text.contains("schedule") ||
+           text.contains("time"))
         {
             return Intent::ROUTINE_QUERY;
         }
@@ -88,17 +86,33 @@ Intent IntentRecognizer::recognizeIntent(
         return Intent::COURSE_INFO;
     }
 
-    // Admission
+    static const QStringList admissionKeywords =
+    {
+        "admission","admissions","apply","application","eligibility","eligible",
+        "required documents","documents","entrance","entrance exam","entrance examination",
+        "fee","fees","tuition","payment","scholarship","financial aid","deadline",
+        "admit","enrollment","enrolment","registration"
+    };
+
     if(containsAny(text, admissionKeywords))
     {
         return Intent::ADMISSION_QUERY;
     }
 
-    // FAQ
+
+    static const QStringList faqKeywords =
+    {
+        "what","how","why","where","library","hostel","wifi",
+        "internet","canteen","bus","transport","club","clubs","event",
+        "events","facility","facilities","contact","location","office",
+        "email","phone"
+    };
+
     if(containsAny(text, faqKeywords))
     {
         return Intent::FAQ_QUERY;
     }
 
+    
     return Intent::FAQ_QUERY;
 }
