@@ -15,11 +15,11 @@ private:
     CourseManager* courseManager;
     RoutineManager* routineManager;
    FaqManager* faqManager;
-    //AdmissionManager* admissionManager;
+    AdmissionManager* admissionManager;
 
 public:
-   ResponseGenerator(CourseManager* courseManager,RoutineManager* routineManager, FaqManager* faqManager);
-        // AdmissionManager* admissionManager
+   ResponseGenerator(CourseManager* courseManager,RoutineManager* routineManager, FaqManager* faqManager,AdmissionManager* admissionManager);
+    
 
     QString generateResponse(
         Intent intent,
