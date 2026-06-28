@@ -285,10 +285,42 @@ QString ResponseGenerator::generateResponse(
     }
     
     case Intent::FAQ_QUERY:
+{
+    QString text = userInput.toLower();
+
+    if(text.contains("your name") ||
+       text.contains("who are you") ||
+       text == "name" ||
+       text == "name?")
     {
-        return faqManager->findAnswer(userInput);
+        return "Hi! 😊 I'm KU InfoBot, your virtual assistant for Kathmandu University. I'm here to help you with information about courses, routines, admissions, fees, scholarships, and more.";
     }
 
+    if(text.contains("what can you do"))
+    {
+        return "I can answer questions related to:\n\n"
+               "📘 Courses\n"
+               "📅 Class Routines\n"
+               "🎓 Admissions\n"
+               "📝 Entrance Exams\n"
+               "💰 Fee Structure\n"
+               "🏆 Scholarships\n"
+               "🏫 Facilities\n"
+               "❓ General FAQs";
+    }
+
+    if(text.contains("thank"))
+    {
+        return "You're welcome! 😊 If you have any more questions, feel free to ask.";
+    }
+
+    if(text.contains("how are you"))
+    {
+        return "I'm doing great! 😊 Thank you for asking. How can I assist you today?";
+    }
+
+    return faqManager->findAnswer(userInput);
+}
     case Intent::ADMISSION_QUERY:
     {
         return admissionManager->findAnswer(userInput);
