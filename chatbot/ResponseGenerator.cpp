@@ -1,4 +1,5 @@
 #include "ResponseGenerator.h"
+
 #include <QRegularExpression>
 #include <QStringList>
 #include <algorithm>
@@ -188,7 +189,7 @@ QString ResponseGenerator::generateResponse(
         return "Course not found.";
     }
 
-    case Intent::ROUTINE_QUERY:
+        case Intent::ROUTINE_QUERY:
     {
         QString upperInput = userInput.toUpper();
         QString lowerInput = userInput.toLower();
@@ -200,19 +201,75 @@ QString ResponseGenerator::generateResponse(
         QString day = extractDay(lowerInput);
         QString courseCode = extractCourseCode(upperInput);
 
+        // If user entered a course name instead of course code,
+        // try to determine the corresponding course code.
+        if(courseCode.isEmpty())
+        {
+            QString searchText = userInput;
+
+            QStringList ignoredWords =
+            {
+                "routine","schedule","timetable",
+                "when","what","which","show","give","display",
+                "class","course","for","of","is","are",
+                "me","please",
+                "program","year","semester","section",
+                "today","tomorrow","on"
+            };
+
+            for(const QString &word : ignoredWords)
+            {
+                searchText.replace(
+                    QRegularExpression(
+                        "\\b" + QRegularExpression::escape(word) + "\\b",
+                        QRegularExpression::CaseInsensitiveOption),
+                    " ");
+            }
+
+            searchText = searchText.simplified();
+
+            std::vector<Course> courses =
+                courseManager->findByName(searchText);
+
+            if(courses.size() == 1)
+            {
+                courseCode = courses.front().getCode();
+            }
+            else if(courses.size() > 1)
+            {
+                QString response =
+                    "Multiple courses matched your query:\n\n";
+
+                for(const Course &course : courses)
+                {
+                    response += QString("%1 - %2\n")
+                                    .arg(course.getCode())
+                                    .arg(course.getName());
+                }
+
+                response +=
+                    "\nPlease specify the exact course.";
+
+                return response;
+            }
+        }
+
         if(!courseCode.isEmpty() &&
-            (program.isEmpty() || year == -1 || semester == -1))
+           (program.isEmpty() ||
+            year == -1 ||
+            semester == -1))
         {
             return "Please specify Program, Year and Semester along with the Course Code.";
         }
 
-        QList<Routine> matches = routineManager->search(
-            program,
-            year,
-            semester,
-            section,
-            day,
-            courseCode);
+        QList<Routine> matches =
+            routineManager->search(
+                program,
+                year,
+                semester,
+                section,
+                day,
+                courseCode);
 
         if(matches.isEmpty())
         {
@@ -226,52 +283,54 @@ QString ResponseGenerator::generateResponse(
                    "- Course Code (optional)";
         }
 
-        // Order of days
         QStringList dayOrder =
+        {
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+        };
+
+        std::sort(matches.begin(),
+                  matches.end(),
+                  [&dayOrder](const Routine &a,
+                              const Routine &b)
+        {
+            int dayA = dayOrder.indexOf(a.getDay());
+            int dayB = dayOrder.indexOf(b.getDay());
+
+            if(dayA != dayB)
             {
-                "Sunday",
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-                "Saturday"
-            };
+                return dayA < dayB;
+            }
 
-        // Sort routines by day and then by time
-        std::sort(matches.begin(), matches.end(),
-                  [&dayOrder](const Routine &a, const Routine &b)
-                  {
-                      int dayA = dayOrder.indexOf(a.getDay());
-                      int dayB = dayOrder.indexOf(b.getDay());
-
-                      if(dayA != dayB)
-                          return dayA < dayB;
-
-                      return a.getTime() < b.getTime();
-                  });
+            return a.getTime() < b.getTime();
+        });
 
         const Routine &first = matches.first();
 
-        QString response = QString(
-                               "Routine for %1-%2 (%3/%4) is:\n\n")
-                               .arg(first.getProgram())
-                               .arg(first.getSection())
-                               .arg(first.getYear())
-                               .arg(first.getSemester());
+        QString response =
+            QString("Routine for %1-%2 (%3/%4) is:\n\n")
+                .arg(first.getProgram())
+                .arg(first.getSection())
+                .arg(first.getYear())
+                .arg(first.getSemester());
 
         QString currentDay;
 
         for(const Routine &routine : matches)
         {
-            // Print day heading only once
             if(currentDay != routine.getDay())
             {
                 if(!currentDay.isEmpty())
+                {
                     response += "\n";
+                }
 
                 currentDay = routine.getDay();
-
                 response += currentDay + "\n";
             }
 
@@ -283,49 +342,49 @@ QString ResponseGenerator::generateResponse(
 
         return response.trimmed();
     }
-    
-    case Intent::FAQ_QUERY:
-{
-    QString text = userInput.toLower();
 
-    if(text.contains("your name") ||
-       text.contains("who are you") ||
-       text == "name" ||
-       text == "name?")
+        case Intent::FAQ_QUERY:
     {
-        return "Hi! 😊 I'm KU InfoBot, your virtual assistant for Kathmandu University. I'm here to help you with information about courses, routines, admissions, fees, scholarships, and more.";
+        QString text = userInput.toLower();
+
+        if(text.contains("your name") ||
+           text.contains("who are you") ||
+           text == "name" ||
+           text == "name?")
+        {
+            return "Hi! 😊 I'm KU InfoBot, your virtual assistant for Kathmandu University. I'm here to help you with information about courses, routines, admissions, fees, scholarships, and more.";
+        }
+
+        if(text.contains("what can you do"))
+        {
+            return "I can answer questions related to:\n\n"
+                   "📘 Courses\n"
+                   "📅 Class Routines\n"
+                   "🎓 Admissions\n"
+                   "📝 Entrance Exams\n"
+                   "💰 Fee Structure\n"
+                   "🏆 Scholarships\n"
+                   "🏫 Facilities\n"
+                   "❓ General FAQs";
+        }
+
+        if(text.contains("thank"))
+        {
+            return "You're welcome! 😊 If you have any more questions, feel free to ask.";
+        }
+
+        if(text.contains("how are you"))
+        {
+            return "I'm doing great! 😊 Thank you for asking. How can I assist you today?";
+        }
+
+        return faqManager->findAnswer(userInput);
     }
 
-    if(text.contains("what can you do"))
-    {
-        return "I can answer questions related to:\n\n"
-               "📘 Courses\n"
-               "📅 Class Routines\n"
-               "🎓 Admissions\n"
-               "📝 Entrance Exams\n"
-               "💰 Fee Structure\n"
-               "🏆 Scholarships\n"
-               "🏫 Facilities\n"
-               "❓ General FAQs";
-    }
-
-    if(text.contains("thank"))
-    {
-        return "You're welcome! 😊 If you have any more questions, feel free to ask.";
-    }
-
-    if(text.contains("how are you"))
-    {
-        return "I'm doing great! 😊 Thank you for asking. How can I assist you today?";
-    }
-
-    return faqManager->findAnswer(userInput);
-}
     case Intent::ADMISSION_QUERY:
     {
         return admissionManager->findAnswer(userInput);
     }
-    
 
     case Intent::UNKNOWN:
     default:
