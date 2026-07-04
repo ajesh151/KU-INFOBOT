@@ -18,14 +18,11 @@ QString ChatBot::getResponse(
 {
     // Step 1: Correct typos
 
-    // QString processedInput =
-    //     typoCorrector.correct(userInput);
+    QString processedInput = typoCorrector.correct(userInput);
 
     // Step 2: Replace synonyms
 
-    // processedInput =
-    //     synonymManager.replaceSynonyms(
-    //         processedInput);
+    // processedInput =synonymManager.replaceSynonyms(processedInput);
 
     // Step 3: Detect intent
     QString processedInput = userInput;
