@@ -31,39 +31,46 @@ set(PROJECT_SOURCES
             chatbot/IntentRecognizer.cpp
             chatbot/ResponseGenerator.cpp
 
+            crawler/WebCrawler.cpp
+            crawler/CrawlCache.cpp
+
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
+
     qt_add_executable(KU_INFOBOT
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
-# Define target properties for Android with Qt 6 as:
-#    set_property(TARGET KU_INFOBOT APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
-#                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
-# For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
+
 else()
+
     if(ANDROID)
+
         add_library(KU_INFOBOT SHARED
             ${PROJECT_SOURCES}
         )
-# Define properties for Android with Qt 5 after find_package() calls as:
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
+
     else()
+
         add_executable(KU_INFOBOT
             ${PROJECT_SOURCES}
         )
+
     endif()
+
 endif()
 
-target_link_libraries(KU_INFOBOT PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(KU_INFOBOT
+    PRIVATE
+    Qt${QT_VERSION_MAJOR}::Widgets
+    Qt${QT_VERSION_MAJOR}::Network
+)
 
-# Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
-# If you are developing for iOS or macOS you should consider setting an
-# explicit, fixed bundle identifier manually though.
 if(${QT_VERSION} VERSION_LESS 6.1.0)
-  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.KU_INFOBOT)
+    set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.KU_INFOBOT)
 endif()
+
 set_target_properties(KU_INFOBOT PROPERTIES
     ${BUNDLE_ID_OPTION}
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
@@ -73,6 +80,7 @@ set_target_properties(KU_INFOBOT PROPERTIES
 )
 
 include(GNUInstallDirs)
+
 install(TARGETS KU_INFOBOT
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -81,4 +89,3 @@ install(TARGETS KU_INFOBOT
 
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(KU_INFOBOT)
-endif()
