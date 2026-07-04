@@ -16,6 +16,7 @@ class TypoCorrector
 
         QHash<QString, QString> dictionary;
         QString correctWord(const QString &word) const;
+        int levenshteinDistance(const QString &a,const QString &b) const;
 };
 
 #endif // TYPOCORRECTOR_H
