@@ -7,6 +7,7 @@
 #include "ResponseGenerator.h"
 #include "TypoCorrector.h"
 #include "SynonymMapper.h"
+#include "WebCrawler.h"
 
 class ChatBot
 {
@@ -15,6 +16,8 @@ private:
     ResponseGenerator responseGenerator;
     TypoCorrector typoCorrector;
     //SynonymManager synonymManager;
+    WebCrawler webCrawler;
+    
 
 public:
     ChatBot(
