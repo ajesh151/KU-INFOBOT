@@ -1,0 +1,550 @@
+# Common English Words
+
+waht=what
+wht=what
+whatt=what
+wahts=what's
+hte=the
+teh=the
+thier=their
+ther=there
+becuase=because
+becouse=because
+recieve=receive
+seperate=separate
+definately=definitely
+occured=occurred
+enviroment=environment
+enviornment=environment
+wher=where
+wer=where
+whre=where
+whene=when
+wen=when
+whn=when
+hw=how
+hww=how
+wich=which
+wichh=which
+
+# University
+
+universit=university
+univercity=university
+universitty=university
+univeristy=university
+varsity=university
+
+# Kathmandu
+
+kathmndu=kathmandu
+kathmandhu=kathmandu
+kathmadu=kathmandu
+katmandu=kathmandu
+
+# Course
+
+cource=course
+corse=course
+cours=course
+cources=courses
+coursess=courses
+
+# Routine
+
+rutine=routine
+rotine=routine
+rountine=routine
+routin=routine
+rutinee=routine
+
+# Examination
+
+examnation=examination
+examintion=examination
+examintaion=examination
+examiation=examination
+examniation=examination
+examinaion=examination
+
+# Scholarship
+
+scholership=scholarship
+scholrship=scholarship
+scholorship=scholarship
+scholarsip=scholarship
+scholershipp=scholarship
+scholarhip=scholarship
+scholarshp=scholarship
+
+# Library
+
+libary=library
+librery=library
+librrary=library
+libray=library
+
+# Hostel
+
+hostell=hostel
+hostle=hostel
+hostal=hostel
+hosteel=hostel
+hostelll=hostel
+
+# Facility
+
+faclity=facility
+facilty=facility
+facillity=facility
+facilties=facilities
+facilitiess=facilities
+
+# Department
+
+departmant=department
+departement=department
+deparment=department
+departmet=department
+departmantt=department
+departmnt=department
+
+# Semester
+
+semster=semester
+semestor=semester
+semestar=semester
+semetre=semester
+semseter=semester
+semeseter=semester
+semeter=semester
+
+# Program
+
+programe=program
+progam=program
+progarm=program
+programm=program
+
+# Bachelor
+
+bachlor=bachelor
+bacholor=bachelor
+bachalor=bachelor
+
+# Engineering
+
+enginering=engineering
+enginearing=engineering
+enginerring=engineering
+
+# Computer
+
+computor=computer
+compter=computer
+comuter=computer
+copmuter=computer
+
+# Fee
+
+feer=fee
+feee=fee
+feess=fees
+tution=tuition
+tutition=tuition
+
+# Registration
+
+regestration=registration
+registeration=registration
+registrtion=registration
+registation=registration
+registraton=registration
+regstration=registration
+
+# Student
+
+studnet=student
+stduent=student
+studant=student
+
+# Teacher
+
+techer=teacher
+teachar=teacher
+lecturerer=lecturer
+
+# Result
+
+resut=result
+rsult=result
+reslt=result
+
+# Portal
+
+protal=portal
+potral=portal
+
+# Transport
+
+transprot=transport
+trasport=transport
+
+# Cafeteria
+
+cafetera=cafeteria
+cafetaria=cafeteria
+cafeteriya=cafeteria
+cafetariah=cafeteria
+cafetirea=cafeteria
+
+# Internet
+
+interent=internet
+internat=internet
+internett=internet
+
+# WiFi
+
+wi fi=wifi
+wi-fi=wifi
+wfi=wifi
+
+# Admission
+
+admisiion=admission
+admissin=admission
+admison=admission
+admissiom=admission
+
+# Application
+
+aplication=application
+applicaton=application
+appliction=application
+applcation=application
+
+# Enrollment
+
+enrolment=enrollment
+enrollement=enrollment
+enrolmentt=enrollment
+
+# Curriculum
+
+curriculam=curriculum
+curiculum=curriculum
+curriculm=curriculum
+
+# Faculty
+
+facuty=faculty
+faculity=faculty
+faculityy=faculty
+
+# Attendance
+
+attendence=attendance
+attandance=attendance
+attendencee=attendance
+
+# Assignment
+
+assignement=assignment
+assingment=assignment
+assignmet=assignment
+
+# Laboratory
+
+laboratoryy=laboratory
+labratory=laboratory
+laboratry=laboratory
+labrotory=laboratory
+
+# Classroom
+
+clasroom=classroom
+classrom=classroom
+classroon=classroom
+
+# Transcript
+
+transcriptt=transcript
+transcirpt=transcript
+trascript=transcript
+
+# Certificate
+
+certficate=certificate
+certifcate=certificate
+certificat=certificate
+
+# Convocation
+
+convacation=convocation
+convocationn=convocation
+convoction=convocation
+
+# Syllabus
+
+syllabas=syllabus
+sylabus=syllabus
+syllabuss=syllabus
+silabus=syllabus
+
+# Timetable
+
+timetabel=timetable
+time table=timetable
+timetble=timetable
+tymetable=timetable
+
+# Schedule
+
+schedual=schedule
+shedule=schedule
+scedule=schedule
+skedule=schedule
+
+# Credit
+
+creddit=credit
+credet=credit
+creditt=credit
+
+# Elective
+
+electiv=elective
+electve=elective
+electivee=elective
+
+# Tutorial
+
+tutorail=tutorial
+tutoral=tutorial
+tuterial=tutorial
+
+# Seminar
+
+seminer=seminar
+semenar=seminar
+seminarr=seminar
+
+# Workshop
+
+workshoop=workshop
+worksop=workshop
+workshhop=workshop
+
+# Orientation
+
+oreintation=orientation
+orientaion=orientation
+orientaton=orientation
+
+# Thesis
+
+thesys=thesis
+thessis=thesis
+thesiss=thesis
+
+# Dissertation
+
+disertation=dissertation
+dissertaion=dissertation
+disertaion=dissertation
+
+# Internship
+
+internshp=internship
+intership=internship
+internshep=internship
+
+# Placement
+
+placemnt=placement
+placment=placement
+placemant=placement
+
+# Graduate
+
+gradute=graduate
+graduat=graduate
+gradaute=graduate
+
+# Undergraduate
+
+undergradute=undergraduate
+undergraduat=undergraduate
+undergradaute=undergraduate
+
+# Diploma
+
+diplomaa=diploma
+diplma=diploma
+dipoma=diploma
+
+# Degree
+
+degre=degree
+degee=degree
+degreee=degree
+
+# Principal
+
+princple=principal
+prinicpal=principal
+princepal=principal
+
+# Professor
+
+profesor=professor
+proffesor=professor
+professer=professor
+
+# Dean
+
+deen=dean
+deann=dean
+
+# Chancellor
+
+chancelor=chancellor
+chanceller=chancellor
+chancellour=chancellor
+
+# Notice
+
+notce=notice
+notic=notice
+noticee=notice
+
+# Announcement
+
+announcment=announcement
+anouncement=announcement
+announcemnt=announcement
+
+# Deadline
+
+deadlin=deadline
+dedline=deadline
+
+# Extension
+
+extention=extension
+extentsion=extension
+extansion=extension
+
+# Holiday
+
+holliday=holiday
+holyday=holiday
+holidey=holiday
+
+# Vacation
+
+vaccation=vacation
+vacetion=vacation
+vacaton=vacation
+
+# Invigilator
+
+invigilater=invigilator
+invigilatorr=invigilator
+invigelator=invigilator
+
+# Supervisor
+
+supervisar=supervisor
+supervisior=supervisor
+supervisorr=supervisor
+
+# Warden
+
+wardan=warden
+wardenn=warden
+
+# Canteen
+
+canten=canteen
+cantine=canteen
+canteenn=canteen
+
+# Auditorium
+
+auditoruim=auditorium
+auditorim=auditorium
+auditorum=auditorium
+
+# Gymnasium
+
+gymnasiam=gymnasium
+gymnasum=gymnasium
+gymnassium=gymnasium
+
+# Percentage
+
+percentge=percentage
+percantage=percentage
+persentage=percentage
+
+# Backlog
+
+backlogg=backlog
+baklog=backlog
+backlogh=backlog
+
+# Migration
+
+migraton=migration
+migreation=migration
+migrattion=migration
+
+# Equivalence
+
+equivalance=equivalence
+equivalnce=equivalence
+equivelence=equivalence
+
+# Verification
+
+verifcation=verification
+verificaton=verification
+verifecation=verification
+
+# Affidavit
+
+affidevit=affidavit
+affidavitt=affidavit
+afidavit=affidavit
+
+# Recommendation
+
+recomendation=recommendation
+reccommendation=recommendation
+recomandation=recommendation
+
+# Signature
+
+signture=signature
+signeture=signature
+signatur=signature
+
+# Password
+
+passwrod=password
+passward=password
+passowrd=password
+
+# Username
+
+usernme=username
+usernaem=username
+usernam=username
+
+# Website
+
+webiste=website
+websit=website
+wesite=website
