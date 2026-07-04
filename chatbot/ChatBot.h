@@ -13,8 +13,8 @@ class ChatBot
 private:
     IntentRecognizer intentRecognizer;
     ResponseGenerator responseGenerator;
-    /*TypoCorrector typoCorrector;
-    SynonymManager synonymManager;*/
+    TypoCorrector typoCorrector;
+    //SynonymManager synonymManager;
 
 public:
     ChatBot(
