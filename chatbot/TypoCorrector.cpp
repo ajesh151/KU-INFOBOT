@@ -3,6 +3,8 @@
 #include <QTextStream>
 #include <QStringList>
 #include <QRegularExpression>
+#include <QVector>
+#include <climits>
 
 TypoCorrector::TypoCorrector()
 {
@@ -27,10 +29,10 @@ bool TypoCorrector::loadDictionary(const QString &filePath)
         if (line.isEmpty())
             continue;
 
-        if (line.startsWith('#'))
+        if (line.startsWith("#"))
             continue;
 
-        QStringList parts = line.split('=');
+        QStringList parts = line.split("=");
 
         if (parts.size() != 2)
             continue;
@@ -42,36 +44,132 @@ bool TypoCorrector::loadDictionary(const QString &filePath)
     }
 
     file.close();
+
     return true;
 }
 
+int TypoCorrector::levenshteinDistance(const QString &a,
+                                       const QString &b) const
+{
+    int n = a.length();
+    int m = b.length();
+
+    QVector<QVector<int>> dp(n + 1,
+                             QVector<int>(m + 1));
+
+    for (int i = 0; i <= n; i++)
+        dp[i][0] = i;
+
+    for (int j = 0; j <= m; j++)
+        dp[0][j] = j;
+
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= m; j++)
+        {
+            int cost =
+                (a[i - 1] == b[j - 1]) ? 0 : 1;
+
+            int deletion =
+                dp[i - 1][j] + 1;
+
+            int insertion =
+                dp[i][j - 1] + 1;
+
+            int substitution =
+                dp[i - 1][j - 1] + cost;
+
+            dp[i][j] =
+                qMin(deletion,
+                     qMin(insertion,
+                          substitution));
+        }
+    }
+
+    return dp[n][m];
+}
 QString TypoCorrector::correctWord(const QString &word) const
 {
-    QString lower = word.toLower();
+    if (word.isEmpty())
+        return word;
 
-    if (dictionary.contains(lower))
-        return dictionary.value(lower);
+    QString originalWord = word;
+    QString lowerWord = word.toLower();
 
-    return word;
+    // Exact dictionary match
+    if (dictionary.contains(lowerWord))
+    {
+        QString corrected = dictionary.value(lowerWord);
+
+        // Preserve capitalization
+        if (originalWord[0].isUpper())
+        {
+            corrected[0] = corrected[0].toUpper();
+        }
+
+        return corrected;
+    }
+
+    // Fuzzy matching using Levenshtein distance
+    QString bestMatch = originalWord;
+    int bestDistance = INT_MAX;
+
+    for (auto it = dictionary.constBegin();
+         it != dictionary.constEnd();
+         ++it)
+    {
+        int distance = levenshteinDistance(lowerWord, it.key());
+
+        if (distance < bestDistance)
+        {
+            bestDistance = distance;
+            bestMatch = it.value();
+        }
+    }
+
+    // Only accept close matches
+    if (bestDistance <= 2)
+    {
+        if (originalWord[0].isUpper())
+        {
+            bestMatch[0] = bestMatch[0].toUpper();
+        }
+
+        return bestMatch;
+    }
+
+    return originalWord;
 }
 
 QString TypoCorrector::correct(const QString &sentence) const
 {
-    QString result = sentence;
+    QString result;
 
-    QRegularExpression re("\\b\\w+\\b");
-    QRegularExpressionMatchIterator i = re.globalMatch(sentence);
+    QString currentWord;
 
-    while (i.hasNext())
+    for (int i = 0; i < sentence.length(); ++i)
     {
-        QRegularExpressionMatch match = i.next();
+        QChar ch = sentence[i];
 
-        QString word = match.captured();
-        QString corrected = correctWord(word);
+        if (ch.isLetterOrNumber())
+        {
+            currentWord += ch;
+        }
+        else
+        {
+            if (!currentWord.isEmpty())
+            {
+                result += correctWord(currentWord);
+                currentWord.clear();
+            }
 
-        result.replace(match.capturedStart(),
-                       word.length(),
-                       corrected);
+            result += ch;
+        }
+    }
+
+    if (!currentWord.isEmpty())
+    {
+        result += correctWord(currentWord);
     }
 
     return result;
