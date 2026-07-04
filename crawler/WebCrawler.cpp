@@ -245,7 +245,8 @@ QString WebCrawler::search(const QString &query)
 
     QString response;
 
-    response += "Closest matching webpage:\n\n";
+    response += "I couldn't find a predefined answer.\n\n";
+    response += "The closest matching Kathmandu University webpage is:\n\n";
     response += result.title;
     response += "\n";
     response += result.url;
