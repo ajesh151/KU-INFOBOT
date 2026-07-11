@@ -15,7 +15,7 @@ private:
     IntentRecognizer intentRecognizer;
     ResponseGenerator responseGenerator;
     TypoCorrector typoCorrector;
-    //SynonymManager synonymManager;
+    SynonymManager synonymManager;
     WebCrawler webCrawler;
     
 
