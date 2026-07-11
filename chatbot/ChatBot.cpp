@@ -5,7 +5,7 @@ ChatBot::ChatBot(
     RoutineManager* routineManager,
     FaqManager* faqManager,
     AdmissionManager* admissionManager)
-    : responseGenerator(courseManager,routineManager,faqManager,dmissionManager)
+    : responseGenerator(courseManager,routineManager,faqManager,admissionManager)
 {
     
 }
@@ -16,7 +16,7 @@ QString ChatBot::getResponse(const QString& userInput)
     QString processedInput =typoCorrector.correct(userInput);
 
     // Step 2: Recognize intent
-    Intent intent =ntentRecognizer.recognizeIntent(processedInput);
+    Intent intent =intentRecognizer.recognizeIntent(processedInput);
 
     // Step 3: Unknown → Web crawler fallback
     if(intent == Intent::UNKNOWN)
