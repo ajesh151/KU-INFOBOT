@@ -17,6 +17,7 @@ public:
 
 private:
     std::unordered_map<std::string, std::string> synonymMap;
+    std::unordered_map<std::string, std::string> phraseMap;
 
     std::string toLower(const std::string& str) const;
 };

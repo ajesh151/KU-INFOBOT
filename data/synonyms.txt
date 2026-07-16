@@ -1,34 +1,54 @@
-admission=admissions,apply,application,enrollment,enrolment,join,joining,register,registration
-fee=fees,cost,price,payment,charge,charges,tuition
-course=courses,subject,subjects,module,modules
-routine=schedule,timetable,class,classes,calendar
-teacher=faculty,professor,lecturer,instructor,tutor
+# ==========================
+# Admissions
+# ==========================
+admission=admissions,admit,enrollment,enrolment,join,joining,register,registration
+application=apply,applications,form
+fee=fees,cost,costs,price,prices,payment,payments,charge,charges,tuition
+
+# ==========================
+# Academics
+# ==========================
+course=courses,subject,subjects,module,modules,paper,papers
+routine=schedule,timetable,class routine,class schedule,time table
+teacher=faculty,professor,professors,lecturer,lecturers,instructor,instructors,tutor,tutors
 department=dept,division,school
-program=programme,degree,major
+program=programme,degree,degrees,major,majors
 semester=term
 year=session,batch
-credit=credits,credithour,credithours
-exam=examination,test,assessment,quiz
+credit=credits,credit hour,credit hours,credithour,credithours
+exam=examination,examinations,test,tests,assessment,assessments,quiz,quizzes
 result=results,grade,grades,gpa,cgpa
+
+# ==========================
+# Facilities
+# ==========================
 library=books,bookroom
 hostel=dorm,dormitory,residence
-bus=transport,busservice,transportation
-scholarship=financialaid,funding,grant
-contact=phone,email,office,helpdesk
-location=address,map,direction,directions
-computer=pc
-engineering=engineer
-computerengineering=ce
-bit=bachelorofinformationtechnology
-computerscience=cs,bscs
-cybersecurity=cybersecurityprogram,cyber
-civil=civilengineering
-mechanical=mechanicalengineering
-electrical=eee,electricalengineering
-architecture=arch
+bus=transport,bus service,transportation
 food=cafeteria,canteen,cafe
 wifi=internet,network
-notice=announcement,news
+scholarship=financial aid,funding,grant
+contact=phone,email,office,helpdesk
+location=address,map,direction,directions
+notice=announcement,announcements,news
 holiday=vacation,break
 attendance=presence
-deadline=lastdate,duedate
+deadline=last date,due date
+
+# ==========================
+# Programs
+# ==========================
+ce=computer engineering,computerengineering
+cs=computer science,computer science and engineering,computerscience,bscs
+eee=electrical engineering,electricalengineering
+civil=civil engineering,civilengineering
+mechanical=mechanical engineering,mechanicalengineering
+architecture=architecture,arch
+bit=bachelor of information technology,bachelorofinformationtechnology
+cybersecurity=cyber security,cybersecurityprogram,cyber
+
+# ==========================
+# Miscellaneous
+# ==========================
+computer=pc
+engineering=engineer

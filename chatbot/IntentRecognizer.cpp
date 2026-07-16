@@ -101,18 +101,33 @@ Intent IntentRecognizer::recognizeIntent(
 
 
     static const QStringList faqKeywords =
-    {
-        "what","how","why","where","library","hostel","wifi",
-        "internet","canteen","bus","transport","club","clubs","event",
-        "events","facility","facilities","contact","location","office",
-        "email","phone"
-    };
+        {
+            "library",
+            "hostel",
+            "wifi",
+            "internet",
+            "canteen",
+            "bus",
+            "transport",
+            "club",
+            "clubs",
+            "event",
+            "events",
+            "facility",
+            "facilities",
+            "contact",
+            "location",
+            "office",
+            "email",
+            "phone"
+        };
 
     if(containsAny(text, faqKeywords))
     {
         return Intent::FAQ_QUERY;
     }
 
-
-    return Intent::FAQ_QUERY;
+    // If no intent matches, return UNKNOWN so the web crawler
+    // or fallback mechanism can handle the query.
+    return Intent::UNKNOWN;
 }

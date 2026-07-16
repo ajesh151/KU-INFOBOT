@@ -1,8 +1,10 @@
 #include "AdmissionManager.h"
+
 #include <QFile>
 #include <QTextStream>
 #include <QStringList>
 #include <QRegularExpression>
+#include <QSet>
 
 AdmissionManager::AdmissionManager()
 {
@@ -24,22 +26,20 @@ bool AdmissionManager::loadData(const QString& filename)
         QString line = in.readLine().trimmed();
 
         if(line.isEmpty())
-        {
             continue;
-        }
+
+        if(line.startsWith("#"))
+            continue;
 
         QStringList parts = line.split('|');
 
         if(parts.size() != 2)
-        {
             continue;
-        }
 
-        Admission admission(
-            parts[0].trimmed(),
-            parts[1].trimmed());
-
-        admissions.push_back(admission);
+        admissions.push_back(
+            Admission(
+                parts[0].trimmed(),
+                parts[1].trimmed()));
     }
 
     file.close();
@@ -54,36 +54,84 @@ std::vector<Admission> AdmissionManager::getAllData() const
 
 QString AdmissionManager::findAnswer(const QString& question) const
 {
-    QString input = question.toLower();
+    QString input = question.toLower().trimmed();
 
-    int bestScore = 0;
+    QStringList inputWords =
+        input.split(QRegularExpression("\\W+"),
+                    Qt::SkipEmptyParts);
+
+    int bestScore = -1;
     QString bestAnswer;
 
-    for(const Admission& admission : admissions)
+    for(const Admission &admission : admissions)
     {
-        QString storedQuestion =
-                admission.getQuestion().toLower();
+        QString key =
+            admission.getQuestion().toLower().trimmed();
 
-        QStringList words =
-                storedQuestion.split(
-                    QRegularExpression("\\W+"),
-                    Qt::SkipEmptyParts);
+        QStringList keyWords =
+            key.split(QRegularExpression("\\W+"),
+                      Qt::SkipEmptyParts);
 
         int score = 0;
 
-        for(const QString& word : words)
+        //--------------------------------------------------
+        // Priority 1 : Exact key
+        //--------------------------------------------------
+        if(input == key)
         {
-            if(word.length() < 3)
-            {
-                continue;
-            }
+            return admission.getAnswer();
+        }
 
-            if(input.contains(word))
+        //--------------------------------------------------
+        // Priority 2 : Phrase match
+        //--------------------------------------------------
+        if(input.contains(key))
+        {
+            score += 10000;
+        }
+
+        //--------------------------------------------------
+        // Priority 3 : All keywords present
+        //--------------------------------------------------
+        bool allPresent = true;
+
+        for(const QString &word : keyWords)
+        {
+            if(!inputWords.contains(word))
             {
-                score++;
+                allPresent = false;
+                break;
             }
         }
 
+        if(allPresent)
+        {
+            score += 5000;
+        }
+
+        //--------------------------------------------------
+        // Priority 4 : Keyword overlap
+        //--------------------------------------------------
+        int matchedWords = 0;
+
+        for(const QString &word : keyWords)
+        {
+            if(inputWords.contains(word))
+            {
+                matchedWords++;
+            }
+        }
+
+        score += matchedWords * 100;
+
+        //--------------------------------------------------
+        // Bonus for longer, more specific keys
+        //--------------------------------------------------
+        score += keyWords.size();
+
+        //--------------------------------------------------
+        // Keep best
+        //--------------------------------------------------
         if(score > bestScore)
         {
             bestScore = score;
@@ -91,28 +139,26 @@ QString AdmissionManager::findAnswer(const QString& question) const
         }
     }
 
-    if(bestScore >= 2)
+    if(bestScore >= 100)
     {
         return bestAnswer;
     }
 
     return "Sorry, I couldn't find any admission-related information.";
 }
-
 std::vector<Admission> AdmissionManager::searchData(
-        const QString& keyword) const
+    const QString& keyword) const
 {
     std::vector<Admission> results;
 
-    for(const Admission& admission : admissions)
+    QString search = keyword.toLower();
+
+    for(const Admission &admission : admissions)
     {
-        if(admission.getQuestion().contains(
-                    keyword,
-                    Qt::CaseInsensitive)
-            ||
-            admission.getAnswer().contains(
-                    keyword,
-                    Qt::CaseInsensitive))
+        QString key =
+            admission.getQuestion().toLower();
+
+        if(key.contains(search))
         {
             results.push_back(admission);
         }

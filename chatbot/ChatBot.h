@@ -7,7 +7,7 @@
 #include "ResponseGenerator.h"
 #include "TypoCorrector.h"
 #include "SynonymMapper.h"
-#include "WebCrawler.h"
+#include "../crawler/WebCrawler.h"
 
 class ChatBot
 {
@@ -15,7 +15,7 @@ private:
     IntentRecognizer intentRecognizer;
     ResponseGenerator responseGenerator;
     TypoCorrector typoCorrector;
-    SynonymManager synonymManager;
+    SynonymMapper synonymManager;
     WebCrawler webCrawler;
     
 

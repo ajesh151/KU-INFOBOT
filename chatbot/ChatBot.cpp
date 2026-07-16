@@ -1,5 +1,6 @@
 #include "ChatBot.h"
-
+#include <iostream>
+using namespace std;
 ChatBot::ChatBot(
     CourseManager* courseManager,
     RoutineManager* routineManager,
@@ -12,18 +13,27 @@ ChatBot::ChatBot(
 
 QString ChatBot::getResponse(const QString& userInput)
 {
-    // Step 1: Correct typos
-    QString processedInput =typoCorrector.correct(userInput);
+    // Step 1
+    QString processedInput = typoCorrector.correct(userInput);
 
-    // Step 2: Recognize intent
-    Intent intent =intentRecognizer.recognizeIntent(processedInput);
+    // Step 2
+    std::string normalized =
+        synonymManager.normalizeSentence(
+            processedInput.toStdString());
 
-    // Step 3: Unknown → Web crawler fallback
+
+    processedInput =
+        QString::fromStdString(normalized);
+ cout << normalized;
+    // Step 3
+    Intent intent =
+        intentRecognizer.recognizeIntent(processedInput);
+
     if(intent == Intent::UNKNOWN)
     {
         return webCrawler.search(processedInput);
     }
 
-    // Step 4: Known intent
-    return responseGenerator.generateResponse(intent,processedInput);
+    return responseGenerator.generateResponse(intent,
+                                              processedInput);
 }

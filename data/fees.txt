@@ -4,6 +4,8 @@ bit fee|The total fee for Bachelor of Information Technology (BIT) is Rs. 960,00
 
 computer engineering fee|The total fee for Computer Engineering is Rs. 960,000.
 
+computer science fee|The toal fee for Computer Science is 960,000.
+
 civil engineering fee|The total fee for Civil Engineering is Rs. 960,000.
 
 mechanical engineering fee|The total fee for Mechanical Engineering is Rs. 960,000.

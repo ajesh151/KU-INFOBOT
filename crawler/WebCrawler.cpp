@@ -16,7 +16,8 @@ QString WebCrawler::downloadPage(const QString &url)
 {
     QNetworkAccessManager manager;
 
-    QNetworkRequest request(QUrl(url));
+    QNetworkRequest request;
+    request.setUrl(QUrl(url));
 
     request.setHeader(
         QNetworkRequest::UserAgentHeader,

@@ -381,10 +381,17 @@ QString ResponseGenerator::generateResponse(
         return faqManager->findAnswer(userInput);
     }
 
-    case Intent::ADMISSION_QUERY:
-    {
-        return admissionManager->findAnswer(userInput);
-    }
+        case Intent::ADMISSION_QUERY:
+        {
+            QString answer = admissionManager->findAnswer(userInput);
+
+            if(answer.startsWith("Sorry"))
+            {
+                return "I couldn't find that admission information.";
+            }
+
+            return answer;
+        }
 
     case Intent::UNKNOWN:
     default:
