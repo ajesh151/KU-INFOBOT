@@ -2,12 +2,37 @@
 #include <QFile>
 #include <QTextStream>
 #include <QStringList>
-#include <QRegularExpression>
 #include <QVector>
 #include <climits>
 
+const QRegularExpression TypoCorrector::courseCodePattern(
+    "^[A-Za-z]{2,5}\\d{2,4}[A-Za-z]*$");
+
 TypoCorrector::TypoCorrector()
 {
+    // Known abbreviations that must be preserved exactly as typed.
+    // Extend this list as new program/subject abbreviations are introduced.
+    protectedAbbreviations =
+        {
+            "ce", "cs", "bit", "bca", "bim", "bba", "eee",
+            "ai", "be", "bph", "bsc", "me","ku",
+        "kucat",
+        "cbt",
+        "gpa",
+        "cgpa",
+        "phd",
+        "mba",
+        "mbe",
+        "mppm",
+        "bbis",
+        "bbm",
+        "llb",
+        "ib",
+        "ctevt",
+        "neb",
+        "lmtc"
+        };
+
     loadDictionary("data/typo_dictionary.txt");
 }
 
@@ -46,6 +71,30 @@ bool TypoCorrector::loadDictionary(const QString &filePath)
     file.close();
 
     return true;
+}
+
+bool TypoCorrector::isProtectedWord(const QString &word) const
+{
+    QString lower = word.toLower();
+
+    if (protectedAbbreviations.contains(lower))
+        return true;
+
+    if (courseCodePattern.match(word).hasMatch())
+        return true;
+
+    return false;
+}
+
+int TypoCorrector::maxAllowedDistance(int wordLength) const
+{
+    if (wordLength <= 3)
+        return 1;
+
+    if (wordLength <= 6)
+        return 2;
+
+    return 3;
 }
 
 int TypoCorrector::levenshteinDistance(const QString &a,
@@ -88,20 +137,25 @@ int TypoCorrector::levenshteinDistance(const QString &a,
 
     return dp[n][m];
 }
+
 QString TypoCorrector::correctWord(const QString &word) const
 {
     if (word.isEmpty())
         return word;
 
+    // Never touch abbreviations or course codes, regardless of dictionary
+    // or fuzzy-match results.
+    if (isProtectedWord(word))
+        return word;
+
     QString originalWord = word;
     QString lowerWord = word.toLower();
 
-    // Exact dictionary match
+    // Priority 1: exact dictionary match (highest confidence).
     if (dictionary.contains(lowerWord))
     {
         QString corrected = dictionary.value(lowerWord);
 
-        // Preserve capitalization
         if (originalWord[0].isUpper())
         {
             corrected[0] = corrected[0].toUpper();
@@ -110,7 +164,9 @@ QString TypoCorrector::correctWord(const QString &word) const
         return corrected;
     }
 
-    // Fuzzy matching using Levenshtein distance
+    // Priority 2: fuzzy match, only reached when no exact match exists.
+    // The accepted distance scales with word length so short words
+    // require a near-exact match before being altered.
     QString bestMatch = originalWord;
     int bestDistance = INT_MAX;
 
@@ -127,8 +183,9 @@ QString TypoCorrector::correctWord(const QString &word) const
         }
     }
 
-    // Only accept close matches
-    if (bestDistance <= 2)
+    int allowedDistance = maxAllowedDistance(lowerWord.length());
+
+    if (bestDistance <= allowedDistance)
     {
         if (originalWord[0].isUpper())
         {
@@ -138,13 +195,13 @@ QString TypoCorrector::correctWord(const QString &word) const
         return bestMatch;
     }
 
+    // Not confident enough to change the word — leave it as typed.
     return originalWord;
 }
 
 QString TypoCorrector::correct(const QString &sentence) const
 {
     QString result;
-
     QString currentWord;
 
     for (int i = 0; i < sentence.length(); ++i)

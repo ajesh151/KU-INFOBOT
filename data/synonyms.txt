@@ -1,54 +1,156 @@
-# ==========================
-# Admissions
-# ==========================
-admission=admissions,admit,enrollment,enrolment,join,joining,register,registration
-application=apply,applications,form
-fee=fees,cost,costs,price,prices,payment,payments,charge,charges,tuition
+# =========================================================
+# KU InfoBot — Synonym Data
+#
+# canonical = variants...
+# =========================================================
 
-# ==========================
-# Academics
-# ==========================
-course=courses,subject,subjects,module,modules,paper,papers
-routine=schedule,timetable,class routine,class schedule,time table
-teacher=faculty,professor,professors,lecturer,lecturers,instructor,instructors,tutor,tutors
-department=dept,division,school
-program=programme,degree,degrees,major,majors
-semester=term
-year=session,batch
-credit=credits,credit hour,credit hours,credithour,credithours
-exam=examination,examinations,test,tests,assessment,assessments,quiz,quizzes
-result=results,grade,grades,gpa,cgpa
+# =========================================================
+# PROGRAMS
+# =========================================================
 
-# ==========================
-# Facilities
-# ==========================
-library=books,bookroom
-hostel=dorm,dormitory,residence
-bus=transport,bus service,transportation
-food=cafeteria,canteen,cafe
-wifi=internet,network
-scholarship=financial aid,funding,grant
-contact=phone,email,office,helpdesk
-location=address,map,direction,directions
-notice=announcement,announcements,news
-holiday=vacation,break
-attendance=presence
-deadline=last date,due date
+computer engineering = ce, comp engineering, computer eng, computer engineer
+computer science = cs, comp science, computer sci, bscs
+electrical engineering = eee, electrical eng, electrical electronics engineering
+civil engineering = civil eng, ce civil
+mechanical engineering = mechanical eng, mech engineering, mech eng
+chemical engineering = chemical eng
+environmental engineering = environmental eng
+mining engineering = mining eng
+geomatics engineering = geomatics, geomatics eng
+artificial intelligence = ai, artificial intelligent, btech ai
+health informatics = hi, health info
+architecture = arch, bachelor architecture
+biotechnology = biotech
+agriculture = agri
+computational mathematics = computational maths, comp maths
+data science = ds
+pharmacy = pharm
+heritage conservation = heritage
+economics = econ
+media studies = media
+fine arts = arts
+music = musical studies
 
-# ==========================
-# Programs
-# ==========================
-ce=computer engineering,computerengineering
-cs=computer science,computer science and engineering,computerscience,bscs
-eee=electrical engineering,electricalengineering
-civil=civil engineering,civilengineering
-mechanical=mechanical engineering,mechanicalengineering
-architecture=architecture,arch
-bit=bachelor of information technology,bachelorofinformationtechnology
-cybersecurity=cyber security,cybersecurityprogram,cyber
+# =========================================================
+# DEGREES
+# =========================================================
 
-# ==========================
-# Miscellaneous
-# ==========================
-computer=pc
-engineering=engineer
+bachelor of information technology = bit, information technology
+bachelor of business administration = bba, business administration
+bachelor of business information systems = bbis
+master of business administration = mba
+master of business economics = mbe
+master of project management = mppm
+executive mba = executive master business administration
+doctor of philosophy = phd
+
+# =========================================================
+# ADMISSION
+# =========================================================
+
+admission = admissions, admission process, admission procedure, joining
+application = apply, applying, application form
+application process = how to apply, admission process
+registration = register, registering
+online registration = web registration, online apply, online application
+eligibility = eligible, qualification, requirements
+required documents = documents, certificates, paperwork
+program change = change program, switch program, transfer program
+enrollment = enrolment, admission confirmation
+enrollment confirmation = confirm enrollment, enrollment form
+
+# =========================================================
+# ENTRANCE
+# =========================================================
+
+entrance exam = entrance examination, entrance test
+computer based test = cbt, computer test
+kucat = ku cat, kathmandu university common admission test
+test format = exam format, paper pattern
+subjects = syllabus subjects, exam subjects
+difficulty level = difficulty
+pass mark = passing marks, qualifying marks
+minimum score = qualifying score, cutoff score
+negative marking = penalty
+adaptive scoring = adaptive marking
+
+# =========================================================
+# FEES
+# =========================================================
+
+fee = fees, cost, costs, price, tuition, payment, expense
+scholarship = financial aid, grant, funding
+international fee = foreign student fee
+saarc fee = saarc tuition
+
+# =========================================================
+# COURSE
+# =========================================================
+
+course = courses, subject, subjects, module
+credit = credits, credit hour, credit hours
+course code = subject code
+prerequisite = prerequisite course
+elective = optional course
+core course = compulsory course
+
+# =========================================================
+# ROUTINE
+# =========================================================
+
+routine = schedule, timetable
+class = lecture
+class timing = class time
+next class = upcoming class
+today = today's classes
+tomorrow = tomorrow's classes
+
+# =========================================================
+# FACULTY
+# =========================================================
+
+teacher = faculty, lecturer, instructor, professor, tutor
+hod = head of department
+department = dept
+school = faculty school
+
+# =========================================================
+# CAMPUS FACILITIES
+# =========================================================
+
+library = books, book room
+hostel = dorm, dormitory, residence
+canteen = cafeteria, food court, cafe
+wifi = internet, wireless
+bus = transport, transportation, shuttle
+parking = vehicle parking
+
+# =========================================================
+# CONTACT
+# =========================================================
+
+contact = phone, telephone, email, office
+location = address, map, directions
+website = web, official website
+
+# =========================================================
+# ACADEMIC
+# =========================================================
+
+semester = term
+year = batch, academic year
+exam = examination, test, assessment, quiz
+result = results, marks, grades, gpa, cgpa
+attendance = presence
+holiday = vacation, break
+deadline = due date, last date
+
+# =========================================================
+# GENERAL
+# =========================================================
+
+notice = announcement, news
+event = events, programme
+club = clubs, society
+facility = facilities
+help = support

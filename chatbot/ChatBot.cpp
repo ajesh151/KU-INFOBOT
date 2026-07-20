@@ -1,6 +1,5 @@
 #include "ChatBot.h"
-#include <iostream>
-using namespace std;
+
 ChatBot::ChatBot(
     CourseManager* courseManager,
     RoutineManager* routineManager,
@@ -8,32 +7,24 @@ ChatBot::ChatBot(
     AdmissionManager* admissionManager)
     : responseGenerator(courseManager,routineManager,faqManager,admissionManager)
 {
-    
+
 }
 
 QString ChatBot::getResponse(const QString& userInput)
 {
-    // Step 1
+    // Step 1: Typo correction
     QString processedInput = typoCorrector.correct(userInput);
 
-    // Step 2
-    std::string normalized =
-        synonymManager.normalizeSentence(
-            processedInput.toStdString());
+    // Step 2: Synonym normalization (phrase synonyms, then word synonyms)
+    processedInput = synonymManager.normalizeSentence(processedInput);
 
-
-    processedInput =
-        QString::fromStdString(normalized);
- cout << normalized;
-    // Step 3
-    Intent intent =
-        intentRecognizer.recognizeIntent(processedInput);
+    // Step 3: Intent recognition
+    Intent intent = intentRecognizer.recognizeIntent(processedInput);
 
     if(intent == Intent::UNKNOWN)
     {
         return webCrawler.search(processedInput);
     }
 
-    return responseGenerator.generateResponse(intent,
-                                              processedInput);
+    return responseGenerator.generateResponse(intent, processedInput);
 }
