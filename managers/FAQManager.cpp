@@ -1,10 +1,13 @@
 #include "FaqManager.h"
+#include "../utils/TextMatcher.h"
+#include "../crawler/WebCrawler.h"
+
 #include <QFile>
 #include <QTextStream>
 #include <QStringList>
-#include <QRegularExpression>
 
-FaqManager::FaqManager()
+FaqManager::FaqManager(WebCrawler* webCrawler)
+    : webCrawler(webCrawler)
 {
 }
 
@@ -30,6 +33,11 @@ bool FaqManager::loadFaqs(const QString& filename)
             continue;
         }
 
+        if (line.startsWith("#"))
+        {
+            continue;
+        }
+
         QStringList parts = line.split('|');
 
         if (parts.size() != 2)
@@ -37,10 +45,17 @@ bool FaqManager::loadFaqs(const QString& filename)
             continue;
         }
 
+        // Data files are line-based, so a literal multi-line answer can't
+        // be stored directly. Authors write "\n" in the text file and it's
+        // converted to a real newline here, e.g.:
+        //   what can you do|Courses\nRoutines\nAdmissions
+        QString answer = parts[1].trimmed();
+        answer.replace("\\n", "\n");
+
         Faq faq(
             parts[0].trimmed(), // Question
-            parts[1].trimmed()  // Answer
-        );
+            answer               // Answer
+            );
 
         faqs.push_back(faq);
     }
@@ -56,45 +71,30 @@ std::vector<Faq> FaqManager::getAllFaqs() const
 
 QString FaqManager::findAnswer(const QString& question) const
 {
-    QString input = question.toLower();
+    QVector<TextMatcher::Entry> entries;
+    entries.reserve(static_cast<int>(faqs.size()));
 
-    int bestScore = 0;
-    QString bestAnswer;
-
-    for(const Faq& faq : faqs)
+    for(int i = 0; i < static_cast<int>(faqs.size()); ++i)
     {
-        QString storedQuestion = faq.getQuestion().toLower();
-
-        QStringList words =
-            storedQuestion.split(
-                QRegularExpression("\\W+"),
-                Qt::SkipEmptyParts);
-
-        int score = 0;
-
-        for(const QString& word : words)
-        {
-            if(word.length() < 3)
-            {
-                continue;
-            }
-
-            if(input.contains(word))
-            {
-                score++;
-            }
-        }
-
-        if(score > bestScore)
-        {
-            bestScore = score;
-            bestAnswer = faq.getAnswer();
-        }
+        entries.append(
+            TextMatcher::Entry{faqs[static_cast<size_t>(i)].getQuestion(), i});
     }
 
-    if(bestScore > 0)
+    TextMatcher::Result result = TextMatcher::findBestMatch(question, entries);
+
+    if(result.matched())
     {
-        return bestAnswer;
+        return faqs[static_cast<size_t>(result.index)].getAnswer();
+    }
+
+    if(webCrawler)
+    {
+        QString crawled = webCrawler->search(question);
+
+        if(!crawled.trimmed().isEmpty())
+        {
+            return crawled;
+        }
     }
 
     return "Sorry, I couldn't find an answer for that question.";

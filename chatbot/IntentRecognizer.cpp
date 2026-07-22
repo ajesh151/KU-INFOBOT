@@ -24,16 +24,19 @@ bool IntentRecognizer::containsAny(
 }
 
 Intent IntentRecognizer::recognizeIntent(
-    const QString& input) const
+    const QString& normalizedInput) const
 {
-    QString text = input.toLower();
+    // Defensive lowercasing only — normalizedInput should already be
+    // lowercase coming out of SynonymMapper. This is not a substitute for
+    // normalization; raw, un-normalized text should never reach this method.
+    QString text = normalizedInput.toLower();
 
 
     static const QStringList greetingKeywords =
-    {
-        "hello","hi","hey","heyy","namaste","namaskar",
-        "good morning","good afternoon","good evening"
-    };
+        {
+            "hello","hi","hey","heyy","namaste","namaskar",
+            "good morning","good afternoon","good evening"
+        };
 
     if(containsAny(text, greetingKeywords))
     {
@@ -42,9 +45,9 @@ Intent IntentRecognizer::recognizeIntent(
 
 
     static const QStringList goodbyeKeywords =
-    {
-        "bye","goodbye","see you","take care","later","bye bye"
-    };
+        {
+            "bye","goodbye","see you","take care","later","bye bye"
+        };
 
     if(containsAny(text, goodbyeKeywords))
     {
@@ -57,15 +60,20 @@ Intent IntentRecognizer::recognizeIntent(
         QRegularExpression::CaseInsensitiveOption);
 
     bool hasCourseCode =
-            coursePattern.match(input).hasMatch();
+        coursePattern.match(normalizedInput).hasMatch();
 
 
+    // Note: "schedule" and "timetable" normalize to "routine" upstream in
+    // SynonymMapper, and "email"/"phone" normalize to "contact" in the FAQ
+    // list below. They're kept here too as a defensive fallback in case this
+    // method is ever exercised directly (e.g. in tests) without going
+    // through the full pipeline — harmless redundancy, not the primary path.
     static const QStringList routineKeywords =
-    {
-        "routine","schedule","timetable","semester","year","section",
-        "sunday","monday","tuesday","wednesday","thursday","friday","saturday",
-       "today","tomorrow","class timing","class time","next class","which class","when is"
-    };
+        {
+            "routine","schedule","timetable","semester","year","section",
+            "sunday","monday","tuesday","wednesday","thursday","friday","saturday",
+            "today","tomorrow","class timing","class time","next class","which class","when is"
+        };
 
     if(containsAny(text,routineKeywords))
     {
@@ -76,9 +84,9 @@ Intent IntentRecognizer::recognizeIntent(
     if(hasCourseCode)
     {
         if(text.contains("when") ||
-           text.contains("routine") ||
-           text.contains("schedule") ||
-           text.contains("time"))
+            text.contains("routine") ||
+            text.contains("schedule") ||
+            text.contains("time"))
         {
             return Intent::ROUTINE_QUERY;
         }
@@ -87,12 +95,13 @@ Intent IntentRecognizer::recognizeIntent(
     }
 
     static const QStringList admissionKeywords =
-    {
-        "admission","admissions","apply","application","eligibility","eligible",
-        "required documents","documents","entrance","entrance exam","entrance examination",
-        "fee","fees","tuition","payment","scholarship","financial aid","deadline",
-        "admit","enrollment","enrolment","registration"
-    };
+        {
+            "admission","admissions","apply","application","eligibility","eligible",
+            "required documents","documents","entrance","entrance exam","entrance examination",
+            "fee","fees","tuition","payment","scholarship","financial aid","deadline",
+            "admit","enrollment","enrolment","registration",
+            "program change","cutoff","cut off"
+        };
 
     if(containsAny(text, admissionKeywords))
     {
@@ -119,7 +128,15 @@ Intent IntentRecognizer::recognizeIntent(
             "location",
             "office",
             "email",
-            "phone"
+            "phone",
+            // General chatbot small-talk. The actual replies live in
+            // data/faq.txt as ordinary entries (found via TextMatcher),
+            // not as special cases here or in ResponseGenerator.
+            "your name",
+            "who are you",
+            "what can you do",
+            "thank",
+            "how are you"
         };
 
     if(containsAny(text, faqKeywords))

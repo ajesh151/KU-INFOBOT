@@ -3,27 +3,36 @@
 
 #include <QString>
 
-#include "../managers/CourseManager.h"
-#include "../managers/RoutineManager.h"
-#include "../managers/FAQManager.h"
-#include "../managers/AdmissionManager.h"
 #include "IntentRecognizer.h"
 
+class CourseManager;
+class RoutineManager;
+class FaqManager;
+class AdmissionManager;
+
+// Pure router: given an intent and the normalized query, forwards to the
+// correct manager and returns its response. ResponseGenerator must never
+// search, match, or know anything about a manager's internal data — that
+// logic lives in the managers (via the shared TextMatcher) and, as a last
+// resort inside each manager, WebCrawler.
 class ResponseGenerator
 {
-private:
-    CourseManager* courseManager;
-    RoutineManager* routineManager;
-   FaqManager* faqManager;
-    AdmissionManager* admissionManager;
-
 public:
-   ResponseGenerator(CourseManager* courseManager,RoutineManager* routineManager, FaqManager* faqManager,AdmissionManager* admissionManager);
-    
+    ResponseGenerator(
+        CourseManager* courseManager,
+        RoutineManager* routineManager,
+        FaqManager* faqManager,
+        AdmissionManager* admissionManager);
 
     QString generateResponse(
         Intent intent,
         const QString& userInput) const;
+
+private:
+    CourseManager* courseManager;
+    RoutineManager* routineManager;
+    FaqManager* faqManager;
+    AdmissionManager* admissionManager;
 };
 
 #endif // RESPONSEGENERATOR_H

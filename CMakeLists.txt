@@ -36,6 +36,9 @@ set(PROJECT_SOURCES
             crawler/WebCrawler.cpp
             crawler/CrawlCache.cpp
 
+            utils/TextMatcher.cpp
+            utils/CourseCodeUtils.cpp
+
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

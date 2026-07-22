@@ -1,12 +1,13 @@
 #include "AdmissionManager.h"
+#include "../utils/TextMatcher.h"
+#include "../crawler/WebCrawler.h"
 
 #include <QFile>
 #include <QTextStream>
 #include <QStringList>
-#include <QRegularExpression>
-#include <QSet>
 
-AdmissionManager::AdmissionManager()
+AdmissionManager::AdmissionManager(WebCrawler* webCrawler)
+    : webCrawler(webCrawler)
 {
 }
 
@@ -36,15 +37,35 @@ bool AdmissionManager::loadData(const QString& filename)
         if(parts.size() != 2)
             continue;
 
+        // Same "\n" -> real newline convention as FaqManager, for any
+        // admission/fee/entrance answer that needs multi-line formatting.
+        QString answer = parts[1].trimmed();
+        answer.replace("\\n", "\n");
+
         admissions.push_back(
             Admission(
                 parts[0].trimmed(),
-                parts[1].trimmed()));
+                answer));
     }
 
     file.close();
 
     return true;
+}
+
+bool AdmissionManager::loadAllSources(const QStringList& filenames)
+{
+    bool allSucceeded = true;
+
+    for(const QString& filename : filenames)
+    {
+        if(!loadData(filename))
+        {
+            allSucceeded = false;
+        }
+    }
+
+    return allSucceeded;
 }
 
 std::vector<Admission> AdmissionManager::getAllData() const
@@ -54,98 +75,35 @@ std::vector<Admission> AdmissionManager::getAllData() const
 
 QString AdmissionManager::findAnswer(const QString& question) const
 {
-    QString input = question.toLower().trimmed();
+    QVector<TextMatcher::Entry> entries;
+    entries.reserve(static_cast<int>(admissions.size()));
 
-    QStringList inputWords =
-        input.split(QRegularExpression("\\W+"),
-                    Qt::SkipEmptyParts);
-
-    int bestScore = -1;
-    QString bestAnswer;
-
-    for(const Admission &admission : admissions)
+    for(int i = 0; i < static_cast<int>(admissions.size()); ++i)
     {
-        QString key =
-            admission.getQuestion().toLower().trimmed();
-
-        QStringList keyWords =
-            key.split(QRegularExpression("\\W+"),
-                      Qt::SkipEmptyParts);
-
-        int score = 0;
-
-        //--------------------------------------------------
-        // Priority 1 : Exact key
-        //--------------------------------------------------
-        if(input == key)
-        {
-            return admission.getAnswer();
-        }
-
-        //--------------------------------------------------
-        // Priority 2 : Phrase match
-        //--------------------------------------------------
-        if(input.contains(key))
-        {
-            score += 10000;
-        }
-
-        //--------------------------------------------------
-        // Priority 3 : All keywords present
-        //--------------------------------------------------
-        bool allPresent = true;
-
-        for(const QString &word : keyWords)
-        {
-            if(!inputWords.contains(word))
-            {
-                allPresent = false;
-                break;
-            }
-        }
-
-        if(allPresent)
-        {
-            score += 5000;
-        }
-
-        //--------------------------------------------------
-        // Priority 4 : Keyword overlap
-        //--------------------------------------------------
-        int matchedWords = 0;
-
-        for(const QString &word : keyWords)
-        {
-            if(inputWords.contains(word))
-            {
-                matchedWords++;
-            }
-        }
-
-        score += matchedWords * 100;
-
-        //--------------------------------------------------
-        // Bonus for longer, more specific keys
-        //--------------------------------------------------
-        score += keyWords.size();
-
-        //--------------------------------------------------
-        // Keep best
-        //--------------------------------------------------
-        if(score > bestScore)
-        {
-            bestScore = score;
-            bestAnswer = admission.getAnswer();
-        }
+        entries.append(
+            TextMatcher::Entry{admissions[static_cast<size_t>(i)].getQuestion(), i});
     }
 
-    if(bestScore >= 100)
+    TextMatcher::Result result = TextMatcher::findBestMatch(question, entries);
+
+    if(result.matched())
     {
-        return bestAnswer;
+        return admissions[static_cast<size_t>(result.index)].getAnswer();
+    }
+
+    if(webCrawler)
+    {
+        QString crawled = webCrawler->search(question);
+
+        if(!crawled.trimmed().isEmpty())
+        {
+            return crawled;
+        }
     }
 
     return "Sorry, I couldn't find any admission-related information.";
 }
+
 std::vector<Admission> AdmissionManager::searchData(
     const QString& keyword) const
 {
