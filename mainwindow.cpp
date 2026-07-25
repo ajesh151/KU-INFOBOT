@@ -8,11 +8,12 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , courseResolver(&courseManager)
+    , routineManager(&courseResolver)
+    , curriculumManager(&courseResolver)
 {
     ui->setupUi(this);
-
     // Load data
-
     courseManager.loadCourses("data/courses.txt");
     routineManager.loadRoutines("data/routines.txt");
     faqManager.loadFaqs("data/faq.txt");
@@ -21,7 +22,6 @@ MainWindow::MainWindow(QWidget *parent)
     admissionManager.loadData("data/fees.txt");
     curriculumManager.loadCurriculum("data/curriculum.txt");
     // Create chatbot
-
     chatbot = new ChatBot(
         &courseManager,
         &routineManager,
@@ -30,70 +30,51 @@ MainWindow::MainWindow(QWidget *parent)
         &curriculumManager,
         &webCrawler
         );
-
     // Send button
-
     connect(ui->btnSend,
             &QPushButton::clicked,
             this,
             &MainWindow::sendMessage);
-
     // Press Enter to send
-
     connect(ui->txtMessage,
             &QLineEdit::returnPressed,
             this,
             &MainWindow::sendMessage);
-
     // Welcome message
-
     addMessage(
         "Hello! I am KU-InfoBot. How can I help you today?",
         false
         );
 }
-
 MainWindow::~MainWindow()
 {
     delete chatbot;
     delete ui;
 }
-
 void MainWindow::sendMessage()
 {
     QString userMessage =
         ui->txtMessage->text().trimmed();
-
     if(userMessage.isEmpty())
     {
         return;
     }
-
     // Display user message
-
     addMessage(userMessage, true);
-
     // Generate response
-
     QString botResponse =
         chatbot->getResponse(userMessage);
-
     // Display bot response
-
     addMessage(botResponse, false);
-
     // Clear input field
-
     ui->txtMessage->clear();
 }
-
 void MainWindow::addMessage(const QString& text, bool isUser)
 {
     // Chat bubble
     QLabel *messageLabel = new QLabel(text);
     messageLabel->setWordWrap(true);
     messageLabel->setMaximumWidth(700);
-
     if(isUser)
     {
         messageLabel->setStyleSheet(
@@ -118,11 +99,9 @@ void MainWindow::addMessage(const QString& text, bool isUser)
             "}"
             );
     }
-
     // Avatar
     QLabel *avatar = new QLabel;
     avatar->setFixedSize(45,45);
-
     if(isUser)
     {
         avatar->setPixmap(
@@ -141,13 +120,10 @@ void MainWindow::addMessage(const QString& text, bool isUser)
                         Qt::SmoothTransformation)
             );
     }
-
     QWidget *container = new QWidget;
-
     QHBoxLayout *layout = new QHBoxLayout(container);
     layout->setContentsMargins(15,8,15,8);
     layout->setSpacing(10);
-
     if(isUser)
     {
         layout->addStretch();
@@ -165,9 +141,7 @@ void MainWindow::addMessage(const QString& text, bool isUser)
     ui->verticalLayout_Chat->insertWidget(
         ui->verticalLayout_Chat->count()-1,
         container);
-
     QScrollBar *scrollBar =
         ui->scrollAreaChat->verticalScrollBar();
-
     scrollBar->setValue(scrollBar->maximum());
 }

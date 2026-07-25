@@ -510,15 +510,16 @@ QString RoutineManager::buildScheduleBody(QList<Routine> matches) const
 
 QString RoutineManager::findAnswer(const QString& query) const
 {
-    qDebug() << "ROUTINEMANAGER RECEIVED:" << query;
+    qDebug() << "RECEIVED QUERY:" << query;
 
     QString lowerInput = query.toLower();
     QString program = ProgramCodeUtils::extractProgramCode(query);
 
-    int year = 1;
-    int semester = 1;
+    int year = -1;
+    int semester = -1;
     extractYearAndSemester(lowerInput, year, semester);
-    qDebug() << "EXTRACTED: program=" << program << "year=" << year << "semester=" << semester;
+
+    qDebug() << "PARSED -> program:" << program << "year:" << year << "semester:" << semester;
     QString section = extractSection(query);
     QString day = extractDay(lowerInput);
 

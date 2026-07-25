@@ -10,6 +10,7 @@
 #include "managers/AdmissionManager.h"
 #include "crawler/WebCrawler.h"
 #include "managers/CurriculumManager.h"
+#include "utils/CourseResolver.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -34,6 +35,7 @@ private:
     ChatBot* chatbot;
 
     CourseManager courseManager;
+    CourseResolver courseResolver;
     RoutineManager routineManager;
     FaqManager faqManager;
     AdmissionManager admissionManager;
