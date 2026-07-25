@@ -1,4 +1,4 @@
-#include "FaqManager.h"
+#include "FAQManager.h"
 #include "../utils/TextMatcher.h"
 #include "../crawler/WebCrawler.h"
 

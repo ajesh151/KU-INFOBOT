@@ -1,4 +1,4 @@
-#include "Faq.h"
+#include "FAQ.h"
 
 Faq::Faq()
 {
