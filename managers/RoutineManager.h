@@ -6,24 +6,30 @@
 
 #include "../models/Routine.h"
 
-// RoutineManager deliberately does NOT use TextMatcher: routine data is
-// structured (program/year/semester/section/day/course code), so it's
-// searched by field rather than free-text matching (refactoring plan,
-// Phase 7). There is also no WebCrawler fallback here — there is no
-// meaningful "web search" answer to a structured timetable query; if the
-// fields don't match anything, the right response is to ask for more
-// detail, not to crawl the web.
+class CourseResolver;
+
+// RoutineManager owns the entire routine-query flow: parsing free text
+// into fields, running the structured search (never TextMatcher — routine
+// data isn't free text), sorting, and formatting the final answer.
+// ResponseGenerator only calls findAnswer() and returns whatever comes
+// back — it does no parsing, searching, or formatting of its own.
 //
-// RoutineManager never calls CourseManager. If a query names a course by
-// NAME rather than by code, ResponseGenerator resolves that via
-// CourseManager first and passes the resolved code into findAnswer()'s
-// second parameter — this is the one piece of cross-manager coordination
-// that has to live in ResponseGenerator, since no manager may call another
-// manager directly.
+// RoutineManager still never touches CourseManager directly. It uses
+// CourseResolver — which is not a manager — to resolve a course NAME to a
+// code and to look up a code's display name for the output table. That
+// keeps "no manager calls another manager" intact while RoutineManager
+// remains the single owner of everything routine-related.
+//
+// No WebCrawler here by design: there's no meaningful "web search" answer
+// to a structured timetable query. If the fields don't match anything, the
+// right response is asking for more detail, not crawling the web.
 class RoutineManager
 {
 public:
-    RoutineManager();
+    // courseResolver may be nullptr (e.g. unit tests exercising only
+    // code-based queries) — findAnswer() then can't resolve course NAMEs
+    // or show course names in the table, only codes.
+    explicit RoutineManager(CourseResolver* courseResolver = nullptr);
 
     bool loadRoutines(const QString& filename);
 
@@ -43,25 +49,28 @@ public:
 
     int size() const;
 
-    // Parses program/year/semester/section/day out of free text, runs
-    // search(), and returns a fully formatted answer — or a request for
-    // more detail, or "no matching routine found". If `resolvedCourseCode`
-    // is non-empty it's used as-is instead of trying to find a code in
-    // `query` (see class comment above for why).
-    QString findAnswer(
-        const QString& query,
-        const QString& resolvedCourseCode = QString()) const;
-
-    // Strips routine-query grammar ("routine", "schedule", "for", "of",
-    // "year", "semester", day names, etc.) out of a query, leaving behind
-    // whatever is likely a course NAME. ResponseGenerator uses this to
-    // build the search string it hands to CourseManager::findByName() when
-    // no course code is present in the query. Public + static so it can be
-    // reused without a RoutineManager instance.
-    static QString stripRoutineNoiseWords(const QString& text);
+    // Parses `query`, searches, sorts, and returns the fully formatted
+    // answer — or a request for more detail, or a "no match" message.
+    QString findAnswer(const QString& query) const;
 
 private:
+    // --- Query understanding (previously RoutineQueryParser) ---
+    QString extractProgram(const QString& upperInput) const;
+    int extractNumberNear(const QString& lowerText, const QString& keyword) const;
+    QString extractSection(const QString& input) const;
+    QString extractDay(const QString& input) const;
+
+    // --- Output formatting (previously RoutineFormatter) ---
+    QString formatTimeRange(const QString& rawTime) const;
+    QString buildHeader(
+        const QString& program,
+        int year,
+        int semester,
+        const QString& section) const;
+    QString buildScheduleBody(QList<Routine> matches) const;
+
     QList<Routine> routines;
+    CourseResolver* courseResolver;
 };
 
 #endif // ROUTINEMANAGER_H

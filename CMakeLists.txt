@@ -38,6 +38,7 @@ set(PROJECT_SOURCES
 
             utils/TextMatcher.cpp
             utils/CourseCodeUtils.cpp
+            utils/CourseResolver.cpp
 
 )
 
