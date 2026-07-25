@@ -17,7 +17,6 @@ public:
     QString getCode() const;
     QString getName() const;
     int getCredits() const;
-
     void setCode(const QString& code);
     void setName(const QString& name);
     void setCredits(int credits);

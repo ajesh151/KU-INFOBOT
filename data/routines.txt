@@ -257,3 +257,110 @@ CE|4||E4|Monday|11:00-12:00|COMP485|9-310
 CE|4||E4|Wednesday|12:00-13:00|COMP485|9-310
 CE|4|||Friday|9:00-11:00|COMP407|9-304
 CE|4|||Friday|12:00-13:00|COMP409|9-304
+
+
+EE|3|2|Power & Control|Monday|9:00 AM-11:00 AM|EPEG 315|409
+EE|3|2|Power & Control|Monday|12:00 PM-2:00 PM|COEG 301|409
+EE|3|2|Power & Control|Monday|2:00 PM-5:00 PM|PCEG 319 (Engineering Project)|N/A
+EE|3|2|Power & Control|Tuesday|9:00 AM-11:00 AM|EEEG 320|503
+EE|3|2|Power & Control|Tuesday|12:00 PM-2:00 PM|ETEG 301|409
+EE|3|2|Power & Control|Tuesday|2:00 PM-5:00 PM|PCEG 319 (Engineering Project)|N/A
+EE|3|2|Power & Control|Wednesday|9:00 AM-12:00 PM|EEEG 321 (Digital Circuit & System Lab)|Communication/Computer Lab
+EE|3|2|Power & Control|Wednesday|1:00 PM-3:00 PM|COEG 301|503
+EE|3|2|Power & Control|Wednesday|3:00 PM-5:00 PM|ETEG 301|503
+EE|3|2|Power & Control|Thursday|9:00 AM-11:00 AM|EEEG 320|503
+EE|3|2|Power & Control|Thursday|12:00 PM-2:00 PM|EPEG 318|503
+EE|3|2|Power & Control|Thursday|2:00 PM-5:00 PM|PCEG 308 (Power & Control Lab)|Power System/Computer/Electronics Lab
+EE|3|2|Power & Control|Friday|9:00 AM-11:00 AM|EPEG 318|503
+EE|3|2|Power & Control|Friday|12:00 PM-2:00 PM|EPEG 315|503
+EE|3|2|Communication|Monday|9:00 AM-11:00 AM|ETEG 305|408
+EE|3|2|Communication|Monday|12:00 PM-2:00 PM|ETEG 303|503
+EE|3|2|Communication|Monday|2:00 PM-5:00 PM|ETEG 319 (Engineering Project)|N/A
+EE|3|2|Communication|Tuesday|9:00 AM-11:00 AM|EEEG 320|503
+EE|3|2|Communication|Tuesday|12:00 PM-2:00 PM|EPEG 301|503
+EE|3|2|Communication|Tuesday|2:00 PM-5:00 PM|ETEG 319 (Engineering Project)|N/A
+EE|3|2|Communication|Wednesday|9:00 AM-12:00 PM|EEEG 321 (Digital Circuit & System Lab)|Communication/Computer Lab
+EE|3|2|Communication|Wednesday|1:00 PM-3:00 PM|ETEG 305|408
+EE|3|2|Communication|Wednesday|3:00 PM-5:00 PM|EPEG 301|408
+EE|3|2|Communication|Thursday|9:00 AM-11:00 AM|EEEG 320|503
+EE|3|2|Communication|Thursday|12:00 PM-2:00 PM|ETEG 303|203
+EE|3|2|Communication|Friday|9:00 AM-11:00 AM|ETEG 321|203
+EE|3|2|Communication|Friday|12:00 PM-2:00 PM|ETEG 321|502
+EE|3|2|Communication|Friday|2:00 PM-5:00 PM|ETEG 323 (Biomedical & Signal Processing Lab)|Computer/Communication Lab
+EE|1|2||Monday|9:00 AM-11:00 AM|ENGT 105|N/A
+EE|1|2||Monday|12:00 PM-2:00 PM|ENVE 101|N/A
+EE|1|2||Monday|2:00 PM-4:00 PM|MATH 104|N/A
+EE|1|2||Monday|4:00 PM-5:00 PM|LIBRARY|N/A
+EE|1|2||Tuesday|9:00 AM-11:00 AM|ENGG 102|N/A
+EE|1|2||Tuesday|12:00 PM-1:00 PM|PHYS 102|N/A
+EE|1|2||Tuesday|1:00 PM-5:00 PM|ENGG 102|N/A
+EE|1|2||Wednesday|9:00 AM-11:00 AM|ENGT 105|N/A
+EE|1|2||Wednesday|12:00 PM-1:00 PM|EDRG 102|N/A
+EE|1|2||Wednesday|1:00 PM-3:00 PM|COMP 116|CLL, Block 03
+EE|1|2||Wednesday|3:00 PM-5:00 PM|ENGG 112|N/A
+EE|1|2||Thursday|9:00 AM-11:00 AM|ENGG 112|N/A
+EE|1|2||Thursday|12:00 PM-2:30 PM|EDRG 102|N/A
+EE|1|2||Thursday|3:00 PM-5:00 PM|MATH 104|N/A
+EE|1|2||Friday|9:00 AM-11:00 AM|COMP 116|CLL, Block 03
+EE|1|2||Friday|12:00 PM-1:00 PM|ENVE 101|N/A
+EE|1|2||Friday|1:00 PM-2:00 PM|PHYS 102|N/A
+EE|1|2||Friday|2:30 PM-5:00 PM|Physics Practical|06-202
+EE|1|2||Friday|2:30 PM-5:00 PM|Physics Practical|06-203
+EE|4|1|Power & Control|Monday|9:00 AM-11:00 AM|MGTS 403|503
+EE|4|1|Power & Control|Monday|12:00 PM-5:00 PM|PCEG 404 (Engineering Project)|N/A
+EE|4|1|Power & Control|Tuesday|9:00 AM-11:00 AM|EPEG 425|409
+EE|4|1|Power & Control|Tuesday|12:00 PM-5:00 PM|PCEG 403 (COEG 401/EPEG 413 Lab)|409
+EE|4|1|Power & Control|Wednesday|9:00 AM-11:00 AM|MGTS 403|503
+EE|4|1|Power & Control|Wednesday|12:00 PM-4:00 PM|EPEG 428 (Elective)|409
+EE|4|1|Power & Control|Thursday|9:00 AM-11:00 AM|EPEG 413|409
+EE|4|1|Power & Control|Thursday|12:00 PM-2:00 PM|COEG 401|409
+EE|4|1|Power & Control|Thursday|2:00 PM-5:00 PM|PCEG 404 (Engineering Project)|N/A
+EE|4|1|Power & Control|Friday|9:00 AM-11:00 AM|EPEG 413|409
+EE|4|1|Power & Control|Friday|12:00 PM-2:00 PM|COEG 401|409
+EE|4|1|Communication|Monday|9:00 AM-11:00 AM|MGTS 403|503
+EE|4|1|Communication|Monday|12:00 PM-2:00 PM|ETEG 402|408
+EE|4|1|Communication|Monday|3:00 PM-5:00 PM|ETEG 425/ETEG 429|408/407
+EE|4|1|Communication|Tuesday|9:00 AM-11:00 AM|ETEG 422|408
+EE|4|1|Communication|Tuesday|12:00 PM-2:00 PM|ETEG 408|408
+EE|4|1|Communication|Tuesday|2:00 PM-5:00 PM|ETEG 404 (Engineering Project)|N/A
+EE|4|1|Communication|Wednesday|9:00 AM-11:00 AM|MGTS 403|503
+EE|4|1|Communication|Wednesday|12:00 PM-5:00 PM|ETEG 404 (Engineering Project)|N/A
+EE|4|1|Communication|Thursday|9:00 AM-12:00 PM|ETEG 403 (ETEG 402/ETEG 422 Comm. Lab)|N/A
+EE|4|1|Communication|Thursday|1:00 PM-2:00 PM|ETEG 402|408
+EE|4|1|Communication|Thursday|2:00 PM-5:00 PM|ETEG 425/ETEG 429|408/407
+EE|4|1|Communication|Friday|9:00 AM-11:00 AM|ETEG 422|408
+EE|4|1|Communication|Friday|12:00 PM-2:00 PM|ETEG 408|408
+EE|2|2||Monday|9:00 AM-11:00 AM|EEEG 214|502
+EE|2|2||Monday|12:00 PM-2:00 PM|EEEG 215|502
+EE|2|2||Monday|2:00 PM-5:00 PM|EEEG 219 (EEEG 215 Machine Lab)|502
+EE|2|2||Tuesday|9:00 AM-11:00 AM|MCSC 202|502
+EE|2|2||Tuesday|12:00 PM-2:00 PM|EEEG 221|502
+EE|2|2||Tuesday|3:00 PM-5:00 PM|EEEG 215|502
+EE|2|2||Wednesday|9:00 AM-11:00 AM|MATH 208|502
+EE|2|2||Wednesday|12:00 PM-2:00 PM|EEEG 214|502
+EE|2|2||Wednesday|2:00 PM-5:00 PM|EEEG 212 (Engineering Project)|N/A
+EE|2|2||Thursday|9:00 AM-12:00 PM|EEEG 222 (EEEG 214/221 Lab)|502
+EE|2|2||Thursday|1:00 PM-2:00 PM|MATH 208|502
+EE|2|2||Thursday|2:00 PM-5:00 PM|MCSC 202|502
+EE|2|2||Friday|9:00 AM-11:00 AM|EEEG 221|502
+EE|2|2||Friday|12:00 PM-5:00 PM|EEEG 212 (Engineering Project)|N/A
+
+CIVIL|1|2|I|Monday|9:00 AM-11:00 AM|ENGG 102|11-106
+CIVIL|1|2|I|Monday|11:00 AM-1:00 PM|COMP 116|CLL, Block 03
+CIVIL|1|2|I|Monday|2:00 PM-5:00 PM|ENGG 102|11-106
+CIVIL|1|2|I|Tuesday|9:00 AM-11:00 AM|ENGT 105|11-106
+CIVIL|1|2|I|Tuesday|12:00 PM-1:00 PM|PHYS 102|11-106
+CIVIL|1|2|I|Tuesday|1:00 PM-3:00 PM|ENVE 101|11-106
+CIVIL|1|2|I|Tuesday|3:00 PM-5:00 PM|ENGG 112|11-106
+CIVIL|1|2|I|Wednesday|9:00 AM-11:00 AM|PHYS 102|11-106
+CIVIL|1|2|I|Wednesday|12:00 PM-2:00 PM|MATH 104|11-106
+CIVIL|1|2|I|Wednesday|2:00 PM-3:00 PM|EDRG 102|11-106
+CIVIL|1|2|I|Wednesday|3:00 PM-4:00 PM|ENVE 101|11-106
+CIVIL|1|2|I|Wednesday|4:00 PM-5:00 PM|LIBRARY|11-106
+CIVIL|1|2|I|Thursday|9:00 AM-11:00 AM|ENGT 105|11-106
+CIVIL|1|2|I|Thursday|12:00 PM-2:00 PM|ENGG 112|11-106
+CIVIL|1|2|I|Thursday|2:30 PM-5:00 PM|Physics Practical (CIVIL1)|06-202
+CIVIL|1|2|I|Thursday|2:30 PM-5:00 PM|Physics Practical (CIVIL2)|06-203
+CIVIL|1|2|I|Friday|9:00 AM-11:30 AM|EDRG 102|11-106
+CIVIL|1|2|I|Friday|1:00 PM-3:00 PM|COMP 116|CLL, Block 03
+CIVIL|1|2|I|Friday|3:00 PM-5:00 PM|MATH 104|11-106
