@@ -39,6 +39,17 @@ public:
     // CourseManager itself.
     QString courseNameForCode(const QString& code) const;
 
+    // Fuller lookup used by CurriculumManager, which needs credits as well
+    // as the name. name is empty and credits is -1 when the code isn't
+    // found or no CourseManager was provided.
+    struct CourseInfo
+    {
+        QString name;
+        int credits = -1;
+    };
+
+    CourseInfo courseInfoForCode(const QString& code) const;
+
 private:
     CourseManager* courseManager;
 };

@@ -9,6 +9,7 @@ enum class Intent
     ROUTINE_QUERY,
     FAQ_QUERY,
     ADMISSION_QUERY,
+    CURRICULUM_QUERY,
     GREETING,
     GOODBYE,
     UNKNOWN

@@ -9,6 +9,7 @@
 #include "managers/FAQManager.h"
 #include "managers/AdmissionManager.h"
 #include "crawler/WebCrawler.h"
+#include "managers/CurriculumManager.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -36,6 +37,7 @@ private:
     RoutineManager routineManager;
     FaqManager faqManager;
     AdmissionManager admissionManager;
+    CurriculumManager curriculumManager;
     WebCrawler webCrawler;
 
     void addMessage(const QString& text, bool isUser);

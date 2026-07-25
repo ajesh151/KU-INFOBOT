@@ -1,152 +1,169 @@
 #include "CurriculumManager.h"
+#include "../utils/CourseResolver.h"
+#include "../utils/ProgramCodeUtils.h"
 
 #include <QFile>
 #include <QTextStream>
-#include <QRegularExpression>
+#include <QStringList>
+#include <QDebug>
+#include <algorithm>
+
+CurriculumManager::CurriculumManager(CourseResolver* courseResolver)
+    : courseResolver(courseResolver)
+{
+}
 
 bool CurriculumManager::loadCurriculum(const QString& filename)
 {
-    curriculum.clear();
-
     QFile file(filename);
 
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        qWarning() << "CurriculumManager: could not open file:" << filename;
         return false;
+    }
 
     QTextStream in(&file);
+
+    entries.clear();
+
+    int lineNumber = 0;
 
     while(!in.atEnd())
     {
         QString line = in.readLine().trimmed();
+        ++lineNumber;
 
         if(line.isEmpty())
+        {
             continue;
+        }
 
-        QStringList p = line.split('|');
+        QStringList data = line.split("|");
 
-        if(p.size()!=6)
+        if(data.size() != 4)
+        {
+            qWarning() << "CurriculumManager: skipping malformed line"
+                       << lineNumber << "-" << data.size()
+                       << "fields instead of 4:" << line;
             continue;
+        }
 
-        curriculum.emplace_back(
-            p[0].toUpper(),
-            p[1].toInt(),
-            p[2].toInt(),
-            p[3],
-            p[4],
-            p[5].toInt()
+        Curriculum entry(
+            data[0].trimmed(),         // Program
+            data[1].trimmed().toInt(), // Year
+            data[2].trimmed().toInt(), // Semester
+            data[3].trimmed()          // Course Code
             );
+
+        entries.append(entry);
     }
+
+    file.close();
 
     return true;
 }
 
-QString CurriculumManager::extractProgram(const QString& text) const
+QList<Curriculum> CurriculumManager::getAll() const
 {
-    QString t=text.toUpper();
-
-    if(t.contains("COMPUTER ENGINEERING"))
-        return "CE";
-
-    if(t.contains("CE"))
-        return "CE";
-
-    if(t.contains("COMPUTER SCIENCE"))
-        return "CS";
-
-    if(t.contains("CS"))
-        return "CS";
-
-    if(t.contains("CIVIL"))
-        return "CIVIL";
-
-    return "";
+    return entries;
 }
 
-int CurriculumManager::extractYear(const QString& text) const
+QList<Curriculum> CurriculumManager::getByProgram(const QString& program) const
 {
-    QString t=text.toLower();
+    QList<Curriculum> result;
 
-    if(t.contains("first year")) return 1;
-    if(t.contains("second year")) return 2;
-    if(t.contains("third year")) return 3;
-    if(t.contains("fourth year")) return 4;
-
-    QRegularExpression r("(\\d)");
-
-    auto m=r.match(t);
-
-    if(m.hasMatch())
-        return m.captured(1).toInt();
-
-    return -1;
-}
-
-int CurriculumManager::extractSemester(const QString& text) const
-{
-    QString t=text.toLower();
-
-    if(t.contains("first semester")) return 1;
-    if(t.contains("second semester")) return 2;
-
-    QRegularExpression r("semester\\s*(\\d)");
-
-    auto m=r.match(t);
-
-    if(m.hasMatch())
-        return m.captured(1).toInt();
-
-    return -1;
-}
-
-QString CurriculumManager::findCurriculum(const QString& query) const
-{
-    QString program=extractProgram(query);
-
-    int year=extractYear(query);
-
-    int semester=extractSemester(query);
-
-    if(program.isEmpty())
-        return "Please specify the program.";
-
-    QString result;
-
-    result+="Curriculum\n";
-    result+="Program : "+program+"\n";
-
-    if(year!=-1)
-        result+="Year : "+QString::number(year)+"\n";
-
-    if(semester!=-1)
-        result+="Semester : "+QString::number(semester)+"\n";
-
-    result+="\n";
-
-    int total=0;
-
-    for(const Curriculum& c : curriculum)
+    for(const Curriculum& entry : entries)
     {
-        if(c.getProgram()!=program)
-            continue;
-
-        if(year!=-1 && c.getYear()!=year)
-            continue;
-
-        if(semester!=-1 && c.getSemester()!=semester)
-            continue;
-
-        result += QString("%1\t%2\t(%3)\n")
-                      .arg(c.getCode(),-10)
-                      .arg(c.getName(),-45)
-                      .arg(c.getCredit());
-
-        total += c.getCredit();
+        if(entry.getProgram().compare(program, Qt::CaseInsensitive) == 0)
+        {
+            result.append(entry);
+        }
     }
 
-    if(total==0)
-        return "Curriculum not found.";
-
-    result+="\nTotal Credits : "+QString::number(total);
-
     return result;
+}
+
+QString CurriculumManager::formatCurriculum(
+    const QString& program,
+    const QList<Curriculum>& entriesIn) const
+{
+    QList<Curriculum> sorted = entriesIn;
+
+    // Stable sort: only reorders by year/semester, preserves each
+    // semester's own course order exactly as it appears in curriculum.txt.
+    std::stable_sort(sorted.begin(), sorted.end(),
+                     [](const Curriculum& a, const Curriculum& b)
+                     {
+                         if(a.getYear() != b.getYear())
+                         {
+                             return a.getYear() < b.getYear();
+                         }
+
+                         return a.getSemester() < b.getSemester();
+                     });
+
+    static const QString divider(48, '=');
+    static const QString subDivider(48, '-');
+
+    QString body;
+    body += divider + "\n";
+    body += QString("Curriculum : %1\n").arg(program);
+    body += divider + "\n\n";
+
+    body += QString("%1 %2 %3\n")
+                .arg("Code", -12)
+                .arg("Course Name", -32)
+                .arg("Credits");
+
+    int currentYear = -1;
+    int currentSemester = -1;
+
+    for(const Curriculum& entry : sorted)
+    {
+        if(entry.getYear() != currentYear || entry.getSemester() != currentSemester)
+        {
+            currentYear = entry.getYear();
+            currentSemester = entry.getSemester();
+
+            body += "\n";
+            body += QString("Year %1 - Semester %2\n")
+                        .arg(currentYear)
+                        .arg(currentSemester);
+            body += subDivider + "\n";
+        }
+
+        CourseResolver::CourseInfo info = courseResolver
+                                              ? courseResolver->courseInfoForCode(entry.getCourseCode())
+                                              : CourseResolver::CourseInfo();
+
+        QString name = info.name.isEmpty() ? "-" : info.name;
+        QString creditsText = info.credits >= 0 ? QString::number(info.credits) : "-";
+
+        body += QString("%1 %2 %3\n")
+                    .arg(entry.getCourseCode(), -12)
+                    .arg(name, -32)
+                    .arg(creditsText);
+    }
+
+    return body.trimmed();
+}
+
+QString CurriculumManager::findAnswer(const QString& query) const
+{
+    QString program = ProgramCodeUtils::extractProgramCode(query);
+
+    if(program.isEmpty())
+    {
+        return "Please specify a program (e.g. CE, CS, Civil) to view its curriculum.";
+    }
+
+    QList<Curriculum> matches = getByProgram(program);
+
+    if(matches.isEmpty())
+    {
+        return "No curriculum found for " + program + ".";
+    }
+
+    return formatCurriculum(program, matches);
 }

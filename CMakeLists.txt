@@ -21,11 +21,13 @@ set(PROJECT_SOURCES
             managers/RoutineManager.cpp
             managers/FaqManager.cpp
             managers/AdmissionManager.cpp
+            managers/CurriculumManager.cpp
 
             models/Course.cpp
             models/Routine.cpp
             models/Faq.cpp
             models/Admission.cpp
+            models/curriculum.cpp
 
             chatbot/ChatBot.cpp
             chatbot/IntentRecognizer.cpp

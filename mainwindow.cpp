@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     admissionManager.loadData("data/admissions.txt");
     admissionManager.loadData("data/entrance.txt");
     admissionManager.loadData("data/fees.txt");
+    curriculumManager.loadCurriculum("data/curriculum.txt");
     // Create chatbot
 
     chatbot = new ChatBot(
@@ -26,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
         &routineManager,
         &faqManager,
         &admissionManager,
+        &curriculumManager,
         &webCrawler
         );
 

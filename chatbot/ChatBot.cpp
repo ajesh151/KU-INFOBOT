@@ -1,13 +1,15 @@
 #include "ChatBot.h"
 #include "../crawler/WebCrawler.h"
 #include <QDebug>
+
 ChatBot::ChatBot(
     CourseManager* courseManager,
     RoutineManager* routineManager,
     FaqManager* faqManager,
     AdmissionManager* admissionManager,
+    CurriculumManager* curriculumManager,
     WebCrawler* webCrawler)
-    : responseGenerator(courseManager,routineManager,faqManager,admissionManager),
+    : responseGenerator(courseManager,routineManager,faqManager,admissionManager,curriculumManager),
     webCrawler(webCrawler)
 {
 
@@ -17,11 +19,11 @@ QString ChatBot::getResponse(const QString& userInput)
 {
     // Step 1: Typo correction
     QString processedInput = typoCorrector.correct(userInput);
-    qDebug() << "AFTER TYPO CORRECTION:" << processedInput;
 
+    // Step 2: Synonym normalization (phrase synonyms, then word synonyms)
     processedInput = synonymManager.normalizeSentence(processedInput);
-    qDebug() << "AFTER SYNONYM MAPPING:" << processedInput;
 
+    // Step 3: Intent recognition
     Intent intent = intentRecognizer.recognizeIntent(processedInput);
 
     // Genuinely unrecognized intent — no manager to route to at all, so

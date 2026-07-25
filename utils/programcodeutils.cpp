@@ -12,7 +12,7 @@ QString ProgramCodeUtils::extractProgramCode(const QString& text)
     // went through SynonymMapper at all) still works as before.
     static const QStringList knownCodes =
         {
-            "BIT","BCA","BIM","BBA","CS","CE","EEE","BE","BPH","BSC","ME"
+            "BIT","BCA","BIM","BBA","CS","CE","EEE","BE","BPH","BSC","ME","CIVIL"
         };
 
     QString upperText = text.toUpper();
@@ -40,7 +40,8 @@ QString ProgramCodeUtils::extractProgramCode(const QString& text)
             {"electrical engineering", "EEE"},
             {"bachelor of information technology", "BIT"},
             {"business administration", "BBA"},
-            {"mechanical engineering", "ME"}
+            {"mechanical engineering", "ME"},
+            {"civil engineering", "CIVIL"}
         };
 
     QString lowerText = text.toLower();

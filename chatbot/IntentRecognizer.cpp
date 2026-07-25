@@ -136,6 +136,18 @@ Intent IntentRecognizer::recognizeIntent(
         return Intent::ADMISSION_QUERY;
     }
 
+    static const QStringList curriculumKeywords =
+        {
+            "curriculum","course catalogue","course catalog","catalogue","catalog",
+            "course structure","course list","subjects list","all subjects",
+            "syllabus structure","full course list","which subjects"
+        };
+
+    if(containsAny(text, curriculumKeywords))
+    {
+        return Intent::CURRICULUM_QUERY;
+    }
+
 
     static const QStringList faqKeywords =
         {

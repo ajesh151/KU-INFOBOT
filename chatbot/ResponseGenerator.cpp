@@ -3,17 +3,20 @@
 #include "../managers/RoutineManager.h"
 #include "../managers/FAQManager.h"
 #include "../managers/AdmissionManager.h"
+#include "../managers/curriculumManager.h"
 
 ResponseGenerator::ResponseGenerator(
     CourseManager* courseManager,
     RoutineManager* routineManager,
     FaqManager* faqManager,
-    AdmissionManager* admissionManager)
+    AdmissionManager* admissionManager,
+    CurriculumManager* curriculumManager)
     :
     courseManager(courseManager),
     routineManager(routineManager),
     faqManager(faqManager),
-    admissionManager(admissionManager)
+    admissionManager(admissionManager),
+    curriculumManager(curriculumManager)
 {
 }
 
@@ -34,6 +37,8 @@ QString ResponseGenerator::generateResponse(
 
     case Intent::ROUTINE_QUERY:
         return routineManager->findAnswer(userInput);
+    case Intent::CURRICULUM_QUERY:
+        return curriculumManager->findAnswer(userInput);
 
     case Intent::FAQ_QUERY:
         return faqManager->findAnswer(userInput);

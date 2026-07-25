@@ -9,6 +9,7 @@ class CourseManager;
 class RoutineManager;
 class FaqManager;
 class AdmissionManager;
+class CurriculumManager;
 
 // Pure router: given an intent and the normalized query, forwards to the
 // correct manager and returns its response. ResponseGenerator must never
@@ -22,7 +23,8 @@ public:
         CourseManager* courseManager,
         RoutineManager* routineManager,
         FaqManager* faqManager,
-        AdmissionManager* admissionManager);
+        AdmissionManager* admissionManager,
+        CurriculumManager* curriculumManager);
 
     QString generateResponse(
         Intent intent,
@@ -33,6 +35,7 @@ private:
     RoutineManager* routineManager;
     FaqManager* faqManager;
     AdmissionManager* admissionManager;
+    CurriculumManager* curriculumManager;
 };
 
 #endif // RESPONSEGENERATOR_H

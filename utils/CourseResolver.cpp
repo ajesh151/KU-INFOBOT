@@ -54,6 +54,28 @@ QString CourseResolver::courseNameForCode(const QString& code) const
     return courseManager->findByCode(code).getName();
 }
 
+CourseResolver::CourseInfo CourseResolver::courseInfoForCode(const QString& code) const
+{
+    CourseInfo info;
+
+    if(!courseManager || code.isEmpty())
+    {
+        return info;
+    }
+
+    Course course = courseManager->findByCode(code);
+
+    if(course.getCode().isEmpty())
+    {
+        // Not found — return the default empty/-1 info.
+        return info;
+    }
+
+    info.name = course.getName();
+    info.credits = course.getCredits();
+    return info;
+}
+
 CourseResolver::Resolution CourseResolver::resolve(const QString& text) const
 {
     Resolution resolution;
