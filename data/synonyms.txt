@@ -87,7 +87,7 @@ saarc fee = saarc tuition
 # COURSE
 # =========================================================
 
-course = courses, subject, subjects, module
+curriculum = course, course catalogue, courses, subjects
 credit = credits, credit hour, credit hours
 course code = subject code
 prerequisite = prerequisite course
@@ -129,8 +129,8 @@ parking = vehicle parking
 # CONTACT
 # =========================================================
 
-contact = phone, telephone, email, office
-location = address, map, directions
+contact = phone, telephone, office, get in touch
+location = address, map, directions, where is
 website = web, official website
 
 # =========================================================
@@ -154,3 +154,18 @@ event = events, programme
 club = clubs, society
 facility = facilities
 help = support
+
+
+school of engineering = soe, kusoe
+
+school of science = sos, kusos
+
+school of law = sol, kusol
+
+school of arts = soa, kusoa
+
+school of education = soed, kusoed
+
+school of medical science = kusms
+
+school of management = kusom,

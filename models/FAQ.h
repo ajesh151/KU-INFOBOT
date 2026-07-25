@@ -15,9 +15,6 @@ public:
 
     QString getQuestion() const;
     QString getAnswer() const;
-
-    void setQuestion(const QString& question);
-    void setAnswer(const QString& answer);
 };
 
 #endif

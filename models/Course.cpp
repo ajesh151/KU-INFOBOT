@@ -31,20 +31,3 @@ int Course::getCredits() const
 {
     return credits;
 }
-
-// Setters
-
-void Course::setCode(const QString& code)
-{
-    this->code = code;
-}
-
-void Course::setName(const QString& name)
-{
-    this->name = name;
-}
-
-void Course::setCredits(int credits)
-{
-    this->credits = credits;
-}

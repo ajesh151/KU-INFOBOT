@@ -20,13 +20,3 @@ QString Faq::getAnswer() const
 {
     return answer;
 }
-
-void Faq::setQuestion( const QString& question)
-{
-    this->question = question;
-}
-
-void Faq::setAnswer( const QString& answer)
-{
-    this->answer = answer;
-}

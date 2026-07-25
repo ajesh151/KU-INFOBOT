@@ -27,14 +27,6 @@ public:
     QString getTime() const;
     QString getCourseCode() const;
     QString getVenue() const;
-    void setProgram(const QString& program);
-    void setYear(int year);
-    void setSemester(int semester);
-    void setSection(const QString& section);
-    void setDay(const QString& day);
-    void setTime(const QString& time);
-    void setCourseCode(const QString& courseCode);
-    void setVenue(const QString& venue);
     QString toString() const;
 };
 

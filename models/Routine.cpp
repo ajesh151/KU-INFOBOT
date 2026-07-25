@@ -52,46 +52,6 @@ QString Routine::getVenue() const
 }
 
 
-void Routine::setProgram(const QString& program)
-{
-    this->program = program;
-}
-
-void Routine::setYear(int year)
-{
-    this->year = year;
-}
-
-void Routine::setSemester(int semester)
-{
-    this->semester = semester;
-}
-
-void Routine::setSection(const QString& section)
-{
-    this->section = section;
-}
-
-void Routine::setDay(const QString& day)
-{
-    this->day = day;
-}
-
-void Routine::setTime(const QString& time)
-{
-    this->time = time;
-}
-
-void Routine::setCourseCode(const QString& courseCode)
-{
-    this->courseCode = courseCode;
-}
-
-void Routine::setVenue(const QString& venue)
-{
-    this->venue = venue;
-}
-
 QString Routine::toString() const
 {
     QString result = QString("%1 %2 — %3 @ %4")

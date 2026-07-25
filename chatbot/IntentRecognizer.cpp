@@ -72,7 +72,7 @@ Intent IntentRecognizer::recognizeIntent(
         {
             "routine","schedule","timetable","semester","year", "section",
             "sunday","monday","tuesday","wednesday","thursday","friday","saturday",
-            "today","tomorrow","class timing","class time","next class","which class","when is"
+            "today","tomorrow","class timing","class time","next class","which class"
         };
 
     if(containsAny(text,routineKeywords))
@@ -96,11 +96,39 @@ Intent IntentRecognizer::recognizeIntent(
 
     static const QStringList admissionKeywords =
         {
-            "admission","admissions","apply","application","eligibility","eligible",
-            "required documents","documents","entrance","entrance exam","entrance examination",
-            "fee","fees","tuition","payment","scholarship","financial aid","deadline",
-            "admit","enrollment","enrolment","registration",
-            "program change","cutoff","cut off"
+        "admission","admissions","apply","application","eligibility","eligible",
+        "required documents","documents","entrance","entrance exam","entrance examination",
+        "fee","fees","tuition","payment","scholarship","financial aid","deadline",
+        "admit","enrollment","enrolment","registration",
+        "program change","cutoff","cut off","admission",
+        "eligibility",
+        "pcb eligibility",
+        "gce a level",
+        "ib diploma",
+        "ctevt diploma",
+        "application",
+        "online registration",
+        "application process",
+        "program change",
+        "enrollment confirmation",
+        "architecture admission",
+        "geomatics scholarship",
+        "tie breaking",
+        "entrance exam",
+        "kucat", "kucbt",
+        "computer based test",
+        "test format",
+        "difficulty level",
+        "adaptive scoring",
+        "negative marking",
+        "pass mark",
+        "minimum score",
+        "documents",
+        "international students",
+        "scholarship",
+        "fee",
+        "deadline",
+        "merit list",
         };
 
     if(containsAny(text, admissionKeywords))
@@ -111,9 +139,11 @@ Intent IntentRecognizer::recognizeIntent(
 
     static const QStringList faqKeywords =
         {
+            "ku",
+            "kathmandu university",
             "library",
             "hostel",
-            "wifi",
+            "website",
             "internet",
             "canteen",
             "bus",
@@ -129,14 +159,7 @@ Intent IntentRecognizer::recognizeIntent(
             "office",
             "email",
             "phone",
-            // General chatbot small-talk. The actual replies live in
-            // data/faq.txt as ordinary entries (found via TextMatcher),
-            // not as special cases here or in ResponseGenerator.
-            "your name",
-            "who are you",
-            "what can you do",
-            "thank",
-            "how are you"
+            "does ku"
         };
 
     if(containsAny(text, faqKeywords))

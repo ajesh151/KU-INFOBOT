@@ -1,4 +1,4 @@
-kucat|Kathmandu University Common Admission Test (KUCAT) is a Computer-Based Test conducted for engineering admissions.
+kucbt|Kathmandu University Common Admission Test (KUCAT) is a Computer-Based Test conducted for engineering admissions.
 
 entrance exam|Admission to the School of Engineering requires qualifying the Kathmandu University Common Admission Test (KUCAT-CBT).
 
@@ -14,17 +14,17 @@ syllabus|Questions are prepared according to the official Kathmandu University e
 
 adaptive scoring|The examination uses adaptive scoring where the difficulty of the next question depends on the previous answer.
 
-difficulty level|Questions are divided into five difficulty levels.
+marks difficulty level 1|Level 1 questions carry 11 points.
 
-level 1|Level 1 questions carry 11 points.
+marks difficulty level 2|Level 2 questions carry 13 points.
 
-level 2|Level 2 questions carry 13 points.
+marks difficulty level 3|Level 3 questions carry 15 points.
 
-level 3|Level 3 questions carry 15 points.
+marks difficulty level 4|Level 4 questions carry 17 points.
 
-level 4|Level 4 questions carry 17 points.
+marks difficulty level 5|Level 5 questions carry 19 points.
 
-level 5|Level 5 questions carry 19 points.
+difficulty level|Questions are divided into five difficulty levels each carrying different marks.
 
 negative marking|There is no traditional negative marking. Incorrect answers lower the difficulty level of subsequent questions.
 

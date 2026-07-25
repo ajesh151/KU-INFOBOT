@@ -15,7 +15,8 @@ TypoCorrector::TypoCorrector()
     protectedAbbreviations =
         {
             "ce", "cs", "bit", "bca", "bim", "bba", "eee",
-            "ai", "be", "bph", "bsc", "me"
+            "ai", "be", "bph", "bsc", "me", "mbe", "soe", "sos", "soa",
+            "cse", "civ", "econ", "env", "ku"
         };
 
     loadDictionary("data/typo_dictionary.txt");
