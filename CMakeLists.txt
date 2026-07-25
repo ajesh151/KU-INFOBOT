@@ -39,6 +39,7 @@ set(PROJECT_SOURCES
             utils/TextMatcher.cpp
             utils/CourseCodeUtils.cpp
             utils/CourseResolver.cpp
+            utils/programcodeutils.cpp
 
 )
 
@@ -47,6 +48,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(KU_INFOBOT
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        utils/programcodeutils.h utils/programcodeutils.cpp
+        models/curriculum.h models/curriculum.cpp
     )
 
 else()

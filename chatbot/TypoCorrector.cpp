@@ -15,22 +15,7 @@ TypoCorrector::TypoCorrector()
     protectedAbbreviations =
         {
             "ce", "cs", "bit", "bca", "bim", "bba", "eee",
-            "ai", "be", "bph", "bsc", "me","ku",
-        "kucat",
-        "cbt",
-        "gpa",
-        "cgpa",
-        "phd",
-        "mba",
-        "mbe",
-        "mppm",
-        "bbis",
-        "bbm",
-        "llb",
-        "ib",
-        "ctevt",
-        "neb",
-        "lmtc"
+            "ai", "be", "bph", "bsc", "me"
         };
 
     loadDictionary("data/typo_dictionary.txt");
@@ -83,7 +68,35 @@ bool TypoCorrector::isProtectedWord(const QString &word) const
     if (courseCodePattern.match(word).hasMatch())
         return true;
 
+    // Never touch a purely numeric token (e.g. "1", "2", "2024"). This
+    // matters a lot more than it looks: a short digit string has a very
+    // small allowed edit distance (see maxAllowedDistance), which makes it
+    // dangerously easy for it to land within that distance of an unrelated
+    // short dictionary entry (e.g. "2" is 1 edit away from "r" in a
+    // dictionary containing "r=are") and get silently "corrected" into a
+    // completely different value — corrupting a year/semester/score number
+    // before anything downstream ever sees the real one. Spelling
+    // correction has no meaningful concept of "misspelled number" anyway.
+    if (isNumericToken(word))
+        return true;
+
     return false;
+}
+
+bool TypoCorrector::isNumericToken(const QString &word) const
+{
+    if (word.isEmpty())
+        return false;
+
+    for (const QChar &ch : word)
+    {
+        if (!ch.isDigit())
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 int TypoCorrector::maxAllowedDistance(int wordLength) const

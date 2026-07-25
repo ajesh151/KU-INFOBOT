@@ -137,7 +137,7 @@ website = web, official website
 # ACADEMIC
 # =========================================================
 
-semester = term
+semester = term, sem
 year = batch, academic year
 exam = examination, test, assessment, quiz
 result = results, marks, grades, gpa, cgpa

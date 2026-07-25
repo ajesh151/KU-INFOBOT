@@ -1,5 +1,6 @@
 #include "RoutineManager.h"
 #include "../utils/CourseResolver.h"
+#include "../utils/ProgramCodeUtils.h"
 
 #include <QFile>
 #include <QTextStream>
@@ -40,6 +41,20 @@ bool RoutineManager::loadRoutines(const QString& filename)
         }
 
         QStringList data = line.split("|");
+
+        // Tolerate a stray leading and/or trailing delimiter (e.g. a line
+        // written as "|CE|1|2|A|Monday|9:00-11:00|MATH104|9-301..." or one
+        // with a trailing "|") without rejecting it as malformed — either
+        // form still describes the same 8 fields.
+        if(!data.isEmpty() && data.first().isEmpty())
+        {
+            data.removeFirst();
+        }
+
+        if(!data.isEmpty() && data.last().isEmpty())
+        {
+            data.removeLast();
+        }
 
         if(data.size() != 8)
         {
@@ -207,74 +222,84 @@ int RoutineManager::size() const
 // Query understanding
 // ============================================================
 
-QString RoutineManager::extractProgram(const QString& upperInput) const
+void RoutineManager::extractYearAndSemester(
+    const QString& lowerText,
+    int& year,
+    int& semester) const
 {
-    static const QStringList knownPrograms =
-        {
-            "BIT","BCA","BIM","BBA","CS","CE","EEE","BE","BPH","BSC","ME"
-        };
+    year = -1;
+    semester = -1;
 
-    for(const QString& program : knownPrograms)
+    // Matches EITHER "<digit><ordinal suffix?> <keyword>" (e.g. "2nd
+    // semester") OR "<keyword> <digit>" (e.g. "semester 2"), for whichever
+    // keyword ("year" or "semester") comes first in that spot. Because
+    // QRegularExpression::globalMatch never lets two matches overlap, once
+    // a digit is consumed as part of one pair, it cannot also be picked up
+    // as part of a different pair later in the scan — that's what makes
+    // this immune to the cross-field theft that broke the old per-keyword
+    // search.
+    static const QRegularExpression pairPattern(
+        "(?:(\\d)(?:st|nd|rd|th)?\\s*(year|semester))"
+        "|"
+        "(?:(year|semester)\\s*(\\d))",
+        QRegularExpression::CaseInsensitiveOption);
+
+    auto it = pairPattern.globalMatch(lowerText);
+
+    while(it.hasNext())
     {
-        QRegularExpression pattern(
-            "\\b" + QRegularExpression::escape(program) + "\\b");
+        QRegularExpressionMatch match = it.next();
 
-        if(pattern.match(upperInput).hasMatch())
+        QString keyword;
+        int number = -1;
+
+        if(!match.captured(2).isEmpty())
         {
-            return program;
+            // "<digit> <keyword>" branch
+            keyword = match.captured(2);
+            number = match.captured(1).toInt();
+        }
+        else if(!match.captured(3).isEmpty())
+        {
+            // "<keyword> <digit>" branch
+            keyword = match.captured(3);
+            number = match.captured(4).toInt();
+        }
+
+        // First occurrence wins for each keyword — if a query somehow
+        // mentions "year" twice, we don't want a later, unrelated number
+        // to overwrite the first legitimate value.
+        if(keyword.compare("year", Qt::CaseInsensitive) == 0 && year == -1)
+        {
+            year = number;
+        }
+        else if(keyword.compare("semester", Qt::CaseInsensitive) == 0 && semester == -1)
+        {
+            semester = number;
         }
     }
 
-    return QString();
-}
-
-int RoutineManager::extractNumberNear(
-    const QString& lowerText,
-    const QString& keyword) const
-{
-    QRegularExpression digitBefore(
-        "(\\d)(?:st|nd|rd|th)?\\s*" + keyword,
-        QRegularExpression::CaseInsensitiveOption);
-
-    auto beforeMatch = digitBefore.match(lowerText);
-
-    if(beforeMatch.hasMatch())
+    // Word-based fallback ("first year", "second semester", ...) for
+    // whichever field the numeric pass didn't find at all.
+    if(year == -1)
     {
-        return beforeMatch.captured(1).toInt();
+        if(lowerText.contains("first year")) year = 1;
+        else if(lowerText.contains("second year")) year = 2;
+        else if(lowerText.contains("third year")) year = 3;
+        else if(lowerText.contains("fourth year")) year = 4;
     }
 
-    QRegularExpression digitAfter(
-        keyword + "\\s*(\\d)",
-        QRegularExpression::CaseInsensitiveOption);
-
-    auto afterMatch = digitAfter.match(lowerText);
-
-    if(afterMatch.hasMatch())
+    if(semester == -1)
     {
-        return afterMatch.captured(1).toInt();
+        if(lowerText.contains("first semester")) semester = 1;
+        else if(lowerText.contains("second semester")) semester = 2;
+        else if(lowerText.contains("third semester")) semester = 3;
+        else if(lowerText.contains("fourth semester")) semester = 4;
+        else if(lowerText.contains("fifth semester")) semester = 5;
+        else if(lowerText.contains("sixth semester")) semester = 6;
+        else if(lowerText.contains("seventh semester")) semester = 7;
+        else if(lowerText.contains("eighth semester")) semester = 8;
     }
-
-    if(keyword == "semester")
-    {
-        if(lowerText.contains("first semester")) return 1;
-        if(lowerText.contains("second semester")) return 2;
-        if(lowerText.contains("third semester")) return 3;
-        if(lowerText.contains("fourth semester")) return 4;
-        if(lowerText.contains("fifth semester")) return 5;
-        if(lowerText.contains("sixth semester")) return 6;
-        if(lowerText.contains("seventh semester")) return 7;
-        if(lowerText.contains("eighth semester")) return 8;
-    }
-
-    if(keyword == "year")
-    {
-        if(lowerText.contains("first year")) return 1;
-        if(lowerText.contains("second year")) return 2;
-        if(lowerText.contains("third year")) return 3;
-        if(lowerText.contains("fourth year")) return 4;
-    }
-
-    return -1;
 }
 
 QString RoutineManager::extractSection(const QString& input) const
@@ -485,12 +510,15 @@ QString RoutineManager::buildScheduleBody(QList<Routine> matches) const
 
 QString RoutineManager::findAnswer(const QString& query) const
 {
-    QString upperInput = query.toUpper();
-    QString lowerInput = query.toLower();
+    qDebug() << "ROUTINEMANAGER RECEIVED:" << query;
 
-    QString program = extractProgram(upperInput);
-    int year = extractNumberNear(lowerInput, "year");
-    int semester = extractNumberNear(lowerInput, "semester");
+    QString lowerInput = query.toLower();
+    QString program = ProgramCodeUtils::extractProgramCode(query);
+
+    int year = 1;
+    int semester = 1;
+    extractYearAndSemester(lowerInput, year, semester);
+    qDebug() << "EXTRACTED: program=" << program << "year=" << year << "semester=" << semester;
     QString section = extractSection(query);
     QString day = extractDay(lowerInput);
 

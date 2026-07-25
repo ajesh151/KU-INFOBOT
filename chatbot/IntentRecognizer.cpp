@@ -70,7 +70,7 @@ Intent IntentRecognizer::recognizeIntent(
     // through the full pipeline — harmless redundancy, not the primary path.
     static const QStringList routineKeywords =
         {
-            "routine","schedule","timetable","semester","year","section",
+            "routine","schedule","timetable","semester","year", "section",
             "sunday","monday","tuesday","wednesday","thursday","friday","saturday",
             "today","tomorrow","class timing","class time","next class","which class","when is"
         };

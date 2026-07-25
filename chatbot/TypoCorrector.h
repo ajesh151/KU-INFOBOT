@@ -29,6 +29,9 @@ private:
     // Returns true if `word` must never be altered (abbreviation or course code).
     bool isProtectedWord(const QString &word) const;
 
+    // Returns true if `word` consists entirely of digits.
+    bool isNumericToken(const QString &word) const;
+
     // Maximum Levenshtein distance allowed for a fuzzy match, scaled by length,
     // so short words require near-exact matches.
     int maxAllowedDistance(int wordLength) const;

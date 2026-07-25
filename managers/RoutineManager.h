@@ -55,8 +55,23 @@ public:
 
 private:
     // --- Query understanding (previously RoutineQueryParser) ---
-    QString extractProgram(const QString& upperInput) const;
-    int extractNumberNear(const QString& lowerText, const QString& keyword) const;
+    // Program extraction lives in ProgramCodeUtils, not here — it has to
+    // recognize both the short code and SynonymMapper's expanded full
+    // name, which is shared, cross-cutting knowledge, not routine-specific.
+    //
+    // Year and semester are extracted TOGETHER in one pass, not by two
+    // independent per-keyword searches. Two independent searches can each
+    // "steal" a number that actually belongs to the other field — e.g. in
+    // "year 1 semester 2", the "1" sits immediately before "semester" too,
+    // so a naive standalone semester search matches "1 semester" and
+    // returns 1 instead of 2. Scanning left-to-right once and consuming
+    // each (number, keyword) pair as it's found makes that impossible: a
+    // number used for "year" is gone from the string as far as the scan
+    // is concerned by the time it looks for "semester".
+    void extractYearAndSemester(
+        const QString& lowerText,
+        int& year,
+        int& semester) const;
     QString extractSection(const QString& input) const;
     QString extractDay(const QString& input) const;
 
