@@ -12,7 +12,7 @@ class WebCrawler; // forward declaration only — full include lives in the .cpp
 // ("Tell me about COSC101") and course names, including partial ones
 // ("Information about Programming Fundamentals"), via the shared
 // TextMatcher. Falls back to WebCrawler when there's no local match.
-class CourseManager
+class CourseManager: public InformationManager
 {
 public:
     // webCrawler may be nullptr (e.g. in unit tests) — findAnswer simply
@@ -34,7 +34,7 @@ public:
     // course names (this is what makes partial names like "programming
     // fundamentals" or "fundamentals" work). Falls back to WebCrawler, and
     // only then reports "Course not found."
-    QString findAnswer(const QString& query) const;
+    QString findAnswer(const QString& query) const override;
 
 private:
     QString formatCourse(const Course& course) const;

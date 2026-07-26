@@ -20,7 +20,7 @@ class CourseResolver;
 //
 // No WebCrawler fallback: an unrecognized program means the query needs a
 // valid program name, not a web search — same reasoning as RoutineManager.
-class CurriculumManager
+class CurriculumManager: public InformationManager
 {
 public:
     // courseResolver may be nullptr (e.g. unit tests) — findAnswer() then
@@ -37,7 +37,7 @@ public:
     // expanded full names like "computer engineering"), then returns the
     // full formatted curriculum for that program — every year and
     // semester, in order, with course codes and (where known) names.
-    QString findAnswer(const QString& query) const;
+    QString findAnswer(const QString& query) const override;
 
 private:
     QString formatCurriculum(

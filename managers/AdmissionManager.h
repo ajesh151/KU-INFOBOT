@@ -13,7 +13,7 @@ class WebCrawler; // forward declaration only — full include lives in the .cpp
 // answers queries using the shared TextMatcher (exact -> phrase -> word ->
 // keyword). Falls back to WebCrawler itself when there's no local match, so
 // ResponseGenerator never has to know that fallback exists.
-class AdmissionManager
+class AdmissionManager : public InformationManager
 {
 public:
     // webCrawler may be nullptr (e.g. in unit tests) — findAnswer simply
@@ -37,7 +37,7 @@ public:
     // Finds the best-matching answer via TextMatcher's four-tier search.
     // Falls back to WebCrawler (if provided) when nothing matches locally,
     // and only then returns the final "not found" message.
-    QString findAnswer(const QString& question) const;
+    QString findAnswer(const QString& question) const override;
 
     std::vector<Admission> searchData(const QString& keyword) const;
 

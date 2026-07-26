@@ -23,7 +23,7 @@ class CourseResolver;
 // No WebCrawler here by design: there's no meaningful "web search" answer
 // to a structured timetable query. If the fields don't match anything, the
 // right response is asking for more detail, not crawling the web.
-class RoutineManager
+class RoutineManager: public InformationManager
 {
 public:
     // courseResolver may be nullptr (e.g. unit tests exercising only
@@ -51,7 +51,7 @@ public:
 
     // Parses `query`, searches, sorts, and returns the fully formatted
     // answer — or a request for more detail, or a "no match" message.
-    QString findAnswer(const QString& query) const;
+    QString findAnswer(const QString& query) const override;
 
 private:
     // --- Query understanding (previously RoutineQueryParser) ---

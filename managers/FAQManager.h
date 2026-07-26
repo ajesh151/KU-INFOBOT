@@ -16,7 +16,7 @@ class WebCrawler; // forward declaration only — full include lives in the .cpp
 // Note: general chatbot small-talk ("what's your name?", "thank you", "how
 // are you?") lives here as ordinary FAQ data entries rather than as special
 // cases in ResponseGenerator — see data/faq.txt.
-class FaqManager
+class FaqManager: public InformationManager
 {
 public:
     // webCrawler may be nullptr (e.g. in unit tests) — findAnswer simply
@@ -30,7 +30,7 @@ public:
     // Finds the best-matching answer via TextMatcher's four-tier search.
     // Falls back to WebCrawler (if provided) when nothing matches locally,
     // and only then returns the final "not found" message.
-    QString findAnswer(const QString& question) const;
+    QString findAnswer(const QString& question) const override;
 
     std::vector<Faq> searchFaqs(const QString& keyword) const;
 
