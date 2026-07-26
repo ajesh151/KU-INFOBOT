@@ -168,4 +168,6 @@ school of education = soed, kusoed
 
 school of medical science = kusms
 
-school of management = kusom,
+school of management = kusom
+
+ = show details of, tell me about

@@ -6,7 +6,6 @@
 #include <QTextStream>
 #include <QStringList>
 #include <QRegularExpression>
-#include <QDebug>
 #include <algorithm>
 
 RoutineManager::RoutineManager(CourseResolver* courseResolver)
@@ -508,16 +507,11 @@ QString RoutineManager::buildScheduleBody(QList<Routine> matches) const
 
 QString RoutineManager::findAnswer(const QString& query) const
 {
-    qDebug() << "RECEIVED QUERY:" << query;
-
     QString lowerInput = query.toLower();
     QString program = ProgramCodeUtils::extractProgramCode(query);
-
     int year = -1;
     int semester = -1;
     extractYearAndSemester(lowerInput, year, semester);
-
-    qDebug() << "PARSED -> program:" << program << "year:" << year << "semester:" << semester;
     QString section = extractSection(query);
     QString day = extractDay(lowerInput);
 
