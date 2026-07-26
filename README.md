@@ -69,7 +69,8 @@ The chatbot stores information in structured text files.
 
 | File | Description |
 |------|-------------|
-| courses.txt | Course and curriculum information |
+| courses.txt | Courses information |
+| curriculum.txt | Curriculum information |
 | routines.txt | Class routine information |
 | admissions.txt | Admission requirements and procedures |
 | fees.txt | Tuition fee information |
