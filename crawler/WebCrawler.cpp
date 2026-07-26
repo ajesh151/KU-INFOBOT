@@ -8,6 +8,23 @@
 #include <QUrl>
 #include <QDebug>
 
+namespace
+{
+// Hard cap on how many pages a single crawl will visit. Without this,
+// crawlPage()'s recursion has no limit at all — the first time a FAQ
+// query misses and falls through to the web crawler, it could
+// synchronously crawl hundreds of interlinked pages across every KU
+// subdomain, blocking the UI thread for a very long time. 60 is a
+// reasonable default for a "closest matching page" lookup; raise it if
+// you find the crawl isn't reaching pages you need, but do so
+// deliberately, not by removing the cap.
+const int MAX_CRAWL_PAGES = 60;
+
+// Where crawled pages are persisted so a previous crawl can be reused
+// across app launches instead of re-crawling the live site every time.
+const QString CACHE_FILE_PATH = "data/crawler_cache.txt";
+}
+
 WebCrawler::WebCrawler()
 {
 }
@@ -82,7 +99,7 @@ QString WebCrawler::extractTitle(const QString &html)
     QRegularExpression titleRegex(
         "<title[^>]*>(.*?)</title>",
         QRegularExpression::CaseInsensitiveOption |
-        QRegularExpression::DotMatchesEverythingOption);
+            QRegularExpression::DotMatchesEverythingOption);
 
     QRegularExpressionMatch match = titleRegex.match(html);
 
@@ -108,14 +125,14 @@ QString WebCrawler::extractContent(const QString &html)
         QRegularExpression(
             "<script[^>]*>.*?</script>",
             QRegularExpression::CaseInsensitiveOption |
-            QRegularExpression::DotMatchesEverythingOption));
+                QRegularExpression::DotMatchesEverythingOption));
 
     // Remove style blocks
     content.remove(
         QRegularExpression(
             "<style[^>]*>.*?</style>",
             QRegularExpression::CaseInsensitiveOption |
-            QRegularExpression::DotMatchesEverythingOption));
+                QRegularExpression::DotMatchesEverythingOption));
 
     // Remove all HTML tags
     content.remove(
@@ -144,7 +161,7 @@ QStringList WebCrawler::extractLinks(const QString &html,
         QRegularExpression::CaseInsensitiveOption);
 
     QRegularExpressionMatchIterator iterator =
-            linkRegex.globalMatch(html);
+        linkRegex.globalMatch(html);
 
     while(iterator.hasNext())
     {
@@ -168,10 +185,10 @@ QStringList WebCrawler::extractLinks(const QString &html,
             continue;
 
         QUrl absoluteUrl =
-                QUrl(baseUrl).resolved(QUrl(link));
+            QUrl(baseUrl).resolved(QUrl(link));
 
         QString finalUrl =
-                absoluteUrl.toString(QUrl::RemoveFragment);
+            absoluteUrl.toString(QUrl::RemoveFragment);
 
         if(isKuUrl(finalUrl))
         {
@@ -185,6 +202,11 @@ QStringList WebCrawler::extractLinks(const QString &html,
 
 void WebCrawler::crawlPage(const QString &url)
 {
+    // Hard cap check FIRST, before doing any work for this page at all —
+    // this is what actually prevents the unbounded recursive crawl.
+    if(cache.size() >= MAX_CRAWL_PAGES)
+        return;
+
     // Already visited
     if(visitedUrls.contains(url))
         return;
@@ -206,11 +228,17 @@ void WebCrawler::crawlPage(const QString &url)
 
     cache.addPage(page);
 
+    if(cache.size() >= MAX_CRAWL_PAGES)
+        return;
+
     // Discover more KU links
     QStringList links = extractLinks(html, url);
 
     for(const QString &link : links)
     {
+        if(cache.size() >= MAX_CRAWL_PAGES)
+            break;
+
         if(!visitedUrls.contains(link))
         {
             crawlPage(link);
@@ -225,16 +253,26 @@ void WebCrawler::crawl(const QString &startUrl)
 
     crawlPage(startUrl);
 
+    // Persist immediately so this crawl can be reused on the next launch
+    // instead of hitting the live site again.
+    cache.saveToFile(CACHE_FILE_PATH);
+
     qDebug() << "Finished crawling.";
     qDebug() << "Pages indexed:" << cache.size();
 }
 
 QString WebCrawler::search(const QString &query)
 {
-    // Crawl only once
     if(cache.size() == 0)
     {
-        crawl("https://ku.edu.np/");
+        // Prefer a previously persisted crawl over hitting the live site
+        // again — crawling is slow and network-dependent even with the
+        // cap in place, so there's no reason to redo it unless nothing
+        // has ever been crawled before.
+        if(!cache.loadFromFile(CACHE_FILE_PATH))
+        {
+            crawl("https://ku.edu.np/");
+        }
     }
 
     CachedPage result = cache.search(query);
