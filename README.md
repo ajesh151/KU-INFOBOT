@@ -213,11 +213,11 @@ This project was developed as an academic project for educational purposes.
 
 ## Authors
 
-**Ajesh Pokhrel**
-**Prayag Parajuli**
-**Smriti Niroula**
-**Aislinn Paudel **
-**Prashis Prasai**
+**Ajesh Pokhrel** \
+**Prayag Parajuli** \
+**Smriti Niroula** \
+**Aislinn Paudel** \
+**Prashis Prasai** \
 
 Department of Computer Science and Engineering  
 Kathmandu University
