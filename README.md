@@ -131,7 +131,7 @@ Major classes include:
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/<username>/KU_INFOBOT.git
+git clone https://github.com/ajesh151/KU_INFOBOT.git
 cd KU_INFOBOT
 ```
 
