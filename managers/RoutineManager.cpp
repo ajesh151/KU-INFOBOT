@@ -484,19 +484,17 @@ QString RoutineManager::buildScheduleBody(QList<Routine> matches) const
             ? QStringLiteral("-")
             : routine.getSection();
 
-            body += QString("%1 %2 %3 %4 %5\n")
+            body += QString("%1 %2 %3 %4\n")
                         .arg(formatTimeRange(routine.getTime()), -16)
                         .arg(sectionLabel, -6)
                         .arg(routine.getCourseCode(), -10)
-                        .arg(courseName, -30)
                         .arg(routine.getVenue());
         }
         else
         {
-            body += QString("%1 %2 %3 %4\n")
+            body += QString("%1 %2 %3\n")
             .arg(formatTimeRange(routine.getTime()), -16)
                 .arg(routine.getCourseCode(), -10)
-                .arg(courseName, -30)
                 .arg(routine.getVenue());
         }
     }

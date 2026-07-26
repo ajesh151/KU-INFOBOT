@@ -45,6 +45,12 @@ private:
     // Abbreviations that must never be "corrected" away, e.g. CE, CS, BIT.
     QSet<QString> protectedAbbreviations;
 
+    // Structurally load-bearing words that query parsing (RoutineManager,
+    // SynonymMapper, IntentRecognizer) depends on literally appearing —
+    // see the constructor comment for why distance-tuning alone can't
+    // substitute for this.
+    QSet<QString> protectedKeywords;
+
     // Matches course codes such as COSC101, CS101, BIT204A.
     static const QRegularExpression courseCodePattern;
 };

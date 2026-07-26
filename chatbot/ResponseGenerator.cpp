@@ -37,6 +37,7 @@ QString ResponseGenerator::generateResponse(
 
     case Intent::ROUTINE_QUERY:
         return routineManager->findAnswer(userInput);
+
     case Intent::CURRICULUM_QUERY:
         return curriculumManager->findAnswer(userInput);
 

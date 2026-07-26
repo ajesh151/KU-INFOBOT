@@ -15,8 +15,32 @@ TypoCorrector::TypoCorrector()
     protectedAbbreviations =
         {
             "ce", "cs", "bit", "bca", "bim", "bba", "eee",
-            "ai", "be", "bph", "bsc", "me", "mbe", "soe", "sos", "soa",
-            "cse", "civ", "econ", "env", "ku"
+            "ai", "be", "bph", "bsc", "me"
+        };
+
+    // Structurally load-bearing keywords: words that RoutineManager,
+    // SynonymMapper, and IntentRecognizer depend on literally appearing in
+    // the query to parse it correctly. Fuzzy correction has no way to know
+    // a word is "important" rather than "just another word" — it only
+    // knows edit distance — so a perfectly normal word like "year" can
+    // land within the allowed distance of an unrelated dictionary entry
+    // (e.g. "wear=where") and get silently replaced, breaking every field
+    // extraction downstream with no way to detect it happened. These are
+    // protected outright rather than relying on distance tuning, because
+    // no distance threshold can distinguish "year" from "wear" — they
+    // really are one edit apart.
+    protectedKeywords =
+        {
+            "year", "years", "yr", "yrs",
+            "semester", "semesters", "sem", "sems",
+            "section", "sections", "sec",
+            "routine", "routines", "schedule", "schedules",
+            "timetable", "timetables",
+            "day", "days",
+            "sunday", "monday", "tuesday", "wednesday",
+            "thursday", "friday", "saturday",
+            "course", "courses", "curriculum", "catalogue", "catalog",
+            "admission", "admissions", "fee", "fees"
         };
 
     loadDictionary("data/typo_dictionary.txt");
@@ -64,6 +88,9 @@ bool TypoCorrector::isProtectedWord(const QString &word) const
     QString lower = word.toLower();
 
     if (protectedAbbreviations.contains(lower))
+        return true;
+
+    if (protectedKeywords.contains(lower))
         return true;
 
     if (courseCodePattern.match(word).hasMatch())
