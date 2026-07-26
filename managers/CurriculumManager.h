@@ -5,6 +5,7 @@
 #include <QList>
 
 #include "../models/Curriculum.h"
+#include "informationmanager.h"
 
 class CourseResolver;
 

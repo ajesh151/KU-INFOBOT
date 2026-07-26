@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "../models/FAQ.h"
+#include "informationmanager.h"
 
 class WebCrawler; // forward declaration only — full include lives in the .cpp
 
