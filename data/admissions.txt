@@ -1,0 +1,35 @@
+eligibility|Applicants must have completed NEB (+2) Science or equivalent with a minimum aggregate GPA of 2.0 or 50% marks. They must have studied Physics, Chemistry and Mathematics.
+
+pcb eligibility|Students from the Biology stream are eligible only if they have passed Additional Mathematics at the +2 level.
+
+gce a level|Applicants must complete at least three A-Level courses and one AS-Level course including Physics, Chemistry and Mathematics with a minimum grade D in each subject.
+
+ib diploma|Applicants must obtain at least 24 points in the IB Diploma and complete Physics, Chemistry and Mathematics with a minimum grade of 3 in each subject.
+
+ctevt diploma|Applicants with a three-year CTEVT diploma in a related technical field with at least 50% aggregate marks are eligible to apply.
+
+application|Applicants must complete the online registration process before the admission deadline.
+
+online registration|Applications are submitted through the Kathmandu University online admission portal.
+
+application process|The admission process includes online registration, entrance examination, publication of the merit list, program preference update and enrollment confirmation.
+
+program change|Applicants can modify their program preferences within 48 hours after the merit list is published.
+
+enrollment confirmation|Selected applicants must submit the Enrollment Confirmation Form to secure their admission.
+
+geomatics scholarship|Geomatics Engineering students may receive scholarships through collaboration with the Land Management Training Centre (LMTC).
+
+tie breaking|If two applicants obtain the same entrance score, their +2 academic performance is used to determine the final ranking.
+
+How do I apply for admission in Kathmandu University?|Admission is based on entrance examinations, academic merit, and program-specific eligibility requirements.
+
+Is KU admission difficult?|Yes, admission is competitive due to limited seats and high academic standards.
+
+Does Kathmandu University conduct entrance exams?|Yes, most programs require entrance examinations.
+
+What documents are required for KU admission?|Academic transcripts, citizenship/passport, photographs, and entrance exam documents are required.
+
+Does KU accept international students?|Yes, KU accepts international students in various programs.
+
+Does KU provide scholarships?|Yes, KU provides merit-based, need-based, and category-based scholarships.

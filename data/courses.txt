@@ -1,0 +1,229 @@
+CHEM101|General Chemistry|3
+CIEG201|Construction Materials & Technology|3
+CIEG405|Entrepreneurship and Ethics|3
+COEG301|Control Engineering|3
+COEG304|Instrumentation and Control|3
+COEG401|Control Systems Design|3
+COMP102|Computer Programming|3
+COMP116|Object-Oriented Programming|3
+COMP117|Introduction to Python Programming|3
+COMP202|Data Structures and Algorithms|3
+COMP204|Communication and Networking|3
+COMP206|Computer Project I|2
+COMP207|Computer Project II|2
+COMP231|Microprocessor and Assembly Language|3
+COMP232|Database Management Systems|3
+COMP301|Principles of Programming Languages|3
+COMP302|System Analysis and Design|3
+COMP303|Combined Engineering Project|2
+COMP304|Operations Research|3
+COMP306|Embedded Systems|3
+COMP307|Operating Systems|3
+COMP308|Combined Engineering Project|2
+COMP310|Laboratory Work|1
+COMP311|Combined/Computer Project|1
+COMP313|Combined Computer Project|1
+COMP314|Algorithms and Complexity|3
+COMP315|Computer Architecture and Organization|3
+COMP316|Theory of Computation|3
+COMP317|Computational Operations Research|4
+COMP323|Graph Theory|3
+COMP341|Human Computer Interaction|3
+COMP342|Computer Graphics|3
+COMP343|Information System Ethics|3
+COMP401|Software Engineering|3
+COMP407|Digital Signal Processing|3
+COMP408|Internship|6
+COMP409|Compiler Design|3
+COMP472|Artificial Intelligence|3
+COMP486|Software Dependability|3
+EDRG101|Engineering Drawing I|2
+EDRG102|Engineering Drawing II|2
+EEEG103|Basic Electrical and Electronics Engineering|3
+EEEG202|Digital Logic|3
+EEEG204|Basic Electronics|2
+EEEG205|Engineering Project|1
+EEEG207|Electrical Engineering Materials|3
+EEEG211|Electronics Engineering I|3
+EEEG212|Engineering Project|2
+EEEG213|Network Analysis|3
+EEEG214|Electronics Engineering II|3
+EEEG215|Electrical Machinery Fundamentals|3
+EEEG217|Digital Electronics Laboratory Work|1
+EEEG218|Analog Electronics Laboratory Work|1
+EEEG219|Electrical Machines Laboratory Work|1
+EEEG221|Signals and Systems|3
+EEEG222|Electronics and Signals Systems Laboratory Work|1
+EEEG306|Instrumentation and Microprocessor Laboratory Work|1
+EEEG309|Electromagnetic Fields and Waves|3
+EEEG314|Microprocessors|3
+EEEG320|Digital Circuits and Systems Design|3
+EEEG321|Digital Circuits and Systems Laboratory Work|1
+ELEC1|Elective I|3
+ELEC2|Elective II|3
+ENGG101|Engineering Project Preparation & Workshop Practice|2
+ENGG102|Engineering Project|2
+ENGG111|Elements of Engineering I|3
+ENGG112|Elements of Engineering II|3
+ENGT105|Technical Communication|3
+ENVE101|Introduction to Environmental Engineering|2
+ENVE102|Fundamentals of Environmental Engineering|2
+ENVE103|Natural Resource Management|3
+ENVE114|Environmental Engineering Project|1
+ENVE206|Chemical Process Calculation|3
+ENVE207|Engineering Geology|3
+ENVE208|Strength of Materials|3
+ENVE209|Engineering and Environmental Survey|3
+ENVE302|Water Supply Engineering|3
+ENVE303|Air and Noise Pollution Control Engineering|3
+ENVE305|Wastewater Engineering|3
+ENVE311|Valuation & Cost Estimation|2
+ENVE312|Engineering Hydrology|3
+ENVE313|Introduction to Structural Analysis|3
+ENVE314|Sociology|2
+ENVE315|Design of Engineering Structures|3
+ENVE316|Artificial Intelligence in Environmental Engineering|3
+ENVE342|Air and Noise Pollution Practical|1
+ENVE343|Wastewater & Sanitary Engineering Practical|1
+ENVE344|Water Engineering Practical|1
+ENVE3XX|Elective - I|3
+ENVE411|Environmental Management System|3
+ENVE455|Engineering Project Management and Ethics|3
+ENVE499|Final Year Engineering Project|6
+EPEG301|Power Apparatus and Systems|3
+EPEG302|Advanced Electrical Machinery|3
+EPEG307|Advanced Machinery Laboratory Work|1
+EPEG315|Power Systems I|3
+EPEG317|Measurement and Instrumentation|3
+EPEG318|Power Electronics|3
+EPEG406|Transmission and Distribution|3
+EPEG409|High Voltage Engineering|3
+EPEG411|Power System Planning and Operation|3
+EPEG413|Power Systems II|3
+EPEG415|Switchgear and Protection|3
+EPEG417|Flexible AC Transmission Systems|3
+EPEG423|Illumination Engineering|3
+EPEG424|Renewable Energy Systems|3
+EPEG425|Power Plant Engineering|3
+EPEG426|Smart Grid|3
+EPEG427|Industrial Electrification & Control|3
+ESEE301|Meteorology & Climate Science|3
+ESEE309|Energy Resource Engineering|3
+ESEE401|Solid Waste Management|3
+ESEE402|Environmental Impact Assessment|3
+ESEE403|Environmental Modeling|3
+ESEE432|Landscape & Bioengineering|3
+ESEE451|Environmental Impact Assessment Project|1
+ESEE454|Internship|2
+ETEG301|Communication Systems|3
+ETEG303|Data Communication Networks|3
+ETEG305|Digital Signal Processing|3
+ETEG320|Communication System Engineering|3
+ETEG321|Principles of Biomedical Engineering|3
+ETEG322|Basic Communications Laboratory Work|1
+ETEG323|Biomedical and Signal Processing Laboratory Work|1
+ETEG402|Antennas and Propagation|3
+ETEG408|Microwave Devices and Systems|3
+ETEG417|Digital Switching and Tele-Traffic Engineering|3
+ETEG422|Optical Fiber Communication|3
+ETEG425|Neural Network and Fuzzy Logic|3
+ETEG426|Very Large Scale Integrated Circuits|3
+ETEG427|Satellite Communication and Broadcasting|3
+ETEG428|Genetic Algorithms|3
+ETEG429|Cellular Mobile Communication|3
+ETEG430|Communication Systems and Noise|3
+ETEG432|Wireless Communications|3
+ETEG433|Wireless Networks|3
+ETEG434|Statistical Signal Processing|3
+ETEG436|Industrial Internship|2
+ETEG440|Acoustics Engineering and Noise Reduction|3
+GEOM201|Introduction to Surveying and Geomatics|2
+GEOM202|Control Surveying|4
+GEOM203|Field Survey I|4
+GEOM204|Geographic Information System|3
+GEOM205|Topographical Surveying|3
+GEOM206|Cartography|3
+GEOM208|Engineering Project III|2
+GEOM303|Engineering and Construction Survey|3
+GEOM304|Field Surveys II|4
+GEOM306|Land Administration|3
+GEOM307|Theory of Errors & Adjustment|2
+GEOM310|Cadastre|3
+GEOM313|Modern Cartography|2
+GEOM314|Engineering Project IV|2
+GEOM315|Satellite Geodesy|3
+GEOM316|Photogrammetry|4
+GEOM317|Physical Geodesy|3
+GEOM318|Spatial Database Management|3
+GEOM319|Computational Methods in Geomatics|3
+GEOM401|Survey Management|3
+GEOM402|Remote Sensing|3
+GEOM404|Field Surveys III|4
+GEOM405|Web GIS|3
+GEOM406|Spatial Data Infrastructure|2
+GEOM410|Final Independent Project|6
+GEOM411|Python Programming|3
+GEOM412|Internship|3
+GEOM415|Land Use Planning & Environmental Management|3
+GEOM417|Precise Point Positioning|3
+MGTS301|Engineering Economics|3
+MGTS303|Engineering Management|3
+MGTS402|Engineering Entrepreneurship|3
+MGTS403|Engineering Management|3
+MATH101|Calculus and Linear Algebra|3
+MATH104|Advanced Calculus|3
+MATH205|Trigonometry & Analytical Geometry|3
+MATH207|Differential Equations and Complex Variables|4
+MATH208|Statistics and Probability|3
+MCSC201|Discrete Mathematics/Structures|3
+MCSC202|Numerical Methods|3
+MEEG112|Introduction to Automobile Engineering|2
+MEEG126|Introduction to Design Studio|2
+MEEG141|Introduction to Energy Technology|2
+MEEG156|Introduction to Hydropower|2
+MEEG202|Strength of Materials|3
+MEEG206|Theory of Machines|3
+MEEG207|Engineering Thermodynamics|3
+MEEG210|Engineering Project|2
+MEEG211|Laboratory Works|2
+MEEG212|Laboratory Works|2
+MEEG213|Material Science & Metallurgy|3
+MEEG215|Engineering Project|2
+MEEG216|Engineering Mechanics|3
+MEEG217|Basic Manufacturing Processes|3
+MEEG218|Fluid Mechanics|3
+MEEG219|Metrology|2
+MEEG301|Fluid Mechanics|3
+MEEG303|Fluid Mechanics and Hydraulic Machines|3
+MEEG305|Laboratory Works|2
+MEEG306|Heat Transfer|3
+MEEG308|Production Planning & Control|3
+MEEG309|Hydraulic Machine Core II|3
+MEEG311|Laboratory Works|2
+MEEG312|Engineering Project|2
+MEEG313|Engineering Project|2
+MEEG315|Machine Element Design & Processes I|3
+MEEG317|Advanced Manufacturing Process Core II|3
+MEEG318|Machine Element Design & Processes II|3
+MEEG325|Finite Element Method Core I|3
+MEEG404|Laboratory Works|2
+MEEG406|Engineering Project|2
+MEEG417|Engineering Project|4
+MEEG427|Mechatronics|3
+MEEG428|Renewable Energy Core I|3
+MEEG434|Industrial Training|6
+MEEG437|Digital Manufacturing & Design|3
+MEEG452|Solar Energy Engineering|3
+MEEG458|Computational Fluid Dynamics|3
+MEPP403|Refrigeration & Air Conditioning|3
+MEPP408|Maintenance Engineering Core III|3
+MEPP412|Automobile Engineering Core V|3
+MEPP429|CAD/CAM|3
+MEPP432|Image Processing and Analysis|3
+MEPP435|Electric and Hybrid Vehicles|3
+MEPP436|Advanced Mechanism Design Core V|3
+MEPP439|Hydropower Engineering Core III|3
+MEPP441|Turbo Machines Core V|3
+MEPP457|Hydrogen Technologies|3
+PHYS101|General Physics I|3
+PHYS102|General Physics II|3
