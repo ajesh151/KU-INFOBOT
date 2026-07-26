@@ -83,7 +83,6 @@ bool SynonymMapper::loadFromFile(const QString& filename)
 
         if(equalPos == -1)
         {
-            qWarning() << "SynonymMapper: malformed line (no '='), skipping:" << line;
             continue;
         }
 
@@ -91,7 +90,6 @@ bool SynonymMapper::loadFromFile(const QString& filename)
 
         if(canonical.isEmpty())
         {
-            qWarning() << "SynonymMapper: empty canonical, skipping line:" << line;
             continue;
         }
 
@@ -100,8 +98,6 @@ bool SynonymMapper::loadFromFile(const QString& filename)
 
         if(variants.isEmpty())
         {
-            qWarning() << "SynonymMapper: canonical" << canonical
-                       << "has no variants, skipping.";
             continue;
         }
 

@@ -1,8 +1,26 @@
 #include "CrawlCache.h"
-#include <QStringList>
+
 #include <QRegularExpression>
+#include <QStringList>
 #include <QFile>
 #include <QTextStream>
+
+namespace
+{
+// Weights for CrawlCache::scorePage. A keyword in the title is a much
+// stronger relevance signal than one buried somewhere in the body
+// text, so it's weighted proportionally higher.
+const int TITLE_MATCH_WEIGHT = 10;
+const int CONTENT_MATCH_WEIGHT = 2;
+
+// Persistence record markers. title/url/content are always single-line
+// by the time WebCrawler hands them over (already whitespace-
+// simplified during extraction), so a fixed three-line-per-page record
+// is safe and simple to parse back without needing an escaping scheme.
+const QString URL_PREFIX = "URL:";
+const QString TITLE_PREFIX = "TITLE:";
+const QString CONTENT_PREFIX = "CONTENT:";
+}
 
 CrawlCache::CrawlCache()
 {
@@ -10,7 +28,7 @@ CrawlCache::CrawlCache()
 
 void CrawlCache::addPage(const CachedPage &page)
 {
-    pages.push_back(page);
+    pages.append(page);
 }
 
 void CrawlCache::clear()
@@ -28,46 +46,61 @@ QVector<CachedPage> CrawlCache::getPages() const
     return pages;
 }
 
-int CrawlCache::scorePage(const CachedPage &page,
-                          const QStringList &keywords) const
+int CrawlCache::scorePage(const CachedPage &page, const QStringList &keywords) const
 {
+    QString lowerTitle = page.title.toLower();
+    QString lowerContent = page.content.toLower();
+
     int score = 0;
-    QString title = page.title.toLower();
-    QString content = page.content.toLower();
+
     for(const QString &keyword : keywords)
     {
         QString key = keyword.trimmed().toLower();
+
         if(key.isEmpty())
+        {
             continue;
-        // Strong match if keyword appears in title
-        if(title.contains(key))
-            score += 10;
-        // Weaker match if keyword appears in page content
-        if(content.contains(key))
-            score += 2;
+        }
+
+        if(lowerTitle.contains(key))
+        {
+            score += TITLE_MATCH_WEIGHT;
+        }
+
+        if(lowerContent.contains(key))
+        {
+            score += CONTENT_MATCH_WEIGHT;
+        }
     }
+
     return score;
 }
 
 CachedPage CrawlCache::search(const QString &query) const
 {
-    CachedPage bestPage;
     if(pages.isEmpty())
-        return bestPage;
-    QStringList keywords =
-        query.toLower().split(
-            QRegularExpression("\\s+"),
-            Qt::SkipEmptyParts);
+    {
+        return CachedPage();
+    }
+
+    QStringList keywords = query.toLower().split(
+        QRegularExpression("\\s+"),
+        Qt::SkipEmptyParts);
+
+    CachedPage bestPage;
     int bestScore = -1;
+
     for(const CachedPage &page : pages)
     {
         int score = scorePage(page, keywords);
+
         if(score > bestScore)
         {
             bestScore = score;
             bestPage = page;
         }
     }
+
     return bestPage;
 }
 
@@ -76,18 +109,17 @@ bool CrawlCache::saveToFile(const QString &filename) const
     QFile file(filename);
 
     if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
         return false;
+    }
 
     QTextStream out(&file);
 
-    // title/url/content are all already whitespace-simplified by
-    // WebCrawler's extraction (no embedded newlines), so a fixed
-    // three-line-per-page record is safe and simple to parse back.
     for(const CachedPage &page : pages)
     {
-        out << "URL:" << page.url << "\n";
-        out << "TITLE:" << page.title << "\n";
-        out << "CONTENT:" << page.content << "\n";
+        out << URL_PREFIX << page.url << "\n";
+        out << TITLE_PREFIX << page.title << "\n";
+        out << CONTENT_PREFIX << page.content << "\n";
     }
 
     file.close();
@@ -99,7 +131,9 @@ bool CrawlCache::loadFromFile(const QString &filename)
     QFile file(filename);
 
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
         return false;
+    }
 
     pages.clear();
 
@@ -110,9 +144,11 @@ bool CrawlCache::loadFromFile(const QString &filename)
         QString urlLine = in.readLine();
 
         if(urlLine.isEmpty())
+        {
             continue;
+        }
 
-        if(!urlLine.startsWith("URL:"))
+        if(!urlLine.startsWith(URL_PREFIX))
         {
             // Unexpected format — stop rather than misinterpreting
             // arbitrary lines as page data.
@@ -123,9 +159,13 @@ bool CrawlCache::loadFromFile(const QString &filename)
         QString contentLine = in.readLine();
 
         CachedPage page;
-        page.url = urlLine.mid(4);
-        page.title = titleLine.startsWith("TITLE:") ? titleLine.mid(6) : QString();
-        page.content = contentLine.startsWith("CONTENT:") ? contentLine.mid(8) : QString();
+        page.url = urlLine.mid(URL_PREFIX.length());
+        page.title = titleLine.startsWith(TITLE_PREFIX)
+                         ? titleLine.mid(TITLE_PREFIX.length())
+                         : QString();
+        page.content = contentLine.startsWith(CONTENT_PREFIX)
+                           ? contentLine.mid(CONTENT_PREFIX.length())
+                           : QString();
 
         pages.append(page);
     }

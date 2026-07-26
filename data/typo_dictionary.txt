@@ -1,32 +1,5 @@
 # Common English Words
 
-waht=what
-wht=what
-whatt=what
-wahts=what's
-hte=the
-teh=the
-thier=their
-ther=there
-becuase=because
-becouse=because
-recieve=receive
-seperate=separate
-definately=definitely
-occured=occurred
-enviroment=environment
-enviornment=environment
-wher=where
-wer=where
-whre=where
-whene=when
-wen=when
-whn=when
-hw=how
-hww=how
-wich=which
-wichh=which
-
 # University
 
 universit=university
