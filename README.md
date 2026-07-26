@@ -217,7 +217,7 @@ This project was developed as an academic project for educational purposes.
 **Prayag Parajuli** \
 **Smriti Niroula** \
 **Aislinn Paudel** \
-**Prashis Prasai** \
+**Prashis Prasai** 
 
 Department of Computer Science and Engineering  
 Kathmandu University
