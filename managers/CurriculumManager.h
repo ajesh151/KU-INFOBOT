@@ -30,9 +30,6 @@ public:
 
     bool loadCurriculum(const QString& filename);
 
-    QList<Curriculum> getAll() const;
-    QList<Curriculum> getByProgram(const QString& program) const;
-
     // Extracts the program referenced in `query` (via ProgramCodeUtils, so
     // it recognizes both short codes like "CE" and SynonymMapper's
     // expanded full names like "computer engineering"), then returns the

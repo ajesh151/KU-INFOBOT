@@ -26,14 +26,10 @@ public:
 
     bool loadFaqs(const QString& filename);
 
-    std::vector<Faq> getAllFaqs() const;
-
     // Finds the best-matching answer via TextMatcher's four-tier search.
     // Falls back to WebCrawler (if provided) when nothing matches locally,
     // and only then returns the final "not found" message.
     QString findAnswer(const QString& question) const override;
-
-    std::vector<Faq> searchFaqs(const QString& keyword) const;
 
 private:
     std::vector<Faq> faqs;

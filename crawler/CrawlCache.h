@@ -32,9 +32,6 @@ public:
     // Number of pages currently cached.
     int size() const;
 
-    // Returns every cached page.
-    QVector<CachedPage> getPages() const;
-
     // Returns the single best-scoring page for `query`, or a default
     // (empty) CachedPage if the cache is empty. Scoring is a simple
     // keyword-overlap count — title matches count for more than content

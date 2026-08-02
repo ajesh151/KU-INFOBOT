@@ -53,26 +53,6 @@ bool AdmissionManager::loadData(const QString& filename)
     return true;
 }
 
-bool AdmissionManager::loadAllSources(const QStringList& filenames)
-{
-    bool allSucceeded = true;
-
-    for(const QString& filename : filenames)
-    {
-        if(!loadData(filename))
-        {
-            allSucceeded = false;
-        }
-    }
-
-    return allSucceeded;
-}
-
-std::vector<Admission> AdmissionManager::getAllData() const
-{
-    return admissions;
-}
-
 QString AdmissionManager::findAnswer(const QString& question) const
 {
     QVector<TextMatcher::Entry> entries;
@@ -102,25 +82,4 @@ QString AdmissionManager::findAnswer(const QString& question) const
     }
 
     return "Sorry, I couldn't find any admission-related information.";
-}
-
-std::vector<Admission> AdmissionManager::searchData(
-    const QString& keyword) const
-{
-    std::vector<Admission> results;
-
-    QString search = keyword.toLower();
-
-    for(const Admission &admission : admissions)
-    {
-        QString key =
-            admission.getQuestion().toLower();
-
-        if(key.contains(search))
-        {
-            results.push_back(admission);
-        }
-    }
-
-    return results;
 }

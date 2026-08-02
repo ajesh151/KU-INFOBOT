@@ -48,6 +48,7 @@ QString ResponseGenerator::generateResponse(
         return admissionManager->findAnswer(userInput);
 
     case Intent::UNKNOWN:
+
     default:
         return "Sorry, I could not understand your question.";
     }

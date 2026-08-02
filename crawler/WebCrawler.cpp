@@ -18,7 +18,7 @@ namespace
 // reasonable default for a "closest matching page" lookup; raise it if
 // you find the crawl isn't reaching pages you need, but do so
 // deliberately, not by removing the cap.
-const int MAX_CRAWL_PAGES = 60;
+const int MAX_CRAWL_PAGES = 30;
 
 // Where crawled pages are persisted so a previous crawl can be reused
 // across app launches instead of re-crawling the live site every time.

@@ -12,7 +12,7 @@ application|Applicants must complete the online registration process before the 
 
 online registration|Applications are submitted through the Kathmandu University online admission portal.
 
-application process|The admission process includes online registration, entrance examination, publication of the merit list, program preference update and enrollment confirmation.
+admission process|The admission process includes online registration, entrance examination, publication of the merit list, program preference update and enrollment confirmation.
 
 program change|Applicants can modify their program preferences within 48 hours after the merit list is published.
 
