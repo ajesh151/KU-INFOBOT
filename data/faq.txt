@@ -1,10 +1,12 @@
-What is Kathmandu University?|Kathmandu University (KU) is an autonomous non-profit public university in Nepal established in 1991, located in Dhulikhel, Kavrepalanchok, and known for quality education in engineering, medicine, science, management, law, and arts. 
- 
+What is Kathmandu University?|Kathmandu University (KU) is an autonomous non-profit public university in Nepal established in 1991, located in Dhulikhel, Kavrepalanchok, and known for quality education in engineering, medicine, science, management, law, and arts.
+
+What is the full form of KU?|The full form of KU is Kathmandu University.
+
 When was Kathmandu University established?|Kathmandu University was established in 1991 (2048 BS).  
 
 Where is the central library located?|The central library is located in the main campus right behind the administration block.
 
-Where is Kathmandu University located?|Kathmandu University is located in Dhulikhel, Kavrepalanchok district, about 30 km east of Kathmandu, Nepal.  
+Where is Kathmandu University located?|Kathmandu University is located in Dhulikhel, Kavrepalanchok district, about 30 km east of Kathmandu, Nepal.
 
 What is the official website of Kathmandu University?|The official website of Kathmandu University is https://ku.edu.np  
 
@@ -36,14 +38,14 @@ What are the schools under Kathmandu University?|KU has School of Engineering, S
 
 How can I contact Kathmandu University?|You can contact KU through its official website https://ku.edu.np or the administration office in Dhulikhel.  
 
-Where is the School of Engineering located?|The School of Engineering is located at the Dhulikhel main campus of Kathmandu University.  
+Where is the School of Engineering located?|The School of Engineering is located at the Dhulikhel main campus of Kathmandu University.
 
-What programs are offered in School of Engineering?|It offers Civil, Computer, Electrical, Mechanical, and related engineering programs with strong practical and lab-based learning.  
+What programs are offered in School of Engineering?|It offers Civil, Computer, Electrical, Mechanical, and related engineering programs with strong practical and lab-based learning.
 
-Where is the School of Science located?|The School of Science is located at the Dhulikhel main campus.  
+Where is the School of Science located?|The School of Science is located at the Dhulikhel main campus.
 What programs are offered in School of Science?|It offers Physics, Chemistry, Mathematics, Environmental Science, and Biological Sciences programs.  
 
-Where is the School of Management located?|The School of Management is located in Balkumari, Lalitpur.  
+Where is the School of Management located?|The School of Management is located in Balkumari, Lalitpur.
 What programs are offered in School of Management?|It offers BBA, MBA, Executive MBA, and other business and management programs.  
 
 Where is the School of Medical Sciences located?|The School of Medical Sciences operates through Dhulikhel Hospital and affiliated medical institutions.
@@ -56,7 +58,7 @@ Where is the School of Education located?|The School of Education operates in La
   
 What programs are offered in School of Education?|It offers B.Ed and M.Ed programs for teacher education and training.  
 
-Where is the School of Arts located?|The School of Arts is located at the Dhulikhel main campus.  
+Where is the School of Arts located?|The School of Arts is located at the Dhulikhel main campus.
 
 What programs are offered in School of Arts?|It offers Humanities, Social Sciences, and Development Studies programs.  
 

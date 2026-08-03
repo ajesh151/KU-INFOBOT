@@ -22,7 +22,7 @@ QString ChatBot::getResponse(const QString& userInput)
 
     // Step 2: Synonym normalization (phrase synonyms, then word synonyms)
     processedInput = synonymManager.normalizeSentence(processedInput);
-
+qDebug() << "processedInput:" << processedInput;
     // Step 3: Intent recognition
     Intent intent = intentRecognizer.recognizeIntent(processedInput);
 

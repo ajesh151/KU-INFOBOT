@@ -40,7 +40,7 @@ TypoCorrector::TypoCorrector()
             "sunday", "monday", "tuesday", "wednesday",
             "thursday", "friday", "saturday",
             "course", "courses", "curriculum", "catalogue", "catalog",
-            "admission", "admissions", "fee", "fees"
+            "admission", "admissions", "fee", "fees", "choose"
         };
 
     loadDictionary("data/typo_dictionary.txt");

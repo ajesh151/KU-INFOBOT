@@ -171,7 +171,9 @@ Intent IntentRecognizer::recognizeIntent(
             "office",
             "email",
             "phone",
-            "does ku"
+            "does ku",
+            "what",
+        "where"
         };
 
     if(containsAny(text, faqKeywords))

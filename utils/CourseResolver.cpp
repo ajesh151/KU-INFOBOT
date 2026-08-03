@@ -23,7 +23,7 @@ QString stripToLikelyName(const QString& text)
             "class","course","for","of","is","are",
             "me","please",
             "program","year","semester","section",
-            "today","tomorrow","on"
+            "on"
         };
 
     for(const QString &word : ignoredWords)

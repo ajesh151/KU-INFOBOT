@@ -8,6 +8,8 @@
 # PROGRAMS
 # =========================================================
 
+
+kathmandu university = ku
 computer engineering = ce, comp engineering, computer eng, computer engineer
 computer science = cs, comp science, computer sci, bscs
 electrical engineering = eee, electrical eng, electrical electronics engineering
@@ -18,7 +20,7 @@ environmental engineering = environmental eng
 mining engineering = mining eng
 geomatics engineering = geomatics, geomatics eng
 artificial intelligence = ai, artificial intelligent, btech ai
-health informatics = hi, health info
+health informatics = health info
 architecture = arch, bachelor architecture
 biotechnology = biotech
 agriculture = agri
@@ -73,7 +75,7 @@ pass mark = passing marks, qualifying marks
 minimum score = qualifying score, cutoff score
 negative marking = penalty
 adaptive scoring = adaptive marking
-
+stand for = full form of
 # =========================================================
 # FEES
 # =========================================================
@@ -130,7 +132,7 @@ parking = vehicle parking
 # =========================================================
 
 contact = phone, telephone, office, get in touch
-location = address, map, directions, where is
+where is = address, map, directions, location
 website = web, official website
 
 # =========================================================
