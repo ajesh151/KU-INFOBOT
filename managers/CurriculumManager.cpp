@@ -64,6 +64,26 @@ bool CurriculumManager::loadCurriculum(const QString& filename)
     return true;
 }
 
+QList<Curriculum> CurriculumManager::getAll() const
+{
+    return entries;
+}
+
+QList<Curriculum> CurriculumManager::getByProgram(const QString& program) const
+{
+    QList<Curriculum> result;
+
+    for(const Curriculum& entry : entries)
+    {
+        if(entry.getProgram().compare(program, Qt::CaseInsensitive) == 0)
+        {
+            result.append(entry);
+        }
+    }
+
+    return result;
+}
+
 QString CurriculumManager::formatCurriculum(
     const QString& program,
     const QList<Curriculum>& entriesIn) const
@@ -138,15 +158,7 @@ QString CurriculumManager::findAnswer(const QString& query) const
         return "Please specify a program (e.g. CE, CS, Civil) to view its curriculum.";
     }
 
-    QList<Curriculum> matches;
-
-    for(const Curriculum& entry : entries)
-    {
-        if(entry.getProgram().compare(program, Qt::CaseInsensitive) == 0)
-        {
-            matches.append(entry);
-        }
-    }
+    QList<Curriculum> matches = getByProgram(program);
 
     if(matches.isEmpty())
     {

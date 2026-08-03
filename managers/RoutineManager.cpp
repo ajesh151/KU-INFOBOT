@@ -468,6 +468,15 @@ QString RoutineManager::buildScheduleBody(QList<Routine> matches) const
             body += divider + "\n";
         }
 
+        QString courseName = courseResolver
+                                 ? courseResolver->courseNameForCode(routine.getCourseCode())
+                                 : QString();
+
+        if(courseName.isEmpty())
+        {
+            courseName = "-";
+        }
+
         if(sectionsVary)
         {
             QString sectionLabel = routine.getSection().isEmpty()

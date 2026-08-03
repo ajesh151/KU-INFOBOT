@@ -41,6 +41,11 @@ int CrawlCache::size() const
     return pages.size();
 }
 
+QVector<CachedPage> CrawlCache::getPages() const
+{
+    return pages;
+}
+
 int CrawlCache::scorePage(const CachedPage &page, const QStringList &keywords) const
 {
     QString lowerTitle = page.title.toLower();

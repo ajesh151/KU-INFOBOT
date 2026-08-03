@@ -72,7 +72,7 @@ Intent IntentRecognizer::recognizeIntent(
         {
             "routine","schedule","timetable","semester","year", "section",
             "sunday","monday","tuesday","wednesday","thursday","friday","saturday",
-            "today","tomorrow","class timing","class time","next class","which class"
+            "class timing","class time","next class","which class"
         };
 
     if(containsAny(text,routineKeywords))

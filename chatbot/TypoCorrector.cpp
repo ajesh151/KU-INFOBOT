@@ -15,7 +15,7 @@ TypoCorrector::TypoCorrector()
     protectedAbbreviations =
         {
             "ce", "cs", "bit", "bca", "bim", "bba", "eee",
-            "ai", "be", "bph", "bsc", "me"
+            "ai" ,"be", "bph", "bsc", "me"
         };
 
     // Structurally load-bearing keywords: words that RoutineManager,

@@ -27,6 +27,7 @@ public:
     QString getTime() const;
     QString getCourseCode() const;
     QString getVenue() const;
+    QString toString() const;
 };
 
 #endif // ROUTINE_H

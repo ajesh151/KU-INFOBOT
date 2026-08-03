@@ -54,6 +54,11 @@ bool CourseManager::loadCourses(const QString& filename)
     return true;
 }
 
+std::vector<Course> CourseManager::getAllCourses() const
+{
+    return courses;
+}
+
 Course CourseManager::findByCode(const QString& code) const
 {
     for (const Course& course : courses)
@@ -78,6 +83,24 @@ std::vector<Course> CourseManager::findByName(
     {
         if (course.getName().contains(
                 keyword,
+                Qt::CaseInsensitive))
+        {
+            results.push_back(course);
+        }
+    }
+
+    return results;
+}
+
+std::vector<Course> CourseManager::findByPrefix(
+    const QString& prefix) const
+{
+    std::vector<Course> results;
+
+    for (const Course& course : courses)
+    {
+        if (course.getCode().startsWith(
+                prefix,
                 Qt::CaseInsensitive))
         {
             results.push_back(course);

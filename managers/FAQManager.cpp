@@ -64,6 +64,11 @@ bool FaqManager::loadFaqs(const QString& filename)
     return true;
 }
 
+std::vector<Faq> FaqManager::getAllFaqs() const
+{
+    return faqs;
+}
+
 QString FaqManager::findAnswer(const QString& question) const
 {
     QVector<TextMatcher::Entry> entries;
@@ -93,4 +98,25 @@ QString FaqManager::findAnswer(const QString& question) const
     }
 
     return "Sorry, I couldn't find an answer for that question.";
+}
+
+std::vector<Faq> FaqManager::searchFaqs(
+    const QString& keyword) const
+{
+    std::vector<Faq> results;
+
+    for (const Faq& faq : faqs)
+    {
+        if (faq.getQuestion().contains(
+                keyword,
+                Qt::CaseInsensitive) ||
+            faq.getAnswer().contains(
+                keyword,
+                Qt::CaseInsensitive))
+        {
+            results.push_back(faq);
+        }
+    }
+
+    return results;
 }
