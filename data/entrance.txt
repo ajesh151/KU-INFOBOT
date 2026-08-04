@@ -30,7 +30,7 @@ negative marking|There is no traditional negative marking. Incorrect answers low
 
 score range|The total obtainable score ranges from 0 to 2220.
 
-pass mark|The minimum qualifying score is 528.
+pass mark kucbt|The minimum qualifying score is 528.
 
 minimum score|The minimum score required to qualify the entrance examination is 528.
 

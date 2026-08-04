@@ -12,7 +12,7 @@ application|Applicants must complete the online registration process before the 
 
 online registration|Applications are submitted through the Kathmandu University online admission portal.
 
-application process|The admission process includes online registration, entrance examination, publication of the merit list, program preference update and enrollment confirmation.
+admission process|The admission process includes online registration, entrance examination, publication of the merit list, program preference update and enrollment confirmation.
 
 program change|Applicants can modify their program preferences within 48 hours after the merit list is published.
 
@@ -24,11 +24,11 @@ tie breaking|If two applicants obtain the same entrance score, their +2 academic
 
 How do I apply for admission in Kathmandu University?|Admission is based on entrance examinations, academic merit, and program-specific eligibility requirements.
 
-Is KU admission difficult?|Yes, admission is competitive due to limited seats and high academic standards.
+KU admission difficult?|Yes, admission is competitive due to limited seats and high academic standards.
 
 Does Kathmandu University conduct entrance exams?|Yes, most programs require entrance examinations.
 
-What documents are required for KU admission?|Academic transcripts, citizenship/passport, photographs, and entrance exam documents are required.
+documents required for KU admission?|Academic transcripts, citizenship/passport, photographs, and entrance exam documents are required.
 
 Does KU accept international students?|Yes, KU accepts international students in various programs.
 

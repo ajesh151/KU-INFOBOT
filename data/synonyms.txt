@@ -50,7 +50,7 @@ doctor of philosophy = phd
 # ADMISSION
 # =========================================================
 
-admission = admissions, admission process, admission procedure, joining
+admission = admissions, admissions, joining
 application = apply, applying, application form
 application process = how to apply, admission process
 registration = register, registering
@@ -60,6 +60,7 @@ required documents = documents, certificates, paperwork
 program change = change program, switch program, transfer program
 enrollment = enrolment, admission confirmation
 enrollment confirmation = confirm enrollment, enrollment form
+process = procedure
 
 # =========================================================
 # ENTRANCE
@@ -67,7 +68,7 @@ enrollment confirmation = confirm enrollment, enrollment form
 
 entrance exam = entrance examination, entrance test
 computer based test = cbt, computer test
-kucat = ku cat, kathmandu university common admission test
+kucat = ku cat, kathmandu university common admission test, 
 test format = exam format, paper pattern
 subjects = syllabus subjects, exam subjects
 difficulty level = difficulty
@@ -75,12 +76,12 @@ pass mark = passing marks, qualifying marks
 minimum score = qualifying score, cutoff score
 negative marking = penalty
 adaptive scoring = adaptive marking
-stand for = full form of
+full form of = stand for
 # =========================================================
 # FEES
 # =========================================================
 
-fee = fees, cost, costs, price, tuition, payment, expense
+fee = fees, cost of, cost, costs, price, tuition, payment, expense, 
 scholarship = financial aid, grant, funding
 international fee = foreign student fee
 saarc fee = saarc tuition
@@ -123,7 +124,7 @@ school = faculty school
 library = books, book room
 hostel = dorm, dormitory, residence
 canteen = cafeteria, food court, cafe
-wifi = internet, wireless
+wifi = internet, wireless, wi fi
 bus = transport, transportation, shuttle
 parking = vehicle parking
 
@@ -132,7 +133,7 @@ parking = vehicle parking
 # =========================================================
 
 contact = phone, telephone, office, get in touch
-where is = address, map, directions, location
+where is = address, map, directions, location, how far is
 website = web, official website
 
 # =========================================================
@@ -142,7 +143,7 @@ website = web, official website
 semester = term, sem
 year = batch, academic year
 exam = examination, test, assessment, quiz
-result = results, marks, grades, gpa, cgpa
+result = results, grades, gpa, cgpa
 attendance = presence
 holiday = vacation, break
 deadline = due date, last date
@@ -168,7 +169,7 @@ school of arts = soa, kusoa
 
 school of education = soed, kusoed
 
-school of medical science = kusms
+school of medical science = kusms, sms, soms
 
 school of management = kusom
 

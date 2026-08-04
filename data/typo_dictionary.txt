@@ -520,3 +520,22 @@ usernam=username
 webiste=website
 websit=website
 wesite=website
+
+# choose
+
+chose = choose
+
+#cost
+
+cst = cost
+cast = cost
+
+# process
+
+proces = process
+
+#mark
+
+#does
+
+#price
