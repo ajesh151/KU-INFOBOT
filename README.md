@@ -1,6 +1,6 @@
 # KU InfoBot
 
-A desktop-based, rule-based chatbot developed using **C++** and the **Qt Framework** to provide information about **Kathmandu University**. The chatbot assists users by answering queries related to courses, curricula, admissions, fees, class routines, entrance examinations, and frequently asked questions through an interactive graphical user interface.
+A rule-based chatbot developed using **C++** and the **Qt Framework** to provide information about **Kathmandu University**. The chatbot assists users by answering queries related to courses, curricula, admissions, fees, class routines, entrance examinations, and frequently asked questions through an interactive graphical user interface.
 
 ---
 
